@@ -20,7 +20,7 @@ module.exports = {
       team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: "Videos" },
+        references: { model: "Teams" },
       },
       createdAt: {
         allowNull: false,
