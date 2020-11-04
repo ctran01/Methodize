@@ -3,11 +3,14 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const { environment } = require("./config");
 const cors = require("cors");
+const userRouter = require("./routes/users");
 
 const server = express();
 server.use(bodyParser.json());
 server.use(morgan("dev"));
 server.use(cors({ origin: true }));
+
+server.use("/user", userRouter);
 
 server.get("/", (req, res) => {
   res.send({ message: "You're Connected" });
