@@ -45,15 +45,41 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "Please provide a value for username.",
+          },
+        },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "Please provide a value for email.",
+          },
+          isEmail: {
+            args: true,
+            msg: "Email addresss is not a valid email.",
+          },
+        },
       },
       hashed_password: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "Please provide a value for password.",
+          },
+          len: {
+            args: [8, 255],
+            msg: "Length needs to be between 8 - 255 characters.",
+          },
+        },
       },
       image: {
         type: DataTypes.STRING,

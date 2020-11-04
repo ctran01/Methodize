@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       Project.belongsTo(models.User, {
         foreignKey: "owner_id",
       });
-      Project.belongsTo(model.Team, {
+      Project.belongsTo(models.Team, {
         foreignKey: "team_id",
       });
     }
