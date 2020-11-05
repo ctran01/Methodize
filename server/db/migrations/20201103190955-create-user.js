@@ -8,11 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      username: {
-        allowNull: false,
-        type: Sequelize.STRING(50),
-        unique: true,
-      },
+
       email: {
         allowNull: false,
         type: Sequelize.STRING(50),
@@ -23,7 +19,6 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING(100),
       },
       image: {
