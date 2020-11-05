@@ -2,7 +2,8 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { asyncHandler } = require("./utilities/utils");
 const { check, validationResult } = require("express-validator");
-const { User } = require("../db/models");
+const { User, Team, UserTeam } = require("../db/models");
+const { getUserToken } = require("./utilities/auth");
 
 const router = express.Router();
 
@@ -15,10 +16,10 @@ validateUserFields = [
     .withMessage("Please provide a valide password"),
 ];
 
-validateName[
+const validateName = [
   check("name")
     .exists({ checkFalsy: true })
-    .withMessage("You'll need to enter a name")
+    .withMessage("You'll need to enter a name"),
 ];
 
 const validateEmailPassword = [
@@ -44,6 +45,14 @@ router.post(
   "/register",
   validateUserFields,
   asyncHandler(async (req, res) => {
+    const validatorErr = validationResult(req);
+
+    if (!validatorErr.isEmpty()) {
+      const errors = validatorErr.array().map((error) => error.msg);
+      res.json(["Errors", ...errors]);
+      return;
+    }
+
     const { email, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -71,7 +80,15 @@ router.post(
 router.put(
   "/register/onboard",
   validateName,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
+    const validatorErr = validationResult(req);
+
+    if (!validatorErr.isEmpty()) {
+      const errors = validatorErr.array().map((error) => error.msg);
+      res.json(["ERRORS", ...errors]);
+      return;
+    }
+
     const { name, email, teamName } = req.body;
     try {
       if (teamName) {
@@ -83,7 +100,25 @@ router.put(
             },
           }
         );
+        res.json(user);
       } else if (!teamName) {
+        const user = await User.update(
+          { name: name },
+          {
+            where: {
+              email: email,
+            },
+          }
+        );
+        //Create initial Team
+        const team = await Team.create({
+          name: teamName,
+        });
+        //Tie user to team
+        const userTeam = await UserTeam.create({
+          user_id: user.id,
+          team_id: team.id,
+        });
       }
     } catch (err) {
       res.status(422).send(err.message);
@@ -94,8 +129,42 @@ router.put(
 //Log in
 
 router.post(
-  "/signin",
-  asyncHandler(async (req, res) => {})
+  "/login",
+  validateEmailPassword,
+  asyncHandler(async (req, res, next) => {
+    const validatorErr = validationResult(req);
+
+    if (!validatorErr.isEmpty()) {
+      const errors = validatorErr.array().map((error) => error.msg);
+      res.json(["ERRORS", ...errors]);
+      return;
+    }
+    const { email, password } = req.body;
+
+    // if (!email || !password) {
+    //   return res.status(422).send({ error: "Must provide email and password" });
+    // }
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user || !user.validatePassword(password)) {
+      const err = new Error("Login Failed");
+      err.status = 401;
+      err.title = "Login Failed";
+      err.errors = ["The provided credentials were invalid"];
+      return next(err);
+    }
+
+    const token = getUserToken(user);
+
+    res.status(200).json({
+      id: user.id,
+      token,
+      email: user.email,
+    });
+  })
 );
 
 module.exports = router;
