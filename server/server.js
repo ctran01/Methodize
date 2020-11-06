@@ -10,13 +10,13 @@ server.use(bodyParser.json());
 server.use(morgan("dev"));
 server.use(cors({ origin: true }));
 
-server.use("/user", userRouter);
+server.use(userRouter);
 
 server.get("/", (req, res) => {
   res.send({ message: "You're Connected" });
 });
 
-// Catch unhandled requests and forward to error handler.
+// Catch unhandled requests such as wrong HTTP Method and forward to error handler.
 server.use((req, res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.status = 404;

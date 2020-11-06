@@ -6,7 +6,6 @@ module.exports = {
       "Users",
       [
         {
-          username: "Demo",
           email: "demo@email.com",
           hashed_password: bcrypt.hashSync("password"),
           name: "Demo User",
