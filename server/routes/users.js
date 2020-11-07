@@ -32,14 +32,14 @@ const validateEmailPassword = [
 ];
 
 //get all users
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    const users = await User.findAll({});
+// router.get(
+//   "/",
+//   asyncHandler(async (req, res) => {
+//     const users = await User.findAll({});
 
-    res.json(users);
-  })
-);
+//     res.json(users);
+//   })
+// );
 
 router.post(
   "/register",
@@ -154,7 +154,8 @@ router.post(
       err.status = 401;
       err.title = "Login Failed";
       err.errors = ["The provided credentials were invalid"];
-      return next(err);
+      res.json(err);
+      return;
     }
 
     const token = getUserToken(user);

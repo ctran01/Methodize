@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { Provider as UserProvider } from "./context/UserContext";
 import Routes from "./components/Routes";
 import Login from "./components/LandingPage/Login";
+import LandingPage from "./components/LandingPage/LandingPage";
+import { Context as UserContext } from "./context/UserContext";
+import Home from "./components/Home";
+import LandingRoutes from "./components/LandingPage/LandingRoutes";
 const App = () => {
-  const [auth, setAuth] = useState(localStorage.getItem("token") || "");
+  // const [auth, setAuth] = useState(localStorage.getItem("token") || "");
+  // const { state } = useContext(UserContext);
 
   return (
     <UserProvider>
-      <BrowserRouter>
-        <Switch>
-          <Routes />
-        </Switch>
-      </BrowserRouter>
+      {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
+      {/* <Route exact path="/" component={LandingPage}></Route> */}
+      <Routes />
+      {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
     </UserProvider>
   );
 };

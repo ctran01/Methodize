@@ -16,7 +16,7 @@ instance.interceptors.request.use(
 
   //Error
   (err) => {
-    return err;
+    return err.message;
   }
 );
 
