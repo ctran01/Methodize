@@ -3,3 +3,53 @@
   flex-flow: column;
   width: 100%;
 }
+.landing-nav-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+  margin: 0 30px;
+}
+
+.landing-nav--button {
+  margin: 0 7px;
+  background: none;
+  outline: none;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 100%;
+}
+.landing-nav--button:hover {
+  border: 2px solid #0093ff;
+  margin: 0 7px;
+}
+
+.landing-main {
+  display: flex;
+  justify-content: center;
+}
+.landing-message {
+  max-width: 800px;
+  width: 60%;
+}
+.landing-message-button--div {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-message--button {
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #0093ff;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  font-size: 18px;
+}
