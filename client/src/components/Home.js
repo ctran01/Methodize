@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
-import { Context as UserContext } from "../context/UserContext";
+import UserContext from "../context/UserContext";
 const Home = () => {
-  const { logout } = useContext(UserContext);
-
+  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("userId");
+    setAuth(null);
+    setEmail(null);
+    setUserId(null);
+  };
   return (
     <div>
       <h1>Home</h1>

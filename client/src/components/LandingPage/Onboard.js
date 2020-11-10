@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context as UserContext } from "../../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 const Onboard = () => {
   const { onboard } = useContext(UserContext);
