@@ -10,13 +10,15 @@ const RegisterPage = () => {
   const { setAuth, setEmail, setUserId } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({ name, email, password }) => {
     try {
-      const res = await apiServer.post("/register", { email, password });
-      localStorage.setItem("token", res.data.token);
+      const res = await apiServer.post("/register", { name, email, password });
+      localStorage.setItem("onboard", res.data.token);
       localStorage.setItem("email", res.data.email);
       localStorage.setItem("userId", res.data.id);
-      setAuth(res.data.token);
+      window.location.href = "/register/onboard";
+      setErrorMessage("");
+
       setEmail(res.data.email);
       setUserId(res.data.id);
     } catch (err) {
@@ -47,11 +49,24 @@ const RegisterPage = () => {
             fontSize: "20px",
           }}
         >
-          First Steps..
+          First things first, let's set up your account...
         </h1>
       </div>
       <form className="register-page--form" onSubmit={handleSubmit(onSubmit)}>
         <div style={{ display: "flex", flexDirection: "column" }}>
+          <label htmlFor="name">Full Name</label>
+          <input
+            name="name"
+            placeholder="John Doe"
+            ref={register({ required: true })}
+          ></input>
+          {errors.name?.type === "required" && (
+            <p style={{ color: "red", margin: "1px" }}>
+              Please enter your full name
+            </p>
+          )}
+        </div>
+        <div>
           <label htmlFor="email">Email Address</label>
           <input
             name="email"
@@ -64,6 +79,7 @@ const RegisterPage = () => {
             </p>
           )}
         </div>
+
         <div>
           <label htmlFor="password">Password</label>
           <input

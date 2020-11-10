@@ -10,6 +10,7 @@ const LandingRoutes = () => {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/register/onboard" component={Onboard} />
         <Route exact path="/" component={LandingPage} />
         <Route
           path="/*"

@@ -16,8 +16,8 @@ validateUserFields = [
     .withMessage("Please provide a valid password"),
 ];
 
-const validateName = [
-  check("name")
+const validateTeamName = [
+  check("teamName")
     .exists({ checkFalsy: true })
     .withMessage("You'll need to enter a name"),
 ];
@@ -53,7 +53,7 @@ router.post(
       return;
     }
 
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -69,6 +69,7 @@ router.post(
     }
 
     const user = await User.create({
+      name: name,
       email: email,
       hashed_password: hashedPassword,
       createdAt: new Date(),
@@ -90,7 +91,7 @@ router.post(
 
 router.put(
   "/register/onboard",
-  validateName,
+  validateTeamName,
   asyncHandler(async (req, res, next) => {
     const validatorErr = validationResult(req);
 
@@ -100,37 +101,29 @@ router.put(
       return;
     }
 
-    const { name, email, teamName } = req.body;
+    const { email, teamName } = req.body;
     // try {
-    if (teamName) {
-      const user = await User.update(
-        { name: name },
-        {
-          where: {
-            email: email,
-          },
-        }
-      );
-      res.json(user);
-    } else if (!teamName) {
-      const user = await User.update(
-        { name: name },
-        {
-          where: {
-            email: email,
-          },
-        }
-      );
-      //Create initial Team
-      const team = await Team.create({
-        name: teamName,
-      });
-      //Tie user to team
-      const userTeam = await UserTeam.create({
-        user_id: user.id,
-        team_id: team.id,
-      });
-    }
+
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    const token = getUserToken(user);
+    res.status(200).json({
+      token,
+    });
+
+    //Create initial Team
+    const team = await Team.create({
+      name: teamName,
+    });
+    //Tie user to team
+    const userTeam = await UserTeam.create({
+      user_id: user.id,
+      team_id: team.id,
+    });
+
     // } catch (err) {
     //   res.status(422).send(err.message);
     // }
