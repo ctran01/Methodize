@@ -1,16 +1,19 @@
-.login-page-container {
+.login-page-container,
+.register-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-page-header {
+.login-page-header,
+.register-page-header {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-page--form {
+.login-page--form,
+.register-page--form {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -20,25 +23,30 @@
   border-radius: 5px;
 }
 
-.login-page--form div {
+.login-page--form div,
+.register-page--form div {
   display: flex;
   flex-direction: column;
   padding: 5px 0px;
 }
-.login-page--form label {
+.login-page--form label,
+.register-page--form label {
   padding-bottom: 5px;
   font-weight: 500;
 }
-.login-page--form input {
+.login-page--form input,
+.register-page--form input {
   height: 30px;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
-.login-page--form button {
+.login-page--form button,
+.register-page--form button {
   height: 30px;
   margin: 10px 0px;
 }
-.register-container {
-  padding-top: 20px;
+.register-container,
+.login-container {
+  padding-top: 10px;
   font-size: 15px;
 }

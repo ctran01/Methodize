@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Context as UserContext } from "../../context/UserContext";
 import "../../css/LoginPage.css";
 const LoginForm = () => {
-  const { login } = useContext(UserContext);
+  const { login, state } = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
 
   return (
@@ -33,6 +33,9 @@ const LoginForm = () => {
         )}
       </div>
       <button type="submit">Login</button>
+      {state.errorMessage ? (
+        <p style={{ color: "red", margin: "1px" }}>{state.errorMessage}</p>
+      ) : null}
       <button>Guest Login</button>
     </form>
   );

@@ -13,7 +13,7 @@ validateUserFields = [
     .withMessage("Please provide a valid email"),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a valide password"),
+    .withMessage("Please provide a valid password"),
 ];
 
 const validateName = [
@@ -49,7 +49,7 @@ router.post(
 
     if (!validatorErr.isEmpty()) {
       const errors = validatorErr.array().map((error) => error.msg);
-      res.json(["Errors", ...errors]);
+      res.status(422).json(["Errors", ...errors]);
       return;
     }
 
@@ -57,23 +57,34 @@ router.post(
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    try {
-      const user = await User.create({
+    // try {
+    const existingUser = await User.findOne({
+      where: {
         email: email,
-        hashed_password: hashedPassword,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-
-      const token = getUserToken(user);
-      res.status(200).json({
-        id: user.id,
-        token,
-        email: user.email,
-      });
-    } catch (err) {
-      res.status(422).send(err.message);
+      },
+    });
+    if (existingUser) {
+      res.status(422).send({ Error: "User already exists" });
+      return;
     }
+
+    const user = await User.create({
+      email: email,
+      hashed_password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    const token = getUserToken(user);
+
+    res.status(200).json({
+      id: user.id,
+      token,
+      email: user.email,
+    });
+    // } catch (err) {
+    //   res.status(422).send({ error: err.errors[0].message });
+    // }
   })
 );
 
@@ -90,39 +101,39 @@ router.put(
     }
 
     const { name, email, teamName } = req.body;
-    try {
-      if (teamName) {
-        const user = await User.update(
-          { name: name },
-          {
-            where: {
-              email: email,
-            },
-          }
-        );
-        res.json(user);
-      } else if (!teamName) {
-        const user = await User.update(
-          { name: name },
-          {
-            where: {
-              email: email,
-            },
-          }
-        );
-        //Create initial Team
-        const team = await Team.create({
-          name: teamName,
-        });
-        //Tie user to team
-        const userTeam = await UserTeam.create({
-          user_id: user.id,
-          team_id: team.id,
-        });
-      }
-    } catch (err) {
-      res.status(422).send(err.message);
+    // try {
+    if (teamName) {
+      const user = await User.update(
+        { name: name },
+        {
+          where: {
+            email: email,
+          },
+        }
+      );
+      res.json(user);
+    } else if (!teamName) {
+      const user = await User.update(
+        { name: name },
+        {
+          where: {
+            email: email,
+          },
+        }
+      );
+      //Create initial Team
+      const team = await Team.create({
+        name: teamName,
+      });
+      //Tie user to team
+      const userTeam = await UserTeam.create({
+        user_id: user.id,
+        team_id: team.id,
+      });
     }
+    // } catch (err) {
+    //   res.status(422).send(err.message);
+    // }
   })
 );
 
