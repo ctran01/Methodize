@@ -6,8 +6,8 @@ const AuthRoutes = () => {
   return (
     <BrowserRouter>
       <Switch>
+        {/* <Route exact path="/register/onboard" component={Onboard} /> */}
         <Route exact path="/" component={Home} />
-        <Route exact path="/register" component={Onboard} />
         <Route
           path="/*"
           render={() => {

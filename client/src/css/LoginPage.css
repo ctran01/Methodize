@@ -1,19 +1,22 @@
 .login-page-container,
-.register-page-container {
+.register-page-container,
+.onboard-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .login-page-header,
-.register-page-header {
+.register-page-header,
+.onboard-page-header {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .login-page--form,
-.register-page--form {
+.register-page--form,
+.onboard-page--form {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,29 +27,50 @@
 }
 
 .login-page--form div,
-.register-page--form div {
+.register-page--form div,
+.onboard-page--form div {
   display: flex;
   flex-direction: column;
   padding: 5px 0px;
 }
 .login-page--form label,
-.register-page--form label {
+.register-page--form label,
+.onboard-page--form label {
   padding-bottom: 5px;
   font-weight: 500;
 }
 .login-page--form input,
-.register-page--form input {
+.register-page--form input,
+.onboard-page--form input {
   height: 30px;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
 .login-page--form button,
-.register-page--form button {
+.register-page--form button,
+.onboard-page--form button {
   height: 30px;
   margin: 10px 0px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0093ff;
+  outline: none;
+  cursor: pointer;
+  color: white;
 }
+.login-page--form button:hover,
+.register-page--form button:hover,
+.onboard-page--form button:hover {
+  background-color: #0053ff;
+}
+
 .register-container,
 .login-container {
   padding-top: 10px;
   font-size: 15px;
+}
+
+.onboard-page-button-container {
+  display: flex;
+  flex-direction: row;
 }

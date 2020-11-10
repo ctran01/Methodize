@@ -1,12 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Context as UserContext } from "../../context/UserContext";
+import UserContext from "../../context/UserContext";
 import logo from "../../assets/logo.png";
 import "../../css/LoginPage.css";
+import apiServer from "../../config/apiServer";
 
 const RegisterPage = () => {
-  const { signup, state } = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
+  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      const res = await apiServer.post("/register", { name, email, password });
+      localStorage.setItem("onboard", res.data.token);
+      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("userId", res.data.id);
+      window.location.href = "/register/onboard";
+      setErrorMessage("");
+
+      setEmail(res.data.email);
+      setUserId(res.data.id);
+    } catch (err) {
+      console.log(err.status);
+      setErrorMessage("Something went wrong with registering");
+    }
+  };
 
   return (
     <div className="register-page-container">
@@ -30,11 +49,24 @@ const RegisterPage = () => {
             fontSize: "20px",
           }}
         >
-          First Steps..
+          First things first, let's set up your account...
         </h1>
       </div>
-      <form className="register-page--form" onSubmit={handleSubmit(signup)}>
+      <form className="register-page--form" onSubmit={handleSubmit(onSubmit)}>
         <div style={{ display: "flex", flexDirection: "column" }}>
+          <label htmlFor="name">Full Name</label>
+          <input
+            name="name"
+            placeholder="John Doe"
+            ref={register({ required: true })}
+          ></input>
+          {errors.name?.type === "required" && (
+            <p style={{ color: "red", margin: "1px" }}>
+              Please enter your full name
+            </p>
+          )}
+        </div>
+        <div>
           <label htmlFor="email">Email Address</label>
           <input
             name="email"
@@ -47,6 +79,7 @@ const RegisterPage = () => {
             </p>
           )}
         </div>
+
         <div>
           <label htmlFor="password">Password</label>
           <input
@@ -61,8 +94,8 @@ const RegisterPage = () => {
           )}
         </div>
         <button type="submit">Register</button>
-        {state.errorMessage ? (
-          <p style={{ color: "red", margin: "1px" }}>{state.errorMessage}</p>
+        {errorMessage ? (
+          <p style={{ color: "red", margin: "1px" }}>{errorMessage}</p>
         ) : null}
       </form>
       <div className="login-container">
