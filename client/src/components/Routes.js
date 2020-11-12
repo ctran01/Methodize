@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Home from "./HomePage/Home";
+import Home from "./Pages/Home";
 import UserContext from "../context/UserContext";
 import LandingPage from "./LandingPage/LandingPage";
 import LandingRoutes from "./LandingPage/LandingRoutes";

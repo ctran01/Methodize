@@ -22,6 +22,19 @@
   /* transition: 850ms; */
 }
 
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.overlay-right-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .left-nav-menu-container {
   display: flex;
   flex-direction: column;

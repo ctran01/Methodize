@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import { GiHamburgerMenu } from "react-icons/gi";
-import TopNavBar from "./TopNavBar";
+import TopNavBar from "../NavigationBar/TopNavBar";
 
 const MainContent = ({ showSidebar, sidebar }) => {
   const { setAuth, setEmail, setUserId } = useContext(UserContext);
