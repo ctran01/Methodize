@@ -20,7 +20,6 @@ const Onboard = (props) => {
         //sets initial token
         localStorage.setItem("token", res.data.token);
         setErrorMessage("");
-        // window.location.href = "/";
         //for Refresh
         setAuth(res.data.token);
       } catch (err) {
