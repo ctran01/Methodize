@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Routes from "./components/Routes";
 import LandingPage from "./components/LandingPage/LandingPage";
 import UserContext from "./context/UserContext";
-import Home from "./components/Home";
 import LandingRoutes from "./components/LandingPage/LandingRoutes";
 const App = () => {
   const [auth, setAuth] = useState(localStorage.getItem("token") || "");
