@@ -8,7 +8,19 @@ const App = () => {
   const [auth, setAuth] = useState(localStorage.getItem("token") || "");
   const [userId, setUserId] = useState(null);
   const [email, setEmail] = useState(null);
-  const context = { auth, setAuth, userId, setUserId, email, setEmail };
+  const [sidebar, setSidebar] = useState(true);
+  const showSidebar = () => setSidebar(!sidebar);
+  const context = {
+    auth,
+    setAuth,
+    userId,
+    setUserId,
+    email,
+    setEmail,
+    sidebar,
+    setSidebar,
+    showSidebar,
+  };
 
   return (
     <UserContext.Provider value={context}>

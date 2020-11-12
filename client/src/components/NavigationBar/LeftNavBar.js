@@ -26,8 +26,12 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
             className="main-menu-items-container"
             style={{ marginTop: "10px" }}
           >
-            <button>Home</button>
-            <button>My Tasks</button>
+            <a href="/">
+              <button>Home</button>
+            </a>
+            <a href="/tasks">
+              <button>My Tasks</button>
+            </a>
           </div>
           <div className="favorites-container">
             <p style={{}}>Favorites</p>
