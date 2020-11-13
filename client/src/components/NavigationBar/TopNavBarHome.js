@@ -3,8 +3,7 @@ import UserContext from "../../context/UserContext";
 import "../../css/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
-
-const TopNavBar = ({ sidebar, showSidebar }) => {
+const TopNavBarHome = () => {
   const { setAuth, setEmail, setUserId } = useContext(UserContext);
 
   const logout = () => {
@@ -15,14 +14,12 @@ const TopNavBar = ({ sidebar, showSidebar }) => {
     setEmail(null);
     setUserId(null);
   };
-
   return (
-    <div className="top-nav-bar-container">
-      <div className="top-nav-bar-left">
-        <h2>Team/Project Name</h2>
-      </div>
-      <div className="top-nav-bar-middle"></div>
-      <div className="top-nav-bar-right">
+    <div className="top-nav-bar-container" style={{ boxShadow: "none" }}>
+      <div
+        className="top-nav-bar-right"
+        style={{ position: "fixed", right: "0" }}
+      >
         <div>Search</div>
         <div>
           <GrAddCircle />
@@ -36,4 +33,4 @@ const TopNavBar = ({ sidebar, showSidebar }) => {
   );
 };
 
-export default TopNavBar;
+export default TopNavBarHome;

@@ -13,7 +13,7 @@ const AuthRoutes = () => {
       <div className="overlay">
         <LeftNavBar showSidebar={showSidebar} sidebar={sidebar} />
         <div className="overlay-right-container">
-          <TopNavBar showSidebar={showSidebar} sidebar={sidebar} />
+          {/* <TopNavBar showSidebar={showSidebar} sidebar={sidebar} /> */}
           <Switch>
             {/* <Route exact path="/register/onboard" component={Onboard} /> */}
             <Route exact path="/" component={Home} />

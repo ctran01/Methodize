@@ -49,27 +49,26 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
           </div>
         </div>
       </div>
-      <div className="show-menu-icon">
-        {sidebar ? null : (
-          <div
-            className="menu-icon"
+
+      {sidebar ? null : (
+        <div
+          className="menu-icon"
+          style={{
+            paddingTop: "25px",
+            paddingLeft: "20px",
+            paddingBottom: "22px",
+            backgroundColor: "white",
+          }}
+        >
+          <RiMenuFill
             style={{
-              paddingTop: "25px",
-              marginLeft: "20px",
-              boxShadow: "0 3px 0px 0px rgba(21, 27, 38, 0.08)",
-              paddingBottom: "22px",
+              fontSize: "24px",
+              cursor: "pointer",
             }}
-          >
-            <RiMenuFill
-              style={{
-                fontSize: "24px",
-                cursor: "pointer",
-              }}
-              onClick={showSidebar}
-            />
-          </div>
-        )}
-      </div>
+            onClick={showSidebar}
+          />
+        </div>
+      )}
     </div>
   );
 };
