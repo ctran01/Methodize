@@ -99,4 +99,11 @@
 }
 .top-nav-bar-right {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 30px;
+}
+
+.top-nav-bar-right div {
+  padding: 0px 15px;
 }

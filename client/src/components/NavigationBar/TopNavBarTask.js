@@ -20,22 +20,17 @@ const TopNavBarTask = () => {
         className="top-nav-bar-left"
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <p style={{ fontSize: "20px", margin: "10px 0px 5px 0px" }}>
-          [Name]'s Tasks
-        </p>
-        <p style={{ margin: "auto" }}>[#] completed tasks</p>
+        <p style={{ fontSize: "20px" }}>[Name]'s Tasks</p>
+        <p style={{}}>[#] completed tasks</p>
       </div>
       <div className="top-nav-bar-middle"></div>
-      <div
-        className="top-nav-bar-right"
-        style={{ position: "fixed", right: "0" }}
-      >
+      <div className="top-nav-bar-right">
         <div>Search</div>
         <div>
-          <GrAddCircle />
+          <GrAddCircle style={{ fontSize: "30px" }} />
         </div>
         <div>
-          <CgProfile />
+          <CgProfile style={{ fontSize: "30px" }} />
         </div>
         <button onClick={logout}>Logout</button>
       </div>
