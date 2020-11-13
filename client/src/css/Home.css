@@ -1,0 +1,14 @@
+.home-welcome-header {
+  height: 175px;
+}
+
+.home-tasks-container {
+  height: 175px;
+}
+.home-tasks-header {
+  display: flex;
+  justify-content: space-between;
+}
+.home-projects-container {
+  height: 175px;
+}

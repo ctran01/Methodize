@@ -1,0 +1,22 @@
+.tasks-container {
+  /* background-color: #f6f8f9; */
+  display: flex;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.tasks-inner-container {
+  background-color: #f6f8f9;
+  min-width: 405px;
+  max-width: 1000px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #f6f8f9;
+  padding: 5px;
+}
