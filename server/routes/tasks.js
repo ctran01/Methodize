@@ -15,4 +15,18 @@ router.get(
   })
 );
 
-module.export = router;
+//get all tasks for user
+router.get(
+  "/user/:id",
+  asyncHandler(async (req, res, next) => {
+    const user_id = req.params.id;
+    const tasks = await Task.findAll({
+      where: {
+        assignee_id: user_id,
+      },
+    });
+    res.json(tasks);
+  })
+);
+
+module.exports = router;
