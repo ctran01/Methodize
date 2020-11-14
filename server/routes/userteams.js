@@ -15,4 +15,4 @@ router.get(
   })
 );
 
-module.export = router;
+module.exports = router;

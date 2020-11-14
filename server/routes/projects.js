@@ -1,8 +1,8 @@
 const express = require("express");
 const { asyncHandler } = require("./utilities/utils");
-const { requireAuth } = require("./utilities/auth");
+const { requireAuth, getUserToken } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
-const { Project } = require("../db/models");
+const { Project, User } = require("../db/models");
 
 const router = express.Router();
 
@@ -16,4 +16,23 @@ router.get(
   })
 );
 
-module.export = router;
+router.get(
+  "/user/:id",
+  asyncHandler(async (req, res, next) => {
+    const user_id = req.params.id;
+    const projects = await Project.findAll({
+      include: [
+        {
+          model: User,
+          where: {
+            id: user_id,
+          },
+        },
+      ],
+    });
+    res.json(projects);
+    //  select * from Projects where user_id = id from projects join team on projects.team_id = team.id join user_team
+  })
+);
+
+module.exports = router;

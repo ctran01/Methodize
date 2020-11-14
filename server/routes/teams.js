@@ -14,4 +14,4 @@ router.get(
     res.json(teams);
   })
 );
-module.export = router;
+module.exports = router;

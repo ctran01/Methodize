@@ -48,7 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       description: DataTypes.TEXT,
       due_date: DataTypes.DATE,
-      completed: DataTypes.BOOLEAN,
+      completed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       completed_at: DataTypes.DATE,
     },
     {
