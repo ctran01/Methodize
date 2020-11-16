@@ -59,7 +59,7 @@ router.get(
 
 //get all taskslists for a project
 router.get(
-  "/:id/tasklists",
+  "/:id/tasklist",
   asyncHandler(async (req, res, next) => {
     const project_id = req.params.id;
 
@@ -93,7 +93,7 @@ router.post(
 
 //Delete project
 router.delete(
-  "/:id/",
+  "/:id",
   asyncHandler(async (req, res, next) => {
     const team_id = req.params.id;
     const project_id = req.params.projectId;
