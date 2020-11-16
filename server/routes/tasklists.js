@@ -30,7 +30,7 @@ router.get(
   })
 );
 
-//Post task to tasklist
+//Create task to tasklist
 router.post(
   "/:id/task",
   asyncHandler(async (req, res, next) => {
@@ -58,4 +58,18 @@ router.post(
     }
   })
 );
+
+//Delete TaskList
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const tasklist_id = req.params.id;
+
+    const tasklist = await TaskList.delete({
+      where: { id: tasklist_id },
+    });
+    res.json(202);
+  })
+);
+
 module.exports = router;

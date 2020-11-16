@@ -38,24 +38,28 @@ router.get(
 );
 
 //get all users in a project
+router.get(
+  "/:id/users",
+  asyncHandler(async (req, res, next) => {
+    const project_id = req.params.id;
 
-// router.get("/:id/user", asyncHandler(async(req,res,next)=>{
-//   const project_id  = req.params.id
+    const users = await User.findAll({
+      include: [
+        {
+          model: Project,
+          where: { id: project_id },
+        },
+      ],
 
-//   const users = await UserTeam.findAll({
-//     include:[{
-//       model: User,
-//       attributes:["name"]
-//     }],
-//     where:{
-//       project_id : project_id
-//     }
-//   })
-// }))
+      attributes: ["name"],
+    });
+    res.json(users);
+  })
+);
 
 //get all taskslists for a project
 router.get(
-  "/:id/tasklist",
+  "/:id/tasklists",
   asyncHandler(async (req, res, next) => {
     const project_id = req.params.id;
 
@@ -68,6 +72,34 @@ router.get(
       res.json({ message: "error" });
     }
     res.json(tasklist);
+  })
+);
+
+//Create tasklist for project
+router.post(
+  "/:id/tasklist",
+  asyncHandler(async (req, res, next) => {
+    const project_id = req.params.id;
+    const { name, user_id } = req.body;
+
+    const tasklist = await TaskList.create({
+      name: name,
+      user_id: user_id,
+      project_id: project_id,
+    });
+  })
+);
+
+//Delete project
+router.delete(
+  "/:id/",
+  asyncHandler(async (req, res, next) => {
+    const team_id = req.params.id;
+    const project_id = req.params.projectId;
+    const project = await Project.delete({
+      where: { id: project_id },
+    });
+    res.status(202);
   })
 );
 
