@@ -16,4 +16,17 @@ router.get(
   })
 );
 
+//Delete Comment
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const comment_id = req.params.id;
+
+    const comment = await Comment.delete({
+      where: { id: comment_id },
+    });
+    res.json(202);
+  })
+);
+
 module.exports = router;
