@@ -12,6 +12,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          email: "test@email.com",
+          hashed_password: bcrypt.hashSync("password"),
+          name: "Test User",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );
@@ -36,6 +43,12 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          user_id: 2,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );
@@ -49,6 +62,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Mobile Application",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );
@@ -57,6 +77,13 @@ module.exports = {
       [
         {
           name: "To Do",
+          project_id: 1,
+          owner_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "In Progress",
           project_id: 1,
           owner_id: 1,
           createdAt: new Date(),

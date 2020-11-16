@@ -6,6 +6,8 @@ const cors = require("cors");
 const userRouter = require("./routes/users");
 const taskRouter = require("./routes/tasks");
 const projectRouter = require("./routes/projects");
+const teamRouter = require("./routes/teams");
+const tasklistRouter = require("./routes/tasklists");
 const server = express();
 server.use(bodyParser.json());
 server.use(morgan("dev"));
@@ -14,6 +16,8 @@ server.use(cors({ origin: true }));
 server.use(userRouter);
 server.use("/task", taskRouter);
 server.use("/project", projectRouter);
+server.use("/team", teamRouter);
+server.use("/tasklist", tasklistRouter);
 
 server.get("/", (req, res) => {
   res.send({ message: "You're Connected" });
