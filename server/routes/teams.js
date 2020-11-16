@@ -96,6 +96,11 @@ router.post(
       team_id: team_id,
       user_id: user_id,
     });
+    if (!userteam) {
+      res.status(404);
+    } else {
+      res.status(201);
+    }
   })
 );
 
@@ -106,7 +111,16 @@ router.post(
     //need to add owner for project
     const team_id = req.params.id;
     const { name, owner_id } = req.body;
-    const project = await Project.create({});
+    const project = await Project.create({
+      owner_id: owner_id,
+      name: name,
+      team_id: team_id,
+    });
+    if (!project) {
+      res.status(404);
+    } else {
+      res.status(201);
+    }
   })
 );
 

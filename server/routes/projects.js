@@ -87,6 +87,7 @@ router.post(
       user_id: user_id,
       project_id: project_id,
     });
+    res.json(201);
   })
 );
 
