@@ -10,12 +10,12 @@ Methodic is a clone of Asana, a project management tool. Methodic allows users t
 
 ### Backend:
 
-| Technology   | Use                            |
-| ------------ | ------------------------------ |
-| PostgreSQL   | SQL database                   |
-| SequelizeORM | Object Relation Mapping (ORM)  |
-| Express.js   | Server framework/API endpoints |
-| Node.js      | Runtime environment            |
+| Technology   | Use                                |
+| ------------ | ---------------------------------- |
+| PostgreSQL   | SQL database                       |
+| SequelizeORM | Object Relation Mapping (ORM)      |
+| Express.js   | Server framework/API endpoints git |
+| Node.js      | Runtime environment                |
 
 ### Frontend
 
