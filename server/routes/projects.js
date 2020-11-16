@@ -5,6 +5,8 @@ const { check, validationResult } = require("express-validator");
 const { Project, User, TaskList } = require("../db/models");
 
 const router = express.Router();
+//Authenticates user before being able to use API
+// router.use(requireAuth);
 
 //get all projects
 router.get(

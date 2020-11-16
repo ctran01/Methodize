@@ -3,7 +3,10 @@ const { asyncHandler } = require("./utilities/utils");
 const { requireAuth } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
 const { Team, UserTeam, User, Project } = require("../db/models");
+
 const router = express.Router();
+//Authenticates user before being able to use API
+// router.use(requireAuth);
 
 //Gets all Teams
 router.get(

@@ -5,6 +5,9 @@ const { check, validationResult } = require("express-validator");
 const { TaskList, Task } = require("../db/models");
 const router = express.Router();
 
+//Authenticates user before being able to use API
+// router.use(requireAuth);
+
 //get all tasklists
 router.get(
   "/",
