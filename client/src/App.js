@@ -4,6 +4,7 @@ import Routes from "./components/Routes";
 import LandingPage from "./components/LandingPage/LandingPage";
 import AuthContext from "./context/AuthContext";
 import { Provider as UserProvider } from "./context/UserContext";
+import { Provider as TaskProvider } from "./context/TaskContext";
 import LandingRoutes from "./components/LandingPage/LandingRoutes";
 const App = () => {
   const [auth, setAuth] = useState(localStorage.getItem("token") || "");
@@ -29,10 +30,12 @@ const App = () => {
   return (
     <AuthContext.Provider value={context}>
       <UserProvider>
-        {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
-        {/* <Route exact path="/" component={LandingPage}></Route> */}
-        <Routes />
-        {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
+        <TaskProvider>
+          {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
+          {/* <Route exact path="/" component={LandingPage}></Route> */}
+          <Routes />
+          {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
+        </TaskProvider>
       </UserProvider>
     </AuthContext.Provider>
   );
