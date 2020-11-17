@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import UserContext from "../../context/UserContext";
+import AuthContext from "../../context/AuthContext";
 import "../../css/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
 
 const TopNavBar = ({ sidebar, showSidebar }) => {
-  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const { setAuth, setEmail, setUserId } = useContext(AuthContext);
 
   const logout = () => {
     localStorage.removeItem("token");

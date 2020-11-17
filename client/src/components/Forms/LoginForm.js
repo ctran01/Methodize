@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import UserContext from "../../context/UserContext";
+import AuthContext from "../../context/AuthContext";
 import "../../css/LoginPage.css";
 import apiServer from "../../config/apiServer";
 const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const [errorMessage, setErrorMessage] = useState("");
-  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const { setAuth, setEmail, setUserId, setUser } = useContext(AuthContext);
 
   const onSubmit = async ({ email, password }) => {
     try {
@@ -20,6 +20,7 @@ const LoginForm = () => {
       setAuth(res.data.token);
       setUserId(res.data.id);
       setEmail(res.data.email);
+      setUser(res.data);
     } catch (err) {
       console.log(err.status);
       setErrorMessage("Something went wrong");

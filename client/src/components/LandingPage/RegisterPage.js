@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import UserContext from "../../context/UserContext";
+import AuthContext from "../../context/AuthContext";
 import logo from "../../assets/logo.png";
 import "../../css/LoginPage.css";
 import apiServer from "../../config/apiServer";
 
 const RegisterPage = () => {
   const { register, handleSubmit, errors } = useForm();
-  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const { setAuth, setEmail, setUserId, setUser } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = async ({ name, email, password }) => {
@@ -18,7 +18,8 @@ const RegisterPage = () => {
       localStorage.setItem("userId", res.data.id);
       window.location.href = "/register/onboard";
       setErrorMessage("");
-
+      setUser(res.data);
+      setAuth(res.data.token);
       setEmail(res.data.email);
       setUserId(res.data.id);
     } catch (err) {

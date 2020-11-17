@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import UserContext from "../../context/UserContext";
+import AuthContext from "../../context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import TopNavBar from "../NavigationBar/TopNavBar";
 
 const MainContent = ({ showSidebar, sidebar }) => {
-  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const { setAuth, setEmail, setUserId } = useContext(AuthContext);
 
   return (
     <div style={{}}>

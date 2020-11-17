@@ -19,7 +19,7 @@ server.use("/task", taskRouter);
 server.use("/project", projectRouter);
 server.use("/team", teamRouter);
 server.use("/tasklist", tasklistRouter);
-server.user("/comment", commentRouter);
+server.use("/comment", commentRouter);
 
 server.get("/", (req, res) => {
   res.send({ message: "You're Connected" });

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../css/Navbar.css";
 import { RiMenuFoldLine, RiMenuFill } from "react-icons/ri";
 
@@ -26,12 +27,12 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
             className="main-menu-items-container"
             style={{ marginTop: "10px" }}
           >
-            <a href="/">
+            <Link to="/">
               <button>Home</button>
-            </a>
-            <a href="/tasks">
+            </Link>
+            <Link to="/tasks">
               <button>My Tasks</button>
-            </a>
+            </Link>
           </div>
           <div className="favorites-container">
             <p style={{}}>Favorites</p>
