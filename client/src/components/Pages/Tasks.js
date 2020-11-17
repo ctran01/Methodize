@@ -1,13 +1,22 @@
 import React, { useContext, useEffect } from "react";
 import TopNavBarTask from "../NavigationBar/TopNavBarTask";
 import "../../css/Task.css";
-import { Context as TaskContext } from "../../context/TaskContext";
+import { Context as TaskContext } from "../../context/store/TaskStore";
+import apiServer from "../../config/apiServer";
+
 const Tasks = () => {
-  const { state, getUserTasks } = useContext(TaskContext);
+  const [taskState, taskdispatch] = useContext(TaskContext);
+
+  const getUserTasks = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/task/user/${id}`);
+    await taskdispatch({ type: "get_user_tasks", payload: res.data });
+  };
 
   useEffect(() => {
     getUserTasks();
   }, []);
+
   return (
     <>
       <TopNavBarTask />

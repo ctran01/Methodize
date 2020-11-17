@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import TopNavBarHome from "../NavigationBar/TopNavBarHome";
 import "../../css/Home.css";
-import { Context as UserContext } from "../../context/UserContext";
+import { Context as UserContext } from "../../context/store/UserStore";
 const Home = () => {
   const { getUserInfo } = useContext(UserContext);
 
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, []);
 
   return (
     <>
