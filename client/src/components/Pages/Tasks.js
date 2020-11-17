@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import TopNavBarTask from "../NavigationBar/TopNavBarTask";
 import "../../css/Task.css";
+import { Context as TaskContext } from "../../context/TaskContext";
 const Tasks = () => {
+  const { state, getUserTasks } = useContext(TaskContext);
+
+  useEffect(() => {
+    getUserTasks();
+  }, []);
   return (
     <>
       <TopNavBarTask />
