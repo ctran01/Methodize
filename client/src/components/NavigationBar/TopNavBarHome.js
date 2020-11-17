@@ -4,16 +4,8 @@ import "../../css/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
 const TopNavBarHome = () => {
-  const { setAuth, setEmail, setUserId } = useContext(AuthContext);
+  const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userId");
-    setAuth(null);
-    setEmail(null);
-    setUserId(null);
-  };
   return (
     <div className="top-nav-bar-container" style={{}}>
       <div
