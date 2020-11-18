@@ -27,9 +27,9 @@ const Tasks = () => {
               <h3>Recently Assigned</h3>
             </div>
             <ul className="task--list">
-              <li className="task">task 1</li>
-              <li className="task">task 2</li>
-              <li className="task">task 3</li>
+              {taskState.tasks.map((task) => {
+                return <li key={task.id}>{task.name}</li>;
+              })}
             </ul>
           </div>
           <div className="today-tasks-container">

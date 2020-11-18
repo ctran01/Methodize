@@ -33,8 +33,8 @@ const AuthRoutes = () => {
     getUserTasks();
   }, []);
   return (
-    <BrowserRouter>
-      <div className="overlay">
+    <div className="overlay">
+      <BrowserRouter>
         <LeftNavBar showSidebar={showSidebar} sidebar={sidebar} />
         <div className="overlay-right-container">
           <Switch>
@@ -48,8 +48,8 @@ const AuthRoutes = () => {
             />
           </Switch>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 };
 
