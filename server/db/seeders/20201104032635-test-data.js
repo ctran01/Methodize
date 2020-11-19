@@ -106,6 +106,17 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Create Models",
+          tasklist_id: 1,
+          project_id: 1,
+          assignee_id: 1,
+          description: "create models",
+          due_date: "2020-08-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );

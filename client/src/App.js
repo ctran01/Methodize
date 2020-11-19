@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Routes from "./components/Routes";
-import LandingPage from "./components/LandingPage/LandingPage";
 import AuthContext from "./context/AuthContext";
 import UserStore from "./context/store/UserStore";
 import TeamStore from "./context/store/TeamStore";
 import TaskStore from "./context/store/TaskStore";
-
+import ProjectStore from "./context/store/ProjectStore";
+import "./css/Home.css";
+import "./css/Task.css";
 const App = () => {
   const [auth, setAuth] = useState(localStorage.getItem("token") || "");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
@@ -41,14 +42,16 @@ const App = () => {
   return (
     <AuthContext.Provider value={context}>
       <UserStore>
-        <TaskStore>
+        <ProjectStore>
           <TeamStore>
-            {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
-            {/* <Route exact path="/" component={LandingPage}></Route> */}
-            <Routes />
-            {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
+            <TaskStore>
+              {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
+              {/* <Route exact path="/" component={LandingPage}></Route> */}
+              <Routes />
+              {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
+            </TaskStore>
           </TeamStore>
-        </TaskStore>
+        </ProjectStore>
       </UserStore>
     </AuthContext.Provider>
   );
