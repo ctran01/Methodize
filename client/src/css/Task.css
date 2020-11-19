@@ -20,3 +20,14 @@
   border: 2px solid #f6f8f9;
   padding: 5px;
 }
+
+.task--li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8ecee;
+  font-size: 13px;
+  height: 40px;
+  padding: 0px 5px;
+  cursor: pointer;
+  align-items: center;
+}

@@ -7,6 +7,9 @@ import LeftNavBar from "./NavigationBar/LeftNavBar";
 
 import { Context as UserContext } from "../context/store/UserStore";
 import { Context as TaskContext } from "../context/store/TaskStore";
+import { Context as ProjectContext } from "../context/store/ProjectStore";
+import { Context as TeamContext } from "../context/store/TeamStore";
+
 import apiServer from "../config/apiServer";
 
 const AuthRoutes = () => {
@@ -14,7 +17,10 @@ const AuthRoutes = () => {
   const showSidebar = () => setSidebar(!sidebar);
   const [taskState, taskdispatch] = useContext(TaskContext);
   const [userState, userdispatch] = useContext(UserContext);
-  //Maybe grab information here and state goes down to child components?
+  const [projectState, projectdispatch] = useContext(ProjectContext);
+  const [teamState, teamdispatch] = useContext(TeamContext);
+
+  //Maybe grab all information here and state goes down to child components?
   const getUserInfo = async () => {
     const id = localStorage.getItem("userId");
     const res = await apiServer.get(`/user/${id}`);
@@ -28,9 +34,24 @@ const AuthRoutes = () => {
     await taskdispatch({ type: "get_user_tasks", payload: res.data });
   };
 
+  const getUserTeams = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/team/user/${id}`);
+    await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
+    // setTeams(res.data[0].Teams);
+  };
+
+  const getUserProjects = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/project/user/${id}`);
+    await projectdispatch({ type: "get_user_projects", payload: res.data });
+  };
+
   useEffect(() => {
     getUserInfo();
     getUserTasks();
+    getUserTeams();
+    getUserProjects();
   }, []);
   return (
     <div className="overlay">

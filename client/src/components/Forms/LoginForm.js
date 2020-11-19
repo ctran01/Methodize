@@ -27,6 +27,26 @@ const LoginForm = () => {
     }
   };
 
+  const demoUser = async () => {
+    const email = "demo@email.com";
+    const password = "password";
+    try {
+      const res = await apiServer.post("/login", { email, password });
+
+      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("userId", res.data.id);
+      localStorage.setItem("token", res.data.token);
+      setErrorMessage("");
+      setAuth(res.data.token);
+      setUserId(res.data.id);
+      setEmail(res.data.email);
+      setUser(res.data);
+    } catch (err) {
+      console.log(err.status);
+      setErrorMessage("Something went wrong");
+    }
+  };
+
   return (
     <form className="login-page--form" onSubmit={handleSubmit(onSubmit)}>
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -57,7 +77,7 @@ const LoginForm = () => {
       {errorMessage ? (
         <p style={{ color: "red", margin: "1px" }}>{errorMessage}</p>
       ) : null}
-      <button>Guest Login</button>
+      <button onClick={demoUser}>Guest Login</button>
     </form>
   );
 };

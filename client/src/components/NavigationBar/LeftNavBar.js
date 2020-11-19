@@ -11,17 +11,17 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
   const [teamState, teamdispatch] = useContext(TeamContext);
   const [loading, setLoading] = useState(true);
   //NOTE : Only other option that worked was setting state either in here or in App.js and call it for global state. ReducerContext does not work
-  const getTeams = async () => {
-    const id = localStorage.getItem("userId");
-    const res = await apiServer.get(`/team/user/${id}`);
-    await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
-    // setTeams(res.data[0].Teams);
-    setLoading(false);
-  };
+  // const getTeams = async () => {
+  //   const id = localStorage.getItem("userId");
+  //   const res = await apiServer.get(`/team/user/${id}`);
+  //   await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
+  //   // setTeams(res.data[0].Teams);
+  //   setLoading(false);
+  // };
 
-  useEffect(() => {
-    getTeams();
-  }, []);
+  // useEffect(() => {
+  //   getTeams();
+  // }, []);
 
   // if (loading) return <Loader />;
   const renderedList = teamState.teams.map((team) => {
