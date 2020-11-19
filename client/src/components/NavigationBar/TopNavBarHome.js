@@ -16,10 +16,10 @@ const TopNavBarHome = () => {
       <div className="top-nav-bar-right" style={{}}>
         <div>Search</div>
         <div>
-          <GrAddCircle style={{ fontSize: "24px" }} />
+          <GrAddCircle className="top-nav-bar--icon" />
         </div>
         <div>
-          <CgProfile style={{ fontSize: "24px" }} />
+          <CgProfile className="top-nav-bar--icon" />
         </div>
         <button onClick={logout}>Logout</button>
       </div>

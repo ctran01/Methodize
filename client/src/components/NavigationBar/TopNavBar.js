@@ -4,17 +4,8 @@ import "../../css/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
 
-const TopNavBar = ({ sidebar, showSidebar }) => {
-  const { setAuth, setEmail, setUserId } = useContext(AuthContext);
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userId");
-    setAuth(null);
-    setEmail(null);
-    setUserId(null);
-  };
+const TopNavBar = () => {
+  const { logout } = useContext(AuthContext);
 
   return (
     <div className="top-nav-bar-container">
@@ -25,10 +16,10 @@ const TopNavBar = ({ sidebar, showSidebar }) => {
       <div className="top-nav-bar-right">
         <div>Search</div>
         <div>
-          <GrAddCircle />
+          <GrAddCircle className="top-nav-bar--icon" />
         </div>
         <div>
-          <CgProfile />
+          <CgProfile className="top-nav-bar--icon" />
         </div>
         <button onClick={logout}>Logout</button>
       </div>

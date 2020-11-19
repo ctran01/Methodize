@@ -6,12 +6,16 @@
   padding: 16px 0;
   width: 152px;
   align-items: center;
-  background: rgba(246, 248, 249, 0);
+  /* background: rgba(246, 248, 249, 0); */
   display: flex;
   flex-flow: column;
   position: relative;
   transition-duration: 0.4s;
   cursor: pointer;
+}
+
+.project-tile-container:hover {
+  padding: 0px 0px;
 }
 
 .project-tile-box {
