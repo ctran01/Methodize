@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Pages/Home";
 import Tasks from "./Pages/Tasks";
+import Project from "./Pages/Project";
 import "../css/Navbar.css";
 import LeftNavBar from "./NavigationBar/LeftNavBar";
 
@@ -53,6 +54,7 @@ const AuthRoutes = () => {
     getUserTeams();
     getUserProjects();
   }, []);
+
   return (
     <div className="overlay">
       <BrowserRouter>
@@ -61,6 +63,7 @@ const AuthRoutes = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/tasks" component={Tasks} />
+            <Route path="/project/:userId/:projectName" component={Project} />
             <Route
               path="/*"
               render={() => {

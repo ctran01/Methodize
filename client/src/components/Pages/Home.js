@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import TaskItem from "../tasks/TaskItem";
 import TopNavBarHome from "../NavigationBar/TopNavBarHome";
+import { FiPlus } from "react-icons/fi";
 
 import { Context as UserContext } from "../../context/store/UserStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
@@ -51,6 +52,14 @@ const Home = () => {
             <div className="home-projects--list">
               {/* call get all projects for specific user route */}
               {projectTiles}
+              <div className="project-tile-container">
+                <div className="project-tile-box">
+                  <div className="project-tile-icon">
+                    <FiPlus style={{ fontSize: "40px" }} />
+                  </div>
+                </div>
+                <div className="project-tile-name">New Project</div>
+              </div>
             </div>
           </div>
         </div>

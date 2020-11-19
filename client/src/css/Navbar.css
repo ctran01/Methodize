@@ -109,3 +109,7 @@
 .top-nav-bar-right div {
   padding: 0px 15px;
 }
+
+.top-nav-bar--icon {
+  font-size: 24px;
+}
