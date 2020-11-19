@@ -24,6 +24,12 @@
   margin: 32px auto;
 }
 
+.home-projects--list {
+  display: flex;
+  flex-flow: row wrap;
+  padding-top: 20px;
+}
+
 .home-tasks--list {
   border: 2px solid #e8ecee;
   border-radius: 5px;

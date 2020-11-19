@@ -4,13 +4,19 @@ import TopNavBarHome from "../NavigationBar/TopNavBarHome";
 
 import { Context as UserContext } from "../../context/store/UserStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
+import { Context as ProjectContext } from "../../context/store/ProjectStore";
+import ProjectTile from "../projects/ProjectTile";
 
 const Home = () => {
   const [getUserInfo] = useContext(UserContext);
   const [taskState] = useContext(TaskContext);
-
+  const [projectState] = useContext(ProjectContext);
   const taskList = taskState.tasks.map((task, i) => {
-    return !task.comppleted && <TaskItem task={task} key={i} />;
+    return !task.completed && <TaskItem task={task} key={i} />;
+  });
+
+  const projectTiles = projectState.projects.map((project, i) => {
+    return <ProjectTile project={project} key={i} />;
   });
 
   return (
@@ -42,9 +48,10 @@ const Home = () => {
             <div className="home-projects-header">
               <h2 style={{ color: "#151b26", fontWeight: 500 }}>Projects</h2>
             </div>
-            <ul className="home-projects--list">
+            <div className="home-projects--list">
               {/* call get all projects for specific user route */}
-            </ul>
+              {projectTiles}
+            </div>
           </div>
         </div>
       </section>

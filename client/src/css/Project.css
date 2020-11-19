@@ -1,0 +1,38 @@
+.project-tile-container {
+  border-radius: 30px;
+  box-sizing: border-box;
+  height: 220px;
+  min-width: 152px;
+  padding: 16px 0;
+  width: 152px;
+  align-items: center;
+  background: rgba(246, 248, 249, 0);
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.project-tile-box {
+  height: 120px;
+  width: 120px;
+}
+
+.project-tile-icon {
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  background: #cbd4db;
+  display: flex;
+  fill: #fff;
+  flex-direction: column;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+}
+
+.project-tile-name {
+}
