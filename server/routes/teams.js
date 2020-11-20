@@ -67,6 +67,22 @@ router.get(
   })
 );
 
+//get everything about team
+router.get(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const team_id = req.params.id;
+    const team = await Team.findOne({
+      include: [
+        { model: Project },
+        { model: User, attributes: ["name", "email"] },
+      ],
+      where: { id: team_id },
+    });
+    res.json(team);
+  })
+);
+
 //Create team
 router.post(
   "/user/:userId",

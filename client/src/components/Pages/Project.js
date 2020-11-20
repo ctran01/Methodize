@@ -7,7 +7,7 @@ import TaskListItem from "../tasks/TaskListItem";
 import "../../css/Project.css";
 import "../../css/TaskList.css";
 
-const Project = () => {
+const ProjectPage = () => {
   const { projectId, projectName } = useParams();
 
   const [project, setProject] = useState();
@@ -47,4 +47,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectPage;

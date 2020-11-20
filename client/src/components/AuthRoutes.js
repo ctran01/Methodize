@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./Pages/Home";
-import Tasks from "./Pages/Tasks";
-import Project from "./Pages/Project";
+import HomePage from "./Pages/Home";
+import TasksPage from "./Pages/Tasks";
+import ProjectPage from "./Pages/Project";
+import TeamPage from "./Pages/Team";
 import "../css/Navbar.css";
 import LeftNavBar from "./NavigationBar/LeftNavBar";
 
@@ -61,9 +62,13 @@ const AuthRoutes = () => {
         <LeftNavBar showSidebar={showSidebar} sidebar={sidebar} />
         <div className="overlay-right-container">
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/tasks" component={Tasks} />
-            <Route path="/project/:projectId/:projectName" component={Project} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/tasks" component={TasksPage} />
+            <Route
+              path="/project/:projectId/:projectName"
+              component={ProjectPage}
+            />
+            <Route path="/team/:teamId/:teamName" component={TeamPage} />
             <Route
               path="/*"
               render={() => {
