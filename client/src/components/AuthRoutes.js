@@ -63,7 +63,7 @@ const AuthRoutes = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/tasks" component={Tasks} />
-            <Route path="/project/:userId/:projectName" component={Project} />
+            <Route path="/project/:projectId/:projectName" component={Project} />
             <Route
               path="/*"
               render={() => {

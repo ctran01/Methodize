@@ -4,13 +4,13 @@ import "../../css/Navbar.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
 
-const TopNavBar = () => {
+const TopNavBar = ({ name }) => {
   const { logout } = useContext(AuthContext);
 
   return (
     <div className="top-nav-bar-container">
       <div className="top-nav-bar-left">
-        <h2>Team/Project Name</h2>
+        <h2>{name}</h2>
       </div>
       <div className="top-nav-bar-middle"></div>
       <div className="top-nav-bar-right">

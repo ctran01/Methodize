@@ -107,24 +107,35 @@ router.delete(
 //get everything about project
 
 router.get(
-  "/:projectName/user/:userId",
+  "/:id",
   asyncHandler(async (req, res, next) => {
     const user_id = req.params.userId;
     const project_name = req.params.projectName;
+    const project_id = req.params.id;
+    // const project = await Project.findOne({
+    //   include: [
+    //     {
+    //       model: User,
+    //       where: {
+    //         id: user_id,
+    //       },
+    //       attributes: ["name"],
+    //     },
+    //     { model: TaskList },
+    //   ],
+    //   where: {
+    //     name: project_name,
+    //   },
+    // });
 
     const project = await Project.findOne({
       include: [
         {
-          model: User,
-          where: {
-            id: user_id,
-          },
-          attributes: ["name"],
+          model: TaskList,
         },
-        { model: TaskList },
       ],
       where: {
-        name: project_name,
+        id: project_id,
       },
     });
 
