@@ -4,7 +4,7 @@ import "../../css/Task.css";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import apiServer from "../../config/apiServer";
 
-const Tasks = () => {
+const TasksPage = () => {
   const [taskState, taskdispatch] = useContext(TaskContext);
 
   const getUserTasks = async () => {
@@ -68,4 +68,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default TasksPage;

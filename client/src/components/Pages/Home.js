@@ -8,7 +8,7 @@ import { Context as TaskContext } from "../../context/store/TaskStore";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import ProjectTile from "../projects/ProjectTile";
 
-const Home = () => {
+const HomePage = () => {
   const [getUserInfo] = useContext(UserContext);
   const [taskState] = useContext(TaskContext);
   const [projectState] = useContext(ProjectContext);
@@ -68,4 +68,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

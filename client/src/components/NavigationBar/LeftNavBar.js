@@ -25,8 +25,16 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
 
   // if (loading) return <Loader />;
   const renderedList = teamState.teams.map((team) => {
-    return <li>{team.name}</li>;
+    return (
+      <Link
+        style={{ textDecoration: "none", color: "white" }}
+        to={`/team/${team.id}/${team.name}`}
+      >
+        <div>{team.name}</div>
+      </Link>
+    );
   });
+
   return (
     <div className="left-nav-bar-container">
       <div className={sidebar ? "nav-menu active" : "nav-menu collapsed"}>
@@ -57,12 +65,12 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
               <button>My Tasks</button>
             </Link>
           </div>
-          <div className="favorites-container">
+          {/* <div className="favorites-container">
             <p style={{}}>Favorites</p>
 
             <li>Favorite 1</li>
             <li>Favorite 2</li>
-          </div>
+          </div> */}
           <div className="teams-items-container">
             <div className="teams-items-header" style={{ display: "flex" }}>
               <p style={{}}>Teams</p>
