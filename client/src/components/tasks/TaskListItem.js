@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TaskItemProject from "./TaskItemProject";
 import apiServer from "../../config/apiServer";
+import "../../css/TaskList.css";
 import Loader from "../Loader";
+import { FiPlus } from "react-icons/fi";
 const TaskListItem = ({ tasklist }) => {
   const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
@@ -31,7 +33,10 @@ const TaskListItem = ({ tasklist }) => {
     <div className="tasklist-container">
       <div className="tasklist-header">{tasklist.name}</div>
       <div className="tasklist-add-task--button"></div>
-      <div className="tasklist-task--list">{renderedTasks}</div>
+      <div className="tasklist-task--list">
+        {renderedTasks}
+        <div className="tasklist-new-task--button">+ Add task</div>
+      </div>
     </div>
   );
 };

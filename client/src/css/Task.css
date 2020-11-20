@@ -21,7 +21,7 @@
   padding: 5px;
 }
 
-.task-home--li {
+.task-home-item {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #e8ecee;
@@ -34,16 +34,19 @@
 
 .task-project-item {
   background: white;
-  list-style: none;
-  padding: 15px;
+  /* padding: 10px; */
+
+  padding: 6px 8px 2px;
   font-size: 13px;
-  margin: 10px 0;
+  /* margin: 10px 0; */
+  margin-bottom: 8px;
   box-shadow: 0 1px 3px 0 rgba(21, 27, 38, 0.15);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
-  height: 100px;
-  position: relative;
-  transition: top ease 0.2s;
-  top: 0;
+  /* height: 100px; */
+  transition: 0.2s;
+}
+.task-project-item:hover {
+  background: #e8ecee;
 }

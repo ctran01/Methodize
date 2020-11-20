@@ -4,6 +4,9 @@ import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 import TopNavBar from "../NavigationBar/TopNavBar";
 import TaskListItem from "../tasks/TaskListItem";
+import "../../css/Project.css";
+import "../../css/TaskList.css";
+
 const Project = () => {
   const { projectId, projectName } = useParams();
 
@@ -36,7 +39,10 @@ const Project = () => {
   return (
     <div>
       <TopNavBar name={project.name} />
-      <div className="project-container">{renderedTaskLists}</div>
+      <div className="project-container">
+        {renderedTaskLists}
+        <div className="tasklist-new-tasklist--button">+ Add List</div>
+      </div>
     </div>
   );
 };
