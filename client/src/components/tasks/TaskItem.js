@@ -2,7 +2,7 @@ import React from "react";
 
 const TaskItem = ({ task }) => {
   return (
-    <li className="task--li">
+    <li className="task-home--li">
       <div>
         <p>{task.name}</p>
       </div>

@@ -21,7 +21,7 @@
   padding: 5px;
 }
 
-.task--li {
+.task-home--li {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #e8ecee;
@@ -30,4 +30,20 @@
   padding: 0px 5px;
   cursor: pointer;
   align-items: center;
+}
+
+.task-project-item {
+  background: white;
+  list-style: none;
+  padding: 15px;
+  font-size: 13px;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px 0 rgba(21, 27, 38, 0.15);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 100px;
+  position: relative;
+  transition: top ease 0.2s;
+  top: 0;
 }

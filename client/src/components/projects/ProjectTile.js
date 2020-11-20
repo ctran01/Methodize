@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import "../../css/Project.css";
 import { AiOutlineProject } from "react-icons/ai";
 const ProjectTile = ({ project }) => {
-  const userId = localStorage.getItem("userId");
-
   return (
-    <Link to={`/project/${userId}/${project.name}`}>
+    <Link to={`/project/${project.id}/${project.name}`}>
       <div className="project-tile-container">
         <div className="project-tile-box">
           <div className="project-tile-icon">

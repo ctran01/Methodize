@@ -1,0 +1,20 @@
+.tasklist-container {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  margin: 0px 10px;
+}
+
+.tasklist-header {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0px;
+}
+.tasklist-add-task--button {
+}
+.tasklist-task--list {
+  width: 270px;
+  height: 501px;
+  display: flex;
+  flex-direction: column;
+}
