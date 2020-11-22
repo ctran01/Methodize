@@ -25,10 +25,7 @@ const HomePage = () => {
     <>
       <TopNavBarHome />
       <section style={{ margin: "20px 120px" }}>
-        <div
-          className="home-container"
-          style={{ width: "900px", margin: "0 auto" }}
-        >
+        <div className="home-container">
           <div className="home-welcome-header">
             <img src={homeImage} alt="home" style={{ width: "400px" }}></img>
             <div>

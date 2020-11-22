@@ -11,7 +11,7 @@ const ProjectTile = ({ project }) => {
       <div className="project-tile-container">
         <div className="project-tile-box">
           <div className="project-tile-icon">
-            <AiOutlineProject style={{ fontSize: "30px" }} />
+            <AiOutlineProject style={{ fontSize: "30px", color: "white" }} />
           </div>
         </div>
         <div className="project-tile-name">{project.name}</div>
