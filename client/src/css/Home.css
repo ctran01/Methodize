@@ -43,3 +43,13 @@
   overflow: hidden;
   margin: 0px 25px;
 }
+
+.home-container {
+  width: 900px;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.home-container::-webkit-scrollbar {
+  display: none;
+}

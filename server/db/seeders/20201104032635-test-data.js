@@ -69,6 +69,34 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Bug Tracking",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Engineering Project Plan",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Web Application",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Short Term Project",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );
