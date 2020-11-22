@@ -8,11 +8,13 @@ import TopNavBarHome from "../NavigationBar/TopNavBarHome";
 import ProjectTile from "../projects/ProjectTile";
 import NewProjectTile from "../projects/NewProjectTile";
 import homeImage from "../../assets/codeVersion.png";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [userState] = useContext(UserContext);
   const [taskState] = useContext(TaskContext);
   const [projectState] = useContext(ProjectContext);
+
   const taskList = taskState.tasks.map((task, i) => {
     return !task.completed && <TaskItem task={task} key={i} />;
   });
@@ -24,7 +26,7 @@ const HomePage = () => {
   return (
     <>
       <TopNavBarHome />
-      <section style={{ margin: "20px 120px" }}>
+      <section style={{ margin: "20px 120px", height: "100%" }}>
         <div className="home-container">
           <div className="home-welcome-header">
             <img src={homeImage} alt="home" style={{ width: "400px" }}></img>
@@ -48,7 +50,12 @@ const HomePage = () => {
                 </h2>
               </div>
               <div>
-                <p>See all my tasks</p>
+                <Link
+                  to="/tasks"
+                  style={{ textDecoration: "none", color: "blue" }}
+                >
+                  <p style={{ fontSize: "14px" }}>See all my tasks</p>
+                </Link>
               </div>
             </div>
             <div className="home-tasks--list">
