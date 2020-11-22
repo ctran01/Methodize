@@ -27,6 +27,7 @@ const restoreUser = (req, res, next) => {
       err.status = 401;
       return next(err);
     }
+
     const { id } = jwtPayload.data;
     try {
       req.user = await User.findByPk(id);
