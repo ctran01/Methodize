@@ -1,7 +1,13 @@
 .home-welcome-header {
-  height: 175px;
+  display: flex;
+  align-items: center;
 }
 
+.home-welcome-message {
+  color: #151b26;
+  font-weight: 500;
+  font-size: 24px;
+}
 .home-tasks-container {
   height: 175px;
   margin: 32px auto;

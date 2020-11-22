@@ -19,8 +19,8 @@
 }
 
 .project-tile-box {
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
 }
 
 .project-tile--link {
@@ -44,6 +44,30 @@
   justify-content: center;
   flex-flow: column;
   position: relative;
+}
+
+.new-project-tile-icon-container {
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  border: dashed #cbd4db;
+  align-items: center;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-tile-container:hover .new-project-tile-icon-container {
+  border: dashed #91979c;
+}
+
+.new-project-tile-icon {
+  font-size: 40px;
+  color: #cbd4db;
+}
+.project-tile-container:hover .new-project-tile-icon {
+  color: #91979c;
 }
 
 .project-tile-name {
