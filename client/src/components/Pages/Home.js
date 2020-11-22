@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import TaskItem from "../tasks/TaskItem";
-import TopNavBarHome from "../NavigationBar/TopNavBarHome";
-import { FiPlus } from "react-icons/fi";
 
 import { Context as UserContext } from "../../context/store/UserStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
+import TaskItem from "../tasks/TaskItem";
+import TopNavBarHome from "../NavigationBar/TopNavBarHome";
 import ProjectTile from "../projects/ProjectTile";
+import NewProjectTile from "../projects/NewProjectTile";
+import homeImage from "../../assets/codeVersion.png";
 
 const HomePage = () => {
-  const [getUserInfo] = useContext(UserContext);
+  const [userState] = useContext(UserContext);
   const [taskState] = useContext(TaskContext);
   const [projectState] = useContext(ProjectContext);
   const taskList = taskState.tasks.map((task, i) => {
@@ -28,7 +29,20 @@ const HomePage = () => {
           className="home-container"
           style={{ width: "900px", margin: "0 auto" }}
         >
-          {/* <div className="home-welcome-header">Welcome [name]!</div> */}
+          <div className="home-welcome-header">
+            <img src={homeImage} alt="home" style={{ width: "400px" }}></img>
+            <div>
+              <h2 className="home-welcome-message">
+                Welcome, {userState.user.name}!
+              </h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.{" "}
+              </p>
+            </div>
+          </div>
           <div className="home-tasks-container">
             <div className="home-tasks-header">
               <div>
@@ -52,14 +66,7 @@ const HomePage = () => {
             <div className="home-projects--list">
               {/* call get all projects for specific user route */}
               {projectTiles}
-              <div className="project-tile-container">
-                <div className="project-tile-box">
-                  <div className="project-tile-icon">
-                    <FiPlus style={{ fontSize: "40px" }} />
-                  </div>
-                </div>
-                <div className="project-tile-name">New Project</div>
-              </div>
+              <NewProjectTile />
             </div>
           </div>
         </div>

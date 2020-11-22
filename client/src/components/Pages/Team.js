@@ -6,15 +6,19 @@ import Loader from "../Loader";
 import "../../css/TeamPage.css";
 import TeamMemberIcon from "../teams/TeamMemberIcon";
 import ProjectTile from "../projects/ProjectTile";
+import NewProjectTile from "../projects/NewProjectTile";
 
 const TeamPage = () => {
   const { teamId, teamName } = useParams();
   const [team, setTeam] = useState();
+
   const [loading, setLoading] = useState(true);
+
   const getTeam = async () => {
     try {
       const res = await apiServer.get(`/team/${teamId}`);
       setTeam(res.data);
+
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -23,19 +27,19 @@ const TeamPage = () => {
 
   useEffect(() => {
     getTeam();
-  });
+  }, []);
 
   if (loading) {
     return <Loader />;
   }
 
-  const membersList = () => {
-    return <TeamMemberIcon />;
-  };
+  const membersList = team.Users.map((user, i) => {
+    return <TeamMemberIcon user={user} key={i} />;
+  });
 
-  const projectsList = () => {
-    return <ProjectTile />;
-  };
+  const projectsList = team.Projects.map((project, i) => {
+    return <ProjectTile project={project} key={i} />;
+  });
   return (
     <div>
       <TopNavBar name={teamName} />
@@ -57,14 +61,19 @@ const TeamPage = () => {
               <div className="team-content-left-members-header">
                 <div className="team-content-title">Members</div>
               </div>
-              <div className="team-content-left-members--list"></div>
+              <div className="team-content-left-members--list">
+                {membersList}
+              </div>
             </div>
           </div>
           <div className="team-page-content-right">
             <div className="team-content-right-header">
               <div className="team-content-title">Projects</div>
             </div>
-            <div className="team-content-right-projects--list"></div>
+            <div className="team-content-right-projects--list">
+              {projectsList}
+              <NewProjectTile />
+            </div>
           </div>
         </div>
       </div>
