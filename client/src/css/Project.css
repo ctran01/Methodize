@@ -66,6 +66,7 @@
   font-size: 40px;
   color: #cbd4db;
 }
+
 .project-tile-container:hover .new-project-tile-icon {
   color: #91979c;
 }
@@ -73,7 +74,7 @@
 .project-tile-name {
   padding-top: 10px;
   color: black;
-  /* font-size: 13px; */
+  font-size: 15px;
 }
 
 .project-container {

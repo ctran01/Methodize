@@ -1,6 +1,7 @@
 .tasks-container {
   /* background-color: #f6f8f9; */
   display: flex;
+  flex-direction: column;
   padding: 15px;
   justify-content: center;
   align-items: center;
@@ -9,7 +10,7 @@
 }
 
 .tasks-inner-container {
-  background-color: #f6f8f9;
+  background-color: white;
   min-width: 405px;
   max-width: 1000px;
   overflow: hidden;
@@ -17,8 +18,10 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  border: 2px solid #f6f8f9;
-  padding: 5px;
+  border: 2px solid #e8ecee;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 1px 4px 0 rgba(21, 27, 38, 0.08);
 }
 
 .task-home-item {
@@ -49,4 +52,14 @@
 }
 .task-project-item:hover {
   background: #e8ecee;
+}
+
+.task-section {
+}
+.task-section-header {
+  display: flex;
+  border-top: 1px solid #e8ecee;
+}
+
+.task-section-list {
 }

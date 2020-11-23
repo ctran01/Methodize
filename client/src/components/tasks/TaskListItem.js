@@ -3,7 +3,8 @@ import TaskItemProject from "./TaskItemProject";
 import apiServer from "../../config/apiServer";
 import "../../css/TaskList.css";
 import Loader from "../Loader";
-import { FiPlus } from "react-icons/fi";
+
+//Project page task list
 const TaskListItem = ({ tasklist }) => {
   const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);

@@ -7,6 +7,7 @@ import "../../css/TeamPage.css";
 import TeamMemberIcon from "../teams/TeamMemberIcon";
 import ProjectTile from "../projects/ProjectTile";
 import NewProjectTile from "../projects/NewProjectTile";
+import NewTeamMemberIcon from "../teams/NewTeamMemberIcon";
 
 const TeamPage = () => {
   const { teamId, teamName } = useParams();
@@ -18,7 +19,6 @@ const TeamPage = () => {
     try {
       const res = await apiServer.get(`/team/${teamId}`);
       setTeam(res.data);
-
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -63,6 +63,7 @@ const TeamPage = () => {
               </div>
               <div className="team-content-left-members--list">
                 {membersList}
+                <NewTeamMemberIcon />
               </div>
             </div>
           </div>

@@ -115,6 +115,7 @@
 
 .team-member-icon {
 }
+
 .team-member-name-container {
   display: flex;
   flex-direction: column;
@@ -125,4 +126,19 @@
 .team-member-name {
 }
 .team-member-email {
+}
+
+.team-member-container:hover .new-user-avatar {
+  border: dashed #91979c;
+}
+
+.team-member-container:hover .new-user-avatar--icon {
+  color: #91979c;
+}
+
+.new-team-member-name {
+  color: #9ca6af;
+}
+.team-member-container:hover .new-team-member-name {
+  color: #5b5e61;
 }
