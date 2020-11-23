@@ -5,7 +5,7 @@ const TeamMemberIcon = ({ user }) => {
   return (
     <div className="team-member-container">
       <div className="team-member-icon">
-        <UserAvatar user={user} />
+        <UserAvatar name={user.name} />
       </div>
       <div className="team-member-name-container">
         <div className="team-member-name">{user.name}</div>

@@ -21,12 +21,12 @@ const AuthRoutes = () => {
   const [userState, userdispatch] = useContext(UserContext);
   const [projectState, projectdispatch] = useContext(ProjectContext);
   const [teamState, teamdispatch] = useContext(TeamContext);
+  const [user, setuser] = useState();
 
   //Maybe grab all information here and state goes down to child components?
   const getUserInfo = async () => {
     const id = localStorage.getItem("userId");
     const res = await apiServer.get(`/user/${id}`);
-    // setName(res.data.name);
     await userdispatch({ type: "get_user_info", payload: res.data });
   };
 

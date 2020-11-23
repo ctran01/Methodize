@@ -3,12 +3,12 @@ import AuthContext from "../../context/AuthContext";
 import { Context as UserContext } from "../../context/store/UserStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import "../../css/Navbar.css";
-import { CgProfile } from "react-icons/cg";
 import { GrAddCircle } from "react-icons/gr";
-import apiServer from "../../config/apiServer";
+import UserAvatar from "./UserAvatar";
+
 const TopNavBarTask = () => {
   const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
-  const [userState, userdispatch] = useContext(UserContext);
+  const [userState] = useContext(UserContext);
   const { name } = userState.user;
   const [taskState, taskdispatch] = useContext(TaskContext);
   const numTask = taskState.tasks.filter((task) => task.completed === true);
@@ -28,8 +28,8 @@ const TopNavBarTask = () => {
         <div>
           <GrAddCircle className="top-nav-bar--icon" />
         </div>
-        <div>
-          <CgProfile className="top-nav-bar--icon" />
+        <div className="top-nav-bar-user-icon">
+          <UserAvatar />
         </div>
         <button onClick={logout}>Logout</button>
       </div>

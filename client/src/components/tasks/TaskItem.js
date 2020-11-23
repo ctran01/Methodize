@@ -1,5 +1,7 @@
 import React from "react";
 
+//Task item list for home and task page
+
 const TaskItem = ({ task }) => {
   return (
     <li className="task-home-item">
