@@ -7,8 +7,6 @@ import UserAvatar from "./UserAvatar";
 
 const TopNavBar = ({ name }) => {
   const { logout } = useContext(AuthContext);
-  const [userState] = useContext(UserContext);
-  console.log(userState);
   return (
     <div className="top-nav-bar-container">
       <div className="top-nav-bar-left">
