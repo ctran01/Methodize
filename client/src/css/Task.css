@@ -54,7 +54,8 @@
   background: #e8ecee;
 }
 
-.task-section {
+.task-section > div {
+  -webkit-user-select: none;
 }
 .task-section-header {
   display: flex;
@@ -62,4 +63,20 @@
 }
 
 .task-section-list {
+}
+
+.open-arrow-collapse {
+  align-self: center;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.open-arrow {
+  align-self: center;
+  padding: 0 5px;
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.task-section-title {
+  margin: 5px 0;
 }

@@ -3,23 +3,28 @@ import { BiRightArrow } from "react-icons/bi";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import "../../css/Task.css";
 import TaskItem from "./TaskItem";
-const TaskSection = ({ title }) => {
+const TaskSection = ({ title, tasks }) => {
   const [open, setOpen] = useState(true);
   const [taskState] = useContext(TaskContext);
 
   const toggle = () => {
     setOpen(!open);
+    let arrow = document.getElementById(`task-collapse-${title}`);
+    arrow.classList.toggle("open-arrow-collapse");
+    arrow.classList.toggle("open-arrow");
   };
-  const taskList = taskState.tasks.map((task, i) => {
+  const taskList = tasks.map((task, i) => {
     return <TaskItem task={task} key={i} />;
   });
   return (
     <div className="task-section">
       <div className="task-section-header" onClick={toggle}>
-        <BiRightArrow style={{ alignSelf: "center", padding: "0 5px" }} />
-        <h3>{title}</h3>
+        <div id={`task-collapse-${title}`} className="open-arrow">
+          <BiRightArrow />
+        </div>
+        <h3 className="task-section-title">{title}</h3>
       </div>
-      {open && <ui className="task-section-list"> {taskList}</ui>}
+      {open && <div className="task-section-list"> {taskList}</div>}
     </div>
   );
 };
