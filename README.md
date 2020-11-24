@@ -25,6 +25,7 @@ Methodic is a clone of Asana, a project management tool. Methodic allows users t
 | React Hook Form | Easy-to-use forms with validation                   |
 | React Hooks     | Reusuable stateful logic with functional components |
 | Axios           | Promised-based HTTP client                          |
+| Material UI     |                                                     |
 
 - BcryptJS
 - Heroku
