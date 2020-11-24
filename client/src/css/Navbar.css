@@ -190,3 +190,7 @@
 .new-project--button:hover {
   background-color: rgba(21, 27, 38, 0.08);
 }
+
+.searchbar {
+  align-self: center;
+}

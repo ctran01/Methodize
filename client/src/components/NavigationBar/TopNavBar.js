@@ -8,11 +8,12 @@ import UserAvatar from "./UserAvatar";
 const TopNavBar = ({ name }) => {
   const { logout } = useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(false);
-
+  const [showNewMenu, setNewMenu] = useState(false);
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+  const handleNewMenu = () => {};
   return (
     <div className="top-nav-bar-container">
       <div className="top-nav-bar-left">
@@ -21,7 +22,7 @@ const TopNavBar = ({ name }) => {
       <div className="top-nav-bar-middle"></div>
       <div className="top-nav-bar-right">
         <div>Search</div>
-        <div>
+        <div onClick={handleNewMenu}>
           <GrAddCircle className="top-nav-bar--icon" />
         </div>
         <div onClick={handleMenu} className="top-nav-bar-user-icon">
