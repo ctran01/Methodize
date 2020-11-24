@@ -12,6 +12,11 @@ const TopNavBarTask = () => {
   const { name } = userState.user;
   const [taskState, taskdispatch] = useContext(TaskContext);
   const numTask = taskState.tasks.filter((task) => task.completed === true);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <div className="top-nav-bar-container" style={{}}>
@@ -28,10 +33,16 @@ const TopNavBarTask = () => {
         <div>
           <GrAddCircle className="top-nav-bar--icon" />
         </div>
-        <div className="top-nav-bar-user-icon">
+        <div onClick={handleMenu} className="top-nav-bar-user-icon">
           <UserAvatar />
+          {showMenu ? (
+            <div className="drop-down-menu">
+              <button className="logout--button" onClick={logout}>
+                Logout
+              </button>
+            </div>
+          ) : null}
         </div>
-        <button onClick={logout}>Logout</button>
       </div>
     </div>
   );

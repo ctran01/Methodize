@@ -24,11 +24,12 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
   // }, []);
 
   // if (loading) return <Loader />;
-  const renderedList = teamState.teams.map((team) => {
+  const renderedList = teamState.teams.map((team, i) => {
     return (
       <Link
         style={{ textDecoration: "none", color: "white" }}
         to={`/team/${team.id}/${team.name}`}
+        key={i}
       >
         <div>{team.name}</div>
       </Link>
@@ -58,11 +59,11 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
             className="main-menu-items-container"
             style={{ marginTop: "10px" }}
           >
-            <Link to="/">
-              <button>Home</button>
+            <Link to="/" className="left-nav-bar-main-link">
+              <div>Home</div>
             </Link>
-            <Link to="/tasks">
-              <button>My Tasks</button>
+            <Link to="/tasks" className="left-nav-bar-main-link">
+              <div>My Tasks</div>
             </Link>
           </div>
           {/* <div className="favorites-container">

@@ -61,51 +61,13 @@ const TasksPage = () => {
       <TopNavBarTask />
       <div className="tasks-container">
         <div className="tasks-inner-container">
-          <div className="tasks-container-header">Add Task</div>
+          <div className="tasks-container-header">
+            <button className="add-task-button">Add Task</button>
+          </div>
           <TaskSection title={"Recently Added"} tasks={recentlyAdded} />
           <TaskSection title={"Today"} tasks={todaysTasks} />
           <TaskSection title={"Upcoming"} tasks={upcomingTasks} />
           <TaskSection title={"Later"} tasks={laterTasks} />
-          {/* <div className="recently-assigned-tasks-container">
-            <div className="task--header">
-              <h3>Recently Assigned</h3>
-            </div>
-            <ul className="task--list">
-              {taskState.tasks.map((task) => {
-                return <li key={task.id}>{task.name}</li>;
-              })}
-            </ul>
-          </div> */}
-          {/* <div className="today-tasks-container">
-            <div className="task--header">
-              <h3>Today</h3>
-            </div>
-            <ul className="task--list">
-              <li className="task">task 1</li>
-              <li className="task">task 2</li>
-              <li className="task">task 3</li>
-            </ul>
-          </div>
-          <div className="upcoming-tasks-container">
-            <div className="task--header">
-              <h3>Upcoming</h3>
-            </div>
-            <ul className="task--list">
-              <li className="task">task 1</li>
-              <li className="task">task 2</li>
-              <li className="task">task 3</li>
-            </ul>
-          </div>
-          <div className="later-tasks-container">
-            <div className="task--header">
-              <h3>Later</h3>
-            </div>
-            <ul className="task--list">
-              <li className="task">task 1</li>
-              <li className="task">task 2</li>
-              <li className="task">task 3</li>
-            </ul>
-          </div> */}
         </div>
       </div>
     </>

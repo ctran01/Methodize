@@ -112,6 +112,8 @@
 
 .top-nav-bar--icon {
   font-size: 36px;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 
 .user-avatar {
@@ -128,6 +130,8 @@
   vertical-align: top;
   line-height: 36px;
   color: white;
+  -webkit-user-select: none;
+  cursor: pointer;
 }
 
 .new-user-avatar {
@@ -148,4 +152,41 @@
 }
 .new-user-avatar--icon {
   color: #cbd4db;
+}
+
+.left-nav-bar-main-link {
+  padding: 5px 0;
+  color: white;
+  text-decoration: none;
+}
+
+.drop-down-menu {
+  padding: revert;
+  position: absolute;
+  top: 55px;
+  right: 20px;
+}
+
+.drop-down-new-menu {
+  display: flex;
+  flex-direction: column;
+  padding: revert;
+  position: absolute;
+  top: 55px;
+  right: 75px;
+}
+.logout--button,
+.new-task--button,
+.new-project--button {
+  border: 1px solid #cbd4db;
+  outline: none;
+  background-color: white;
+  height: 30px;
+  cursor: pointer;
+}
+
+.logout--button:hover,
+.new-task--button:hover,
+.new-project--button:hover {
+  background-color: rgba(21, 27, 38, 0.08);
 }

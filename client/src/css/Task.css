@@ -23,6 +23,20 @@
   margin: 10px;
   box-shadow: 0 1px 4px 0 rgba(21, 27, 38, 0.08);
 }
+.tasks-container-header {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.add-task-button {
+  background: #14aaf5;
+  border: none;
+  border-radius: 3px;
+  height: 25px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
 
 .task-home-item {
   display: flex;
@@ -33,6 +47,9 @@
   padding: 0px 5px;
   cursor: pointer;
   align-items: center;
+}
+.task-home-item:hover {
+  background-color: rgba(133, 140, 155, 0.08);
 }
 
 .task-project-item {
@@ -70,11 +87,17 @@
   padding: 0 5px;
   cursor: pointer;
 }
+.open-arrow-collapse:hover {
+  color: blue;
+}
 .open-arrow {
   align-self: center;
   padding: 0 5px;
   transform: rotate(90deg);
   cursor: pointer;
+}
+.open-arrow:hover {
+  color: blue;
 }
 
 .task-section-title {
