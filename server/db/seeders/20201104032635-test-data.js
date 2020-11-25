@@ -129,7 +129,7 @@ module.exports = {
           project_id: 1,
           assignee_id: 1,
           description: "create initial database schema",
-          due_date: "2020-08-13",
+          due_date: new Date("2020-08-13"),
           completed: false,
           createdAt: new Date(),
           updatedAt: new Date(),

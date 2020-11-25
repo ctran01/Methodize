@@ -5,6 +5,9 @@ import { Context as TaskContext } from "../../context/store/TaskStore";
 import "../../css/Navbar.css";
 import { GrAddCircle } from "react-icons/gr";
 import UserAvatar from "./UserAvatar";
+import { Modal, Menu, MenuItem } from "@material-ui/core";
+import ProjectForm from "../Forms/ProjectForm";
+import TaskForm from "../Forms/TaskForm";
 
 const TopNavBarTask = () => {
   const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
@@ -14,8 +17,40 @@ const TopNavBarTask = () => {
   const numTask = taskState.tasks.filter((task) => task.completed === true);
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleMenu = () => {
-    setShowMenu(!showMenu);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEle, setAnchorEle] = useState(null);
+  const [openProject, setOpenProject] = useState(false);
+  const [openTask, setOpenTask] = useState(false);
+
+  const clickOpenTask = () => {
+    setOpenTask(true);
+    handleNewClose();
+  };
+
+  const clickCloseTask = () => {
+    setOpenTask(false);
+  };
+
+  const clickOpenProject = () => {
+    setOpenProject(true);
+    handleNewClose();
+  };
+  const clickCloseProject = () => {
+    setOpenProject(false);
+  };
+
+  const handleNewClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleNewClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleProfClick = (event) => {
+    setAnchorEle(event.currentTarget);
+  };
+  const handleProfClose = () => {
+    setAnchorEle(null);
   };
 
   return (
@@ -28,21 +63,47 @@ const TopNavBarTask = () => {
         <p style={{}}>{numTask.length} completed tasks</p>
       </div>
       <div className="top-nav-bar-middle"></div>
-      <div className="top-nav-bar-right">
-        <div>Search</div>
+      <div className="top-nav-bar-right" style={{}}>
+        <div style={{ display: "flex" }}>
+          <input className="searchbar" placeholder={"Search"}></input>
+        </div>
         <div>
-          <GrAddCircle className="top-nav-bar--icon" />
+          <GrAddCircle onClick={handleNewClick} className="top-nav-bar--icon" />
+          <Menu
+            style={{ marginTop: "40px" }}
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleNewClose}
+          >
+            <MenuItem onClick={clickOpenTask}>Add Task</MenuItem>
+            <TaskForm
+              handleNewClose={handleNewClose}
+              clickClose={clickCloseTask}
+              open={openTask}
+            ></TaskForm>
+            <MenuItem onClick={clickOpenProject}>Add Project</MenuItem>
+            <ProjectForm
+              handleNewClose={handleNewClose}
+              clickClose={clickCloseProject}
+              open={openProject}
+            />
+          </Menu>
         </div>
-        <div onClick={handleMenu} className="top-nav-bar-user-icon">
-          <UserAvatar />
-          {showMenu ? (
-            <div className="drop-down-menu">
-              <button className="logout--button" onClick={logout}>
-                Logout
-              </button>
-            </div>
-          ) : null}
+
+        <div onClick={handleProfClick}>
+          <UserAvatar id={localStorage.getItem("userId")} />
         </div>
+
+        <Menu
+          style={{ marginTop: "40px" }}
+          anchorEl={anchorEle}
+          keepMounted
+          open={Boolean(anchorEle)}
+          onClose={handleProfClose}
+        >
+          <MenuItem onClick={logout}>Logout</MenuItem>
+        </Menu>
       </div>
     </div>
   );

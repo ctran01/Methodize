@@ -28,6 +28,8 @@ const LoginForm = () => {
   };
 
   const demoUser = async () => {
+    setErrorMessage("");
+
     const email = "demo@email.com";
     const password = "password";
     try {

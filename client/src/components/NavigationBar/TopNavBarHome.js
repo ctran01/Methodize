@@ -126,7 +126,7 @@ const TopNavBarHome = () => {
           ) : null}
         </div> */}
         <div onClick={handleProfClick}>
-          <UserAvatar />
+          <UserAvatar id={localStorage.getItem("userId")} />
         </div>
 
         <Menu

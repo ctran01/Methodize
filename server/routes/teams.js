@@ -75,7 +75,7 @@ router.get(
     const team = await Team.findOne({
       include: [
         { model: Project },
-        { model: User, attributes: ["name", "email"] },
+        { model: User, attributes: ["name", "email", "id"] },
       ],
       where: { id: team_id },
     });
