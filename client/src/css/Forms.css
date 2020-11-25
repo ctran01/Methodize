@@ -1,0 +1,25 @@
+.form-header {
+}
+
+.textarea {
+  box-sizing: border-box;
+  resize: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  outline: none;
+}
+.form-top-container {
+  display: flex;
+}
+.name-textarea {
+  line-height: 32px;
+  height: 42px;
+  font-weight: 500;
+  font-size: 24px;
+  width: 100%;
+  padding: 4px 0px 0px 0px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #c5cad1;
+}

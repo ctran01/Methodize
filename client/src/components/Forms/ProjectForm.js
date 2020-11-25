@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import { Modal } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
+import "../../css/Forms.css";
 const ProjectForm = ({ handleNewClose, clickClose, open }) => {
   //try returning modal in here
   return (
     <div>
       <Modal open={open} onClose={clickClose}>
         <div className="modal-container">
+          <h2 className="form-header">Add a Project</h2>
           <form>
-            <div>
+            <div className="form-top-container">
+              <label htmlFor="name">Project name</label>
               <textarea
                 name="name"
                 type="text"
                 placeholder={"Task Name"}
-                className="edit-task-title textarea"
+                className="name-textarea textarea"
               ></textarea>
             </div>
             <div className="task-info">
