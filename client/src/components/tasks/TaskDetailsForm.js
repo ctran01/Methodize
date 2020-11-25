@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import "../../css/Task.css";
 import moment from "moment";
 import UserAvatar from "../NavigationBar/UserAvatar";
 import apiServer from "../../config/apiServer";
-const TaskDetailsForm = ({ task }) => {
+
+import { Context as TaskContext } from "../../context/store/TaskStore";
+const TaskDetailsForm = ({ task, closeModal }) => {
   const { register, handleSubmit, errors } = useForm();
   const createdDate = moment(
     task.createdAt.substring(0, 10).replace("-", ""),
     "YYYYMMDD"
   );
 
+  const [taskState, taskdispatch] = useContext(TaskContext);
   const date = moment(task.due_date);
   const dueDate = date.format("YYYY-MM-DD");
-  console.log(dueDate);
 
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
@@ -22,22 +24,26 @@ const TaskDetailsForm = ({ task }) => {
     setUser(res.data);
     setLoading(false);
   };
-  const onSubmit = async ({
-    name,
 
-    due_date,
-    description,
-    completed,
-  }) => {
+  const onSubmit = async ({ name, due_date, description, completed }) => {
     //put route to update task
-    // try{
-    //   const res = await apiServer.put(`/task/${task.id}`, {})
-    // }
-    console.log(name);
-    console.log(due_date);
-    console.log(description, "description");
-    console.log(completed);
+    try {
+      await apiServer.put(`/task/${task.id}`, {
+        name,
+        due_date,
+        description,
+        completed,
+      });
+      const res = await apiServer.get(
+        `/task/user/${localStorage.getItem("userId")}`
+      );
+      await taskdispatch({ type: "update_task", payload: res.data });
+      closeModal();
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   useEffect(() => {
     getTaskUser();
   }, []);
