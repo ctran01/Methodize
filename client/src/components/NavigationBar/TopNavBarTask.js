@@ -7,7 +7,7 @@ import { GrAddCircle } from "react-icons/gr";
 import UserAvatar from "./UserAvatar";
 import { Modal, Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
-import TaskForm from "../Forms/TaskForm";
+import TaskForm from "../Forms/AddTaskForm";
 
 const TopNavBarTask = () => {
   const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
@@ -53,6 +53,15 @@ const TopNavBarTask = () => {
     setAnchorEle(null);
   };
 
+  const projectBody = (
+    <div className="modal-container">
+      {/* <h2 id="modal-title">Task Detail</h2>
+      <p id="modal-description">
+        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+      </p> */}
+      <ProjectForm closeModal={clickCloseProject} open={openProject} />
+    </div>
+  );
   return (
     <div className="top-nav-bar-container" style={{}}>
       <div
@@ -88,6 +97,9 @@ const TopNavBarTask = () => {
               clickClose={clickCloseProject}
               open={openProject}
             />
+            {/* <Modal open={openProject} onClose={clickCloseProject}>
+              {projectBody}
+            </Modal> */}
           </Menu>
         </div>
 
