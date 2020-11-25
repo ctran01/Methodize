@@ -62,7 +62,12 @@ const TasksPage = () => {
       <div className="tasks-container">
         <div className="tasks-inner-container">
           <div className="tasks-container-header">
-            <button className="add-task-button">Add Task</button>
+            <div>
+              <button className="add-task-button">Add Task</button>
+            </div>
+            <div style={{ fontSize: "14px", alignSelf: "center" }}>
+              Due Date
+            </div>
           </div>
           <TaskSection title={"Recently Added"} tasks={recentlyAdded} />
           <TaskSection title={"Today"} tasks={todaysTasks} />

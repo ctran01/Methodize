@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "@material-ui/core";
+import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,13 +8,23 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const ProjectForm = ({ handleNewClose, clickClose, open }) => {
-  //try returning modal in here
+const TaskForm = ({ handleNewClose, clickClose, open }) => {
+  const handleSubmit = (event) => {};
   return (
     <div>
-      <Modal open={open} onClose={clickClose}>
-        <div className="modal-container">
-          <form>
+      <form>
+        <Dialog
+          open={open}
+          onClose={clickClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Add a Task</DialogTitle>
+
+          <DialogContent>
+            {/* <DialogContentText>
+              To subscribe to this website, please enter your email address
+              here. We will send updates occasionally.
+            </DialogContentText> */}
             <div>
               <textarea
                 name="name"
@@ -85,28 +95,19 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
                 className="edit-task-description textarea"
               ></textarea>
             </div>
-
-            <div style={{ display: "flex", marginLeft: "400px" }}>
-              <Button
-                style={{ color: "#0093ff" }}
-                onClick={clickClose}
-                color="primary"
-              >
-                Cancel
-              </Button>
-              <Button
-                style={{ color: "#0093ff" }}
-                type="submit"
-                color="primary"
-              >
-                Save
-              </Button>
-            </div>
-          </form>
-        </div>
-      </Modal>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={clickClose} color="primary">
+              Cancel
+            </Button>
+            <Button type="submit" onClick={clickClose} color="primary">
+              Subscribe
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </form>
     </div>
   );
 };
 
-export default ProjectForm;
+export default TaskForm;

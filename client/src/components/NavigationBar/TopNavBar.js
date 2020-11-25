@@ -6,7 +6,7 @@ import { Context as UserContext } from "../../context/store/UserStore";
 import UserAvatar from "./UserAvatar";
 import { Modal, Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
-import TaskForm from "../Forms/TaskForm";
+import TaskForm from "../Forms/AddTaskForm";
 
 const TopNavBar = ({ name }) => {
   const { logout } = useContext(AuthContext);

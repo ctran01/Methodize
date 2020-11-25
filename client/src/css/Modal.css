@@ -10,4 +10,5 @@
   left: 50%;
   transform: translate(-50%, -50%);
   outline: none;
+  border-radius: 4px;
 }
