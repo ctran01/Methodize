@@ -103,3 +103,67 @@
 .task-section-title {
   margin: 5px 0;
 }
+
+/* Task Details Form */
+.task-details-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+}
+
+.edit-task-title {
+  line-height: 32px;
+  height: 42px;
+  font-weight: 500;
+  font-size: 24px;
+  width: 100%;
+  padding: 4px 0px 0px 0px;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+}
+.edit-task-title:focus,
+.edit-task-title:hover,
+.edit-task-description:focus,
+.edit-task-description:hover {
+  border: 2px solid #bbbdc0;
+}
+
+.textarea {
+  box-sizing: border-box;
+  resize: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  outline: none;
+}
+.edit-task-description {
+  margin-top: 10px;
+  height: 200px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  color: #151b26;
+  font-size: 13px;
+}
+
+.edit-task-button {
+  cursor: pointer;
+  background: #0093ff;
+  text-align: center;
+  padding: 0 9px;
+  color: white;
+  font-size: 13px;
+  box-sizing: border-box;
+  height: 30px;
+  border-radius: 4px;
+  width: 50px;
+  border: none;
+  margin-left: 500px;
+  margin-top: 10px;
+}
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+}

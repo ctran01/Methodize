@@ -62,6 +62,34 @@ router.get(
   })
 );
 
+router.put("/:id", asyncHandler, async (req, res, next) => {
+  const task_id = req.params.id;
+  const { name, assignee_id, due_date, description, completed } = req.body;
+  const task = await Task.findOne({
+    where: {
+      id: task_id,
+    },
+  });
+  if (task) {
+    const updateTask = await Task.update(
+      {
+        name: name,
+        assignee_id: assignee_id,
+        due_date: due_date,
+        description: description,
+        completed: completed,
+      },
+      {
+        where: {
+          id: task_id,
+        },
+      }
+    );
+  } else {
+    res.status(401).send({ error: "Something went wrong" });
+  }
+});
+
 //Delete Task
 router.delete(
   "/:id",

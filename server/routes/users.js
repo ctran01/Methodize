@@ -41,6 +41,7 @@ router.get(
       where: {
         id: user_id,
       },
+      attributes: ["name", "email"],
     });
 
     res.json(user);
