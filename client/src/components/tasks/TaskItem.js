@@ -25,7 +25,7 @@ const TaskItem = ({ task }) => {
       <p id="modal-description">
         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
       </p> */}
-      <TaskDetailsForm task={task} />
+      <TaskDetailsForm task={task} closeModal={closeModal} />
     </div>
   );
   return (
