@@ -165,7 +165,16 @@
   margin-top: 10px;
 }
 
-.task-info {
+.edit-task-info {
   display: flex;
   justify-content: space-between;
+}
+
+.edit-task-form-input {
+  padding: 10px 5px;
+  width: 100%;
+  border: 1px solid lightgray;
+  outline: none;
+  margin: 10px 0;
+  text-overflow: ellipsis;
 }
