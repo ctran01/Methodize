@@ -19,7 +19,6 @@ router.get(
 );
 
 //get all tasks for tasklist
-
 router.get(
   "/:id/tasks",
   asyncHandler(async (req, res, next) => {

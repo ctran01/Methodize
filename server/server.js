@@ -9,24 +9,30 @@ const projectRouter = require("./routes/projects");
 const teamRouter = require("./routes/teams");
 const tasklistRouter = require("./routes/tasklists");
 const commentRouter = require("./routes/comments");
-const server = express();
-server.use(bodyParser.json());
-server.use(morgan("dev"));
-server.use(cors({ origin: true }));
+const app = express();
 
-server.use(userRouter);
-server.use("/task", taskRouter);
-server.use("/project", projectRouter);
-server.use("/team", teamRouter);
-server.use("/tasklist", tasklistRouter);
-server.user("/comment", commentRouter);
+app.use(bodyParser.json());
 
-server.get("/", (req, res) => {
-  res.send({ message: "You're Connected" });
+// Same as bodyParser but built in
+// app.use(express.json())
+// app.use(express.urlencoded({extended:true}))
+
+app.use(morgan("dev"));
+app.use(cors({ origin: true }));
+
+app.use(userRouter);
+app.use("/task", taskRouter);
+app.use("/project", projectRouter);
+app.use("/team", teamRouter);
+app.use("/tasklist", tasklistRouter);
+app.use("/comment", commentRouter);
+
+app.get("/", (req, res) => {
+  res.send("<h1>You're Connected </h1>");
 });
 
 // Catch unhandled requests such as wrong HTTP Method and forward to error handler.
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.status = 404;
   err.errors = ["Could not find string of resource"];
@@ -34,7 +40,7 @@ server.use((req, res, next) => {
 });
 
 // Generic error handler.
-server.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   const isProduction = environment === "production";
   res.json({
@@ -45,4 +51,4 @@ server.use((err, req, res, next) => {
   });
 });
 
-module.exports = server;
+module.exports = app;

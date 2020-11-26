@@ -89,7 +89,7 @@ router.post(
       user_id: user_id,
       project_id: project_id,
     });
-    res.json(201);
+    res.status(201);
   })
 );
 
@@ -103,6 +103,45 @@ router.delete(
       where: { id: project_id },
     });
     res.status(202);
+  })
+);
+
+//get everything about project
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const user_id = req.params.userId;
+    const project_name = req.params.projectName;
+    const project_id = req.params.id;
+    // const project = await Project.findOne({
+    //   include: [
+    //     {
+    //       model: User,
+    //       where: {
+    //         id: user_id,
+    //       },
+    //       attributes: ["name"],
+    //     },
+    //     { model: TaskList },
+    //   ],
+    //   where: {
+    //     name: project_name,
+    //   },
+    // });
+
+    const project = await Project.findOne({
+      include: [
+        {
+          model: TaskList,
+        },
+      ],
+      where: {
+        id: project_id,
+      },
+    });
+
+    res.json(project);
   })
 );
 

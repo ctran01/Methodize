@@ -1,23 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./Pages/Home";
-import Tasks from "./Pages/Tasks";
+import HomePage from "./Pages/Home";
+import TasksPage from "./Pages/Tasks";
+import ProjectPage from "./Pages/Project";
+import TeamPage from "./Pages/Team";
 import "../css/Navbar.css";
 import LeftNavBar from "./NavigationBar/LeftNavBar";
-import TopNavBar from "./NavigationBar/TopNavBar";
+
+import { Context as UserContext } from "../context/store/UserStore";
+import { Context as TaskContext } from "../context/store/TaskStore";
+import { Context as ProjectContext } from "../context/store/ProjectStore";
+import { Context as TeamContext } from "../context/store/TeamStore";
+
+import apiServer from "../config/apiServer";
+
 const AuthRoutes = () => {
   const [sidebar, setSidebar] = useState(true);
   const showSidebar = () => setSidebar(!sidebar);
+  const [taskState, taskdispatch] = useContext(TaskContext);
+  const [userState, userdispatch] = useContext(UserContext);
+  const [projectState, projectdispatch] = useContext(ProjectContext);
+  const [teamState, teamdispatch] = useContext(TeamContext);
+  const [user, setuser] = useState();
+
+  //Maybe grab all information here and state goes down to child components?
+  const getUserInfo = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/user/${id}`);
+    await userdispatch({ type: "get_user_info", payload: res.data });
+  };
+
+  const getUserTasks = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/task/user/${id}`);
+    await taskdispatch({ type: "get_user_tasks", payload: res.data });
+  };
+
+  const getUserTeams = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/team/user/${id}`);
+    await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
+    // setTeams(res.data[0].Teams);
+  };
+
+  const getUserProjects = async () => {
+    const id = localStorage.getItem("userId");
+    const res = await apiServer.get(`/project/user/${id}`);
+    await projectdispatch({ type: "get_user_projects", payload: res.data });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+    getUserTasks();
+    getUserTeams();
+    getUserProjects();
+  }, []);
+
   return (
-    <BrowserRouter>
-      <div className="overlay">
+    <div className="overlay">
+      <BrowserRouter>
         <LeftNavBar showSidebar={showSidebar} sidebar={sidebar} />
         <div className="overlay-right-container">
-          {/* <TopNavBar showSidebar={showSidebar} sidebar={sidebar} /> */}
           <Switch>
-            {/* <Route exact path="/register/onboard" component={Onboard} /> */}
-            <Route exact path="/" component={Home} />
-            <Route path="/tasks" component={Tasks} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/tasks" component={TasksPage} />
+            <Route
+              path="/project/:projectId/:projectName"
+              component={ProjectPage}
+            />
+            <Route path="/team/:teamId/:teamName" component={TeamPage} />
             <Route
               path="/*"
               render={() => {
@@ -26,8 +77,8 @@ const AuthRoutes = () => {
             />
           </Switch>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 };
 

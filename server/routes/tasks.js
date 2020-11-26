@@ -65,6 +65,33 @@ router.get(
   })
 );
 
+router.put(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const task_id = req.params.id;
+    const { name, due_date, description, completed } = req.body;
+    try {
+      const updateTask = await Task.update(
+        {
+          name: name,
+          due_date: due_date,
+          description: description,
+          completed: completed,
+        },
+        {
+          where: {
+            id: task_id,
+          },
+        }
+      );
+      console.log("confirm");
+      res.json(updateTask);
+    } catch (err) {
+      res.status(401).send({ error: "Something went wrong" });
+    }
+  })
+);
+
 //Delete Task
 router.delete(
   "/:id",

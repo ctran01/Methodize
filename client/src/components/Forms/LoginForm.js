@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import UserContext from "../../context/UserContext";
+import AuthContext from "../../context/AuthContext";
 import "../../css/LoginPage.css";
 import apiServer from "../../config/apiServer";
 const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm();
 
   const [errorMessage, setErrorMessage] = useState("");
-  const { setAuth, setEmail, setUserId } = useContext(UserContext);
+  const { setAuth, setEmail, setUserId, setUser } = useContext(AuthContext);
 
   const onSubmit = async ({ email, password }) => {
     try {
@@ -20,6 +20,29 @@ const LoginForm = () => {
       setAuth(res.data.token);
       setUserId(res.data.id);
       setEmail(res.data.email);
+      setUser(res.data);
+    } catch (err) {
+      console.log(err.status);
+      setErrorMessage("Something went wrong");
+    }
+  };
+
+  const demoUser = async () => {
+    setErrorMessage("");
+
+    const email = "demo@email.com";
+    const password = "password";
+    try {
+      const res = await apiServer.post("/login", { email, password });
+
+      localStorage.setItem("email", res.data.email);
+      localStorage.setItem("userId", res.data.id);
+      localStorage.setItem("token", res.data.token);
+      setErrorMessage("");
+      setAuth(res.data.token);
+      setUserId(res.data.id);
+      setEmail(res.data.email);
+      setUser(res.data);
     } catch (err) {
       console.log(err.status);
       setErrorMessage("Something went wrong");
@@ -56,7 +79,7 @@ const LoginForm = () => {
       {errorMessage ? (
         <p style={{ color: "red", margin: "1px" }}>{errorMessage}</p>
       ) : null}
-      <button>Guest Login</button>
+      <button onClick={demoUser}>Guest Login</button>
     </form>
   );
 };

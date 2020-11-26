@@ -1,0 +1,60 @@
+.tasklist-container {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  margin: 0px 10px;
+  align-items: center;
+  background-color: #ebecf0;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.tasklist-header {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0px;
+}
+.tasklist-add-task--button {
+}
+.tasklist-task--list {
+  width: 260px;
+  /* height: 501px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.tasklist-new-task--button {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 15px;
+  font-size: 15px;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px 0 rgba(21, 27, 38, 0.15);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: top ease 0.2s;
+}
+
+.tasklist-new-task--button:hover {
+  background: #e8ecee;
+}
+
+.tasklist-new-tasklist--button {
+  display: flex;
+  width: 270px;
+  margin: 0px 10px;
+  background-color: #ebecf0;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+}
+
+.tasklist-new-tasklist--button:hover {
+  background: #dcdde0;
+}

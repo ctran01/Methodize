@@ -1,14 +1,56 @@
 .home-welcome-header {
-  height: 175px;
+  display: flex;
+  align-items: center;
 }
 
+.home-welcome-message {
+  color: #151b26;
+  font-weight: 500;
+  font-size: 24px;
+}
 .home-tasks-container {
   height: 175px;
+  margin: 32px auto;
 }
-.home-tasks-header {
+
+.home-tasks-header,
+.home-projects-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e8ecee;
+  height: 32px;
+  margin-left: 24px;
+  margin-right: 24px;
+  padding: 8px 0;
+  margin-bottom: 9px;
 }
 .home-projects-container {
   height: 175px;
+  margin: 32px auto;
+}
+
+.home-projects--list {
+  display: flex;
+  flex-flow: row wrap;
+  padding-top: 20px;
+  margin: 0px 25px;
+}
+
+.home-tasks--list {
+  border: 2px solid #e8ecee;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0px 25px;
+}
+
+.home-container {
+  width: 900px;
+  height: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+
+.home-container::-webkit-scrollbar {
+  display: none;
 }

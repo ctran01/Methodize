@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { asyncHandler } = require("./utilities/utils");
 const { check, validationResult } = require("express-validator");
 const { User, Team, UserTeam } = require("../db/models");
-const { getUserToken } = require("./utilities/auth");
+const { getUserToken, requireAuth } = require("./utilities/auth");
 
 const router = express.Router();
 
@@ -31,16 +31,24 @@ const validateEmailPassword = [
     .withMessage("Please provide a valid password"),
 ];
 
-//get all users
-// router.get(
-//   "/",
-//   asyncHandler(async (req, res) => {
-//     const users = await User.findAll({});
+//Get user Information
+router.get(
+  "/user/:id",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const user_id = req.params.id;
+    const user = await User.findOne({
+      where: {
+        id: user_id,
+      },
+      attributes: ["name", "email"],
+    });
 
-//     res.json(users);
-//   })
-// );
+    res.json(user);
+  })
+);
 
+//Register
 router.post(
   "/register",
   validateUserFields,
@@ -89,6 +97,7 @@ router.post(
   })
 );
 
+//Onboard information
 router.put(
   "/register/onboard",
   validateTeamName,
@@ -131,7 +140,6 @@ router.put(
 );
 
 //Log in
-
 router.post(
   "/login",
   validateEmailPassword,
