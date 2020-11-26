@@ -75,9 +75,9 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
             className="edit-task-title textarea"
           ></textarea>
         </div>
-        <div className="task-info">
+        <div className="edit-task-info">
           <div
-            className="task-info-left"
+            className="edit-task-info-left"
             style={{
               display: "flex",
               justifyContent: "center",
@@ -100,7 +100,7 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
               <div>{user.name}</div>
             </div>
           </div>
-          <div className="task-info-mid">
+          <div className="edit-task-info-mid">
             <input
               type="checkbox"
               name="completed"
@@ -112,7 +112,7 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
             </label>
           </div>
           <div
-            className="task-info-right"
+            className="edit-task-info-right"
             style={{ display: "flex", flexDirection: "column" }}
           >
             <div style={{ display: "flex" }}>
@@ -128,8 +128,17 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
               <div>{updatedDate.format("MMM DD YYYY")}</div>
             </div>
             <div style={{ marginTop: "5px", display: "flex" }}>
-              <div style={{ fontWeight: "500", marginRight: "5px" }}>Due:</div>
+              <div
+                style={{
+                  fontWeight: "500",
+                  marginRight: "5px",
+                  alignSelf: "center",
+                }}
+              >
+                Due:
+              </div>
               <input
+                className="edit-task-form-input"
                 style={{ border: "1px solid black" }}
                 type="date"
                 name="due_date"

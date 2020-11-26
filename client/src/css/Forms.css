@@ -12,6 +12,15 @@
 .form-top-container {
   display: flex;
 }
+
+.form-input {
+  padding: 10px 5px;
+  width: 100%;
+  border: 1px solid lightgray;
+  outline: none;
+  margin: 10px 0;
+  text-overflow: ellipsis;
+}
 .name-textarea {
   line-height: 32px;
   height: 42px;
