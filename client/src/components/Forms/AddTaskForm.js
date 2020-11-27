@@ -18,41 +18,51 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
           <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
             <h2 className="form-header">Add a Task</h2>
             <div className="form-top-container">
-              <label>
-                Task Name
-                <input
-                  name="name"
-                  type="text"
-                  placeholder={"Task Name"}
-                  className="form-input"
-                  ref={register}
-                ></input>
-              </label>
-              <label>
-                Project
-                <select name="projectId" className="form-input">
-                  <option value={"projectId"}>Project Name</option>
-                </select>
-              </label>
-              <label>
-                Assignee
-                <select name="assigneeId" className="form-input">
-                  <option value={"assigneeId"}>Assignee Name</option>
-                </select>
-              </label>
-              <label>
-                Due date
-                <input
-                  className="form-input"
-                  type="date"
-                  name="due_date"
-                  ref={register}
-                ></input>
-              </label>
-              <label>
-                Mark Complete
-                <input type="checkbox" name="completed" ref={register}></input>
-              </label>
+              <div className="form-top-left">
+                <label className="form-label">
+                  Task Name
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder={"Task Name"}
+                    className="form-input"
+                    ref={register}
+                  ></input>
+                </label>
+                <label className="form-label">
+                  Project
+                  <select name="projectId" className="form-input">
+                    <option value={"projectId"}>Project Name</option>
+                  </select>
+                </label>
+              </div>
+              <div className="form-top-middle">
+                <label className="form-label">
+                  Assignee
+                  <select name="assigneeId" className="form-input">
+                    <option value={"assigneeId"}>Assignee Name</option>
+                  </select>
+                </label>
+                <label className="form-label">
+                  Due date
+                  <input
+                    className="form-input"
+                    type="date"
+                    name="due_date"
+                    ref={register}
+                  ></input>
+                </label>
+              </div>
+              <div className="form-top-right" style={{ alignSelf: "normal" }}>
+                <label className="form-label">
+                  Mark Complete
+                  <input
+                    type="checkbox"
+                    name="completed"
+                    ref={register}
+                  ></input>
+                </label>
+              </div>
               {/* <div className="task-info">
                 <div
                   className="task-info-left"
@@ -131,7 +141,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                 type="submit"
                 color="primary"
               >
-                Save
+                Add
               </Button>
             </div>
           </form>

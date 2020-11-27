@@ -11,11 +11,13 @@
 }
 .form-top-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form-input {
   padding: 10px 5px;
-  width: 100%;
+  /* width: 100%; */
   border: 1px solid lightgray;
   outline: none;
   margin: 10px 0;
@@ -31,4 +33,9 @@
   outline: none;
   border-radius: 5px;
   border: 1px solid #c5cad1;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
 }
