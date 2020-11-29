@@ -96,16 +96,28 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const user_id = req.params.userId;
     const { description, name } = req.body;
-    const team = await Team.create({
-      description: description,
-      name: name,
-    });
-
-    //Adds user to team
-    const userteam = await UserTeam.create({
-      team_id: team.id,
-      user_id: user_id,
-    });
+    if (description) {
+      const team = await Team.create({
+        description: description,
+        name: name,
+      });
+      //Adds user to team
+      const userteam = await UserTeam.create({
+        team_id: team.id,
+        user_id: user_id,
+      });
+      res.json(team).status(201);
+    } else if (!description) {
+      const team = await Team.create({
+        name: name,
+      });
+      //Adds user to team
+      const userteam = await UserTeam.create({
+        team_id: team.id,
+        user_id: user_id,
+      });
+      res.json(team).status(201);
+    }
   })
 );
 
@@ -139,10 +151,11 @@ router.post(
       owner_id: userId,
       team_id: team_id,
     });
+
     if (!project) {
       res.status(404);
     } else {
-      res.status(201);
+      res.json(project).status(201);
     }
   })
 );

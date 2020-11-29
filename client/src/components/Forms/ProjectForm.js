@@ -4,21 +4,24 @@ import Button from "@material-ui/core/Button";
 import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import { Context as TeamContext } from "../../context/store/TeamStore";
+import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import "../../css/Forms.css";
 const ProjectForm = ({ handleNewClose, clickClose, open }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [teamState, teamdispatch] = useContext(TeamContext);
+  const [projectState, projectdispatch] = useContext(ProjectContext);
   const userId = localStorage.getItem("userId");
 
   const onSubmit = async ({ name, teamId }) => {
-    const res = await apiServer.post(`/team/${teamId}/project/`, {
+    await apiServer.post(`/team/${teamId}/project/`, {
       name,
       userId,
     });
-    console.log(res.data);
-    // const res = await apiServer.get(`/team/user/${userId}`);
-    // await teamdispatch({ type: "get_user_teams", payload: res.data });
-    // clickClose();
+
+    //REFER TO THIS WHEN CHECKING FOR RERENDERING
+    const res = await apiServer.get(`/project/user/${userId}`);
+    await projectdispatch({ type: "update_user_projects", payload: res.data });
+    clickClose();
   };
 
   const clearError = () => {
@@ -52,7 +55,9 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
                     ref={register({ required: true })}
                   ></input>
                   {errors.name?.type === "required" && (
-                    <p className="error-message">Please choose an assignee</p>
+                    <p className="error-message">
+                      Please fill out project name
+                    </p>
                   )}
                 </label>
               </div>
@@ -68,7 +73,7 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
                     {renderedTeams}
                   </select>
                   {errors.teamId?.type === "required" && (
-                    <p className="error-message">Please choose an assignee</p>
+                    <p className="error-message">Please choose a team</p>
                   )}
                 </label>
               </div>

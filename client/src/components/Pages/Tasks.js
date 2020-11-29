@@ -1,21 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Modal } from "@material-ui/core";
 import TopNavBarTask from "../NavigationBar/TopNavBarTask";
 import "../../css/Task.css";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import apiServer from "../../config/apiServer";
 import TaskSection from "../tasks/TaskSection";
 import moment from "moment";
+import TaskForm from "../Forms/AddTaskForm";
 
 const TasksPage = () => {
   const [taskState, taskdispatch] = useContext(TaskContext);
   const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+
   const getUserTasks = async () => {
     const id = localStorage.getItem("userId");
     const res = await apiServer.get(`/task/user/${id}`);
     await taskdispatch({ type: "get_user_tasks", payload: res.data });
     // setTasks(res.data);
     setLoading(false);
+  };
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -25,6 +36,12 @@ const TasksPage = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  const modalBody = (
+    <div className="modal-container">
+      <TaskForm clickClose={closeModal} open={open}></TaskForm>
+    </div>
+  );
 
   const recentlyAdded = taskState.tasks.filter((task) => {
     const date = new Date(task.createdAt);
@@ -63,7 +80,9 @@ const TasksPage = () => {
         <div className="tasks-inner-container">
           <div className="tasks-container-header">
             <div>
-              <button className="add-task-button">Add Task</button>
+              <button className="add-task-button" onClick={openModal}>
+                Add Task
+              </button>
             </div>
             <div style={{ fontSize: "14px", alignSelf: "center" }}>
               Due Date
@@ -75,6 +94,9 @@ const TasksPage = () => {
           <TaskSection title={"Later"} tasks={laterTasks} />
         </div>
       </div>
+      <Modal open={open} onClose={closeModal}>
+        {modalBody}
+      </Modal>
     </>
   );
 };

@@ -80,7 +80,9 @@ const HomePage = () => {
             <div className="home-projects--list">
               {/* call get all projects for specific user route */}
               {projectTiles}
-              <NewProjectTile />
+              <div>
+                <NewProjectTile />
+              </div>
             </div>
           </div>
         </div>

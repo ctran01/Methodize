@@ -16,6 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "Projects" },
+        onDelete: "CASCADE",
       },
       owner_id: {
         type: Sequelize.INTEGER,
