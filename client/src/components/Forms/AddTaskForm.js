@@ -1,15 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "@material-ui/core";
 import { useForm } from "react-hook-form";
+import apiServer from "../../config/apiServer";
+import Loader from "../Loader";
 const TaskForm = ({ handleNewClose, clickClose, open }) => {
   const { register, handleSubmit, errors } = useForm();
-
+  const [projects, setProjects] = useState();
+  const [projectUsers, setProjectUsers] = useState([
+    {
+      id: "0",
+      name: "Choose a Project First",
+    },
+  ]);
+  const [loading, setLoading] = useState(true);
   const getUserTeams = async () => {};
 
+  const getUserProjects = async () => {
+    const userId = localStorage.getItem("userId");
+    const res = await apiServer.get(`/project/user/${userId}`);
+    setProjects(res.data);
+    setLoading(false);
+  };
+
+  const getProjectUsers = async (event) => {
+    var select = document.getElementById("project-select");
+    const res = await apiServer.get(`/project/${select.value}/users`);
+    setProjectUsers(res.data);
+  };
+
+  useEffect(() => {
+    getUserProjects();
+  }, []);
   //Probably need dispatch here to update the task page when task is created.
-  const onSubmit = (event) => {};
+  const onSubmit = async ({
+    name,
+    projectId,
+    assigneeId,
+    due_date,
+    completed,
+    description,
+  }) => {
+    console.log(name, "name");
+    // var projectId = document.getElementById("project-select");
+
+    console.log(projectId, "projectId");
+    // var assigneeId = document.getElementById("assignee-select");
+
+    console.log(assigneeId, "assigneeId");
+    console.log(due_date, "due_date");
+    console.log(completed, "completed");
+    console.log(description, "description");
+  };
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const renderedProjects = projects.map((project) => {
+    return (
+      <option id={project.id} value={project.id}>
+        {project.name}
+      </option>
+    );
+  });
+
+  const renderedUsers = projectUsers.map((user) => {
+    return <option value={user.id}>{user.name}</option>;
+  });
 
   return (
     <div>
@@ -26,22 +85,48 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     type="text"
                     placeholder={"Task Name"}
                     className="form-input"
-                    ref={register}
+                    ref={register({ required: true })}
                   ></input>
+                  {errors.name?.type === "required" && (
+                    <p style={{ color: "red", margin: "1px" }}>
+                      Please enter a task name
+                    </p>
+                  )}
                 </label>
                 <label className="form-label">
                   Project
-                  <select name="projectId" className="form-input">
-                    <option value={"projectId"}>Project Name</option>
+                  <select
+                    id="project-select"
+                    name="projectId"
+                    className="form-input"
+                    onChange={getProjectUsers}
+                    ref={register({ required: true })}
+                  >
+                    {renderedProjects}
                   </select>
+                  {errors.projectId?.type === "required" && (
+                    <p style={{ color: "red", margin: "1px" }}>
+                      Please choose a project
+                    </p>
+                  )}
                 </label>
               </div>
               <div className="form-top-middle">
                 <label className="form-label">
                   Assignee
-                  <select name="assigneeId" className="form-input">
-                    <option value={"assigneeId"}>Assignee Name</option>
+                  <select
+                    id="assignee-select"
+                    name="assigneeId"
+                    className="form-input"
+                    ref={register({ required: true })}
+                  >
+                    {renderedUsers}
                   </select>
+                  {errors.assigneeId?.type === "required" && (
+                    <p style={{ color: "red", margin: "1px" }}>
+                      Please choose an assignee
+                    </p>
+                  )}
                 </label>
                 <label className="form-label">
                   Due date
@@ -49,8 +134,13 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     className="form-input"
                     type="date"
                     name="due_date"
-                    ref={register}
+                    ref={register({ required: true })}
                   ></input>
+                  {errors.due_date?.type === "required" && (
+                    <p style={{ color: "red", margin: "1px" }}>
+                      Please choose a due_date
+                    </p>
+                  )}
                 </label>
               </div>
               <div className="form-top-right" style={{ alignSelf: "normal" }}>
@@ -125,10 +215,11 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                 type="text"
                 placeholder={"Task Description"}
                 className="edit-task-description textarea"
+                ref={register}
               ></textarea>
             </div>
 
-            <div style={{ display: "flex", marginLeft: "400px" }}>
+            <div style={{ display: "flex", marginLeft: "500px" }}>
               <Button
                 style={{ color: "#0093ff" }}
                 onClick={clickClose}

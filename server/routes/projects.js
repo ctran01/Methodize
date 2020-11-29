@@ -53,7 +53,7 @@ router.get(
         },
       ],
 
-      attributes: ["name"],
+      attributes: ["id", "name"],
     });
     res.json(users);
   })
