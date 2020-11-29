@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Task.hasMany(models.Comment, {
         foreignKey: "task_id",
-        onDelete: "CASCADE",
+        onDelete: "cascade",
         hooks: true,
       });
     }

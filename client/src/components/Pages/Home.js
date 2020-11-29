@@ -15,7 +15,17 @@ const HomePage = () => {
   const [taskState] = useContext(TaskContext);
   const [projectState] = useContext(ProjectContext);
 
-  const taskList = taskState.tasks.map((task, i) => {
+  const uncompletedTasklist = taskState.tasks.filter((task) => {
+    return !task.completed;
+  });
+  const sortedTaskList = uncompletedTasklist.sort(function (a, b) {
+    return new Date(b.due_date) - new Date(a.due_date);
+  });
+
+  const upcomingTasklist = sortedTaskList
+    .slice(sortedTaskList.length - 3)
+    .reverse();
+  const taskList = upcomingTasklist.map((task, i) => {
     return !task.completed && <TaskItem task={task} key={i} />;
   });
 

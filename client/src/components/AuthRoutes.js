@@ -39,7 +39,7 @@ const AuthRoutes = () => {
   const getUserTeams = async () => {
     const id = localStorage.getItem("userId");
     const res = await apiServer.get(`/team/user/${id}`);
-    await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
+    await teamdispatch({ type: "get_user_teams", payload: res.data });
     // setTeams(res.data[0].Teams);
   };
 

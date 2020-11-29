@@ -48,7 +48,6 @@ const TopNavBar = ({ name }) => {
     setAnchorEle(null);
   };
 
-  const handleNewMenu = () => {};
   return (
     <div className="top-nav-bar-container">
       <div className="top-nav-bar-left">

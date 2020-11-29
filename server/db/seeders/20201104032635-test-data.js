@@ -97,6 +97,20 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "UI/UX Project",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Cloud Storage Project",
+          owner_id: 1,
+          team_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );

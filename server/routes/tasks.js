@@ -3,6 +3,7 @@ const { asyncHandler } = require("./utilities/utils");
 const { requireAuth } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
 const { Task, Comment } = require("../db/models");
+const comment = require("../db/models/comment");
 
 const router = express.Router();
 //Authenticates user before being able to use API
@@ -98,7 +99,7 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const task_id = req.params.id;
 
-    const task = await Task.delete({
+    const task = await Task.destroy({
       where: { id: task_id },
     });
     res.json(202);

@@ -93,38 +93,8 @@ const TopNavBarHome = () => {
               open={openProject}
             />
           </Menu>
-          {/* {newMenu ? (
-            <div className="drop-down-new-menu">
-              <button
-                className="new-task--button"
-                style={{ padding: "5px 0", borderRadius: "5px 5px 0 0" }}
-              >
-                New Task
-              </button>
-              <button
-                className="new-project--button"
-                style={{ borderRadius: "0 0 5px 5px" }}
-              >
-                New Project
-              </button>
-              <button onClick={handleProjectForm}>Open Form</button>
-            </div>
-          ) : null} */}
         </div>
-        {/* <div onClick={handleMenu} className="top-nav-bar-user-icon">
-          <UserAvatar />
-          {showMenu ? (
-            <div className="drop-down-menu">
-              <button
-                className="logout--button"
-                style={{ borderRadius: "5px" }}
-                onClick={logout}
-              >
-                Logout
-              </button>
-            </div>
-          ) : null}
-        </div> */}
+
         <div onClick={handleProfClick}>
           <UserAvatar id={localStorage.getItem("userId")} />
         </div>
