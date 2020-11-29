@@ -138,6 +138,7 @@
   word-wrap: break-word;
   overflow: hidden;
   outline: none;
+  padding-left: 10px;
 }
 .edit-task-description {
   margin-top: 10px;
