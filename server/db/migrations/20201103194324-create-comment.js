@@ -15,6 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "Tasks" },
+        onDelete: "CASCADE",
       },
       user_id: {
         type: Sequelize.INTEGER,

@@ -44,12 +44,16 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const user_id = req.params.id;
 
-    const teams = await User.findAll({
-      include: [{ model: Team }],
-      where: {
-        id: user_id,
-      },
-      attributes: ["name"],
+    const teams = await Team.findAll({
+      include: [
+        {
+          model: User,
+          where: {
+            id: user_id,
+          },
+          attributes: ["name", "id"],
+        },
+      ],
     });
 
     res.json(teams);
@@ -129,10 +133,10 @@ router.post(
   asyncHandler(async (req, res, next) => {
     //need to add owner for project
     const team_id = req.params.id;
-    const { name, owner_id } = req.body;
+    const { name, userId } = req.body;
     const project = await Project.create({
-      owner_id: owner_id,
       name: name,
+      owner_id: userId,
       team_id: team_id,
     });
     if (!project) {

@@ -64,7 +64,6 @@ router.get(
   "/:id/tasklists",
   asyncHandler(async (req, res, next) => {
     const project_id = req.params.id;
-
     const tasklist = await TaskList.findAll({
       where: {
         project_id: project_id,

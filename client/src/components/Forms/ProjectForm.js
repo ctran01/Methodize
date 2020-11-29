@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Modal } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useForm } from "react-hook-form";
+import apiServer from "../../config/apiServer";
+import { Context as TeamContext } from "../../context/store/TeamStore";
 import "../../css/Forms.css";
 const ProjectForm = ({ handleNewClose, clickClose, open }) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, clearErrors } = useForm();
+  const [teamState, teamdispatch] = useContext(TeamContext);
+  const userId = localStorage.getItem("userId");
 
-  const onSubmit = ({ name }) => {
-    console.log(name);
+  const onSubmit = async ({ name, teamId }) => {
+    const res = await apiServer.post(`/team/${teamId}/project/`, {
+      name,
+      userId,
+    });
+    console.log(res.data);
+    // const res = await apiServer.get(`/team/user/${userId}`);
+    // await teamdispatch({ type: "get_user_teams", payload: res.data });
+    // clickClose();
   };
-  //try returning modal in here
+
+  const clearError = () => {
+    var teamSelect = document.getElementById("team-select");
+    clearErrors(teamSelect.name);
+  };
+  const renderedTeams = teamState.teams.map((team, i) => {
+    return (
+      <option key={i} id={team.id} value={team.id}>
+        {team.name}
+      </option>
+    );
+  });
+
   return (
     <div>
       <Modal open={open} onClose={clickClose}>
@@ -25,16 +48,28 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
                     type="text"
                     placeholder={"Project Name"}
                     className="form-input"
-                    ref={register}
+                    onChange={clearError}
+                    ref={register({ required: true })}
                   ></input>
+                  {errors.name?.type === "required" && (
+                    <p className="error-message">Please choose an assignee</p>
+                  )}
                 </label>
               </div>
               <div className="form-top-middle">
                 <label className="form-label" style={{ width: "200px" }}>
                   Team
-                  <select name="teamId" className="form-input">
-                    <option value={"teamId"}>Team Name</option>
+                  <select
+                    id="team-select"
+                    name="teamId"
+                    className="form-input"
+                    ref={register({ required: true })}
+                  >
+                    {renderedTeams}
                   </select>
+                  {errors.teamId?.type === "required" && (
+                    <p className="error-message">Please choose an assignee</p>
+                  )}
                 </label>
               </div>
               {/* <div

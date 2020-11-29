@@ -4,6 +4,9 @@ const Reducer = (state, action) => {
       return { ...state, projects: action.payload };
     case "get_project":
       return { ...state, userProject: action.payload };
+    case "update_project":
+      return { ...state, userProject: action.payload };
+
     default:
       return state;
   }
