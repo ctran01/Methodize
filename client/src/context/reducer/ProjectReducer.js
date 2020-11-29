@@ -6,7 +6,8 @@ const Reducer = (state, action) => {
       return { ...state, userProject: action.payload };
     case "update_project":
       return { ...state, userProject: action.payload };
-
+    case "update_user_projects":
+      return { ...state, projects: action.payload };
     default:
       return state;
   }

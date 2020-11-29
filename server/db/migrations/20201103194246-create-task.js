@@ -16,6 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "TaskLists" },
+        onDelete: "CASCADE",
       },
       assignee_id: {
         type: Sequelize.INTEGER,

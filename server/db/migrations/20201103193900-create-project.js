@@ -21,6 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: "Teams" },
+        onDelete: "CASCADE",
       },
       createdAt: {
         allowNull: false,

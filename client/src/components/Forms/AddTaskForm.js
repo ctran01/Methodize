@@ -103,20 +103,28 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
   //   return <Loader />;
   // }
 
-  const renderedProjects = projectState.projects.map((project) => {
+  const renderedProjects = projectState.projects.map((project, i) => {
     return (
-      <option id={project.id} value={project.id}>
+      <option key={i} id={project.id} value={project.id}>
         {project.name}
       </option>
     );
   });
 
-  const renderedUsers = projectUsers.map((user) => {
-    return <option value={user.id}>{user.name}</option>;
+  const renderedUsers = projectUsers.map((user, i) => {
+    return (
+      <option key={i} value={user.id}>
+        {user.name}
+      </option>
+    );
   });
 
-  const renderedTasklists = projectTaskLists.map((tasklist) => {
-    return <option value={tasklist.id}>{tasklist.name}</option>;
+  const renderedTasklists = projectTaskLists.map((tasklist, i) => {
+    return (
+      <option key={i} value={tasklist.id}>
+        {tasklist.name}
+      </option>
+    );
   });
 
   return (
