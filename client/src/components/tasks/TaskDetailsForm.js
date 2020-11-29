@@ -35,24 +35,23 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
   };
 
   const onSubmit = async ({ name, due_date, description, completed }) => {
-    //put route to update task
-    // try {
-    //   await apiServer.put(`/task/${task.id}`, {
-    //     name,
-    //     due_date,
-    //     description,
-    //     completed,
-    //   });
-    //   //Updates new task list
-    //   const res = await apiServer.get(
-    //     `/task/user/${localStorage.getItem("userId")}`
-    //   );
-    //   await taskdispatch({ type: "update_task", payload: res.data });
-    //   closeModal();
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    console.log(name);
+    // put route to update task
+    try {
+      await apiServer.put(`/task/${task.id}`, {
+        name,
+        due_date,
+        description,
+        completed,
+      });
+      //Updates new task list
+      const res = await apiServer.get(
+        `/task/user/${localStorage.getItem("userId")}`
+      );
+      await taskdispatch({ type: "update_task", payload: res.data });
+      closeModal();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
