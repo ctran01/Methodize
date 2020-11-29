@@ -6,6 +6,7 @@ import UserStore from "./context/store/UserStore";
 import TeamStore from "./context/store/TeamStore";
 import TaskStore from "./context/store/TaskStore";
 import ProjectStore from "./context/store/ProjectStore";
+import TasklistStore from "./context/store/TasklistStore";
 import "./css/Home.css";
 import "./css/Task.css";
 const App = () => {
@@ -44,12 +45,14 @@ const App = () => {
       <UserStore>
         <ProjectStore>
           <TeamStore>
-            <TaskStore>
-              {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
-              {/* <Route exact path="/" component={LandingPage}></Route> */}
-              <Routes />
-              {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
-            </TaskStore>
+            <TasklistStore>
+              <TaskStore>
+                {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
+                {/* <Route exact path="/" component={LandingPage}></Route> */}
+                <Routes />
+                {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
+              </TaskStore>
+            </TasklistStore>
           </TeamStore>
         </ProjectStore>
       </UserStore>

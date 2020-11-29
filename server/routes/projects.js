@@ -61,7 +61,7 @@ router.get(
 
 //get all taskslists for a project
 router.get(
-  "/:id/tasklist",
+  "/:id/tasklists",
   asyncHandler(async (req, res, next) => {
     const project_id = req.params.id;
 

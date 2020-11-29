@@ -38,25 +38,26 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const tasklist_id = req.params.id;
     const {
-      description,
+      name,
+      projectId,
+      assigneeId,
       due_date,
       completed,
-      completed_at,
-      project_id,
-      user_id,
+      description,
     } = req.body;
     const task = await Task.create({
-      user_id,
-      description,
-      due_date,
-      completed,
-      completed_at,
-      project_id,
+      name: name,
+      project_id: projectId,
+      assignee_id: assigneeId,
+      due_date: due_date,
+      completed: completed,
+      description: description,
+      tasklist_id: tasklist_id,
     });
     if (!task) {
       res.status(404);
     } else {
-      res.status(201);
+      res.json(task).status(201);
     }
   })
 );

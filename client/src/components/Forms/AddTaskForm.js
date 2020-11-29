@@ -6,16 +6,26 @@ import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 const TaskForm = ({ handleNewClose, clickClose, open }) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, clearErrors } = useForm();
   const [projects, setProjects] = useState();
+  const [taskListError, setTaskListError] = useState();
+  const [projectError, setProjectError] = useState();
+  const [assigneeError, setAssigneeError] = useState();
+
   const [projectUsers, setProjectUsers] = useState([
     {
       id: "0",
       name: "Choose a Project First",
     },
   ]);
+  const [projectTaskLists, setProjectTaskLists] = useState([
+    {
+      id: "0",
+      name: "Choose a Project First",
+    },
+  ]);
+
   const [loading, setLoading] = useState(true);
-  const getUserTeams = async () => {};
 
   const getUserProjects = async () => {
     const userId = localStorage.getItem("userId");
@@ -25,9 +35,21 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
   };
 
   const getProjectUsers = async (event) => {
-    var select = document.getElementById("project-select");
-    const res = await apiServer.get(`/project/${select.value}/users`);
+    var projectSelect = document.getElementById("project-select");
+    var assigneeSelect = document.getElementById("assignee-select");
+    var tasklistSelect = document.getElementById("tasklist-select");
+    clearErrors(projectSelect.name);
+    clearErrors(assigneeSelect.name);
+    clearErrors(tasklistSelect.name);
+    const res = await apiServer.get(`/project/${projectSelect.value}/users`);
     setProjectUsers(res.data);
+    getProjectTasklists();
+  };
+
+  const getProjectTasklists = async (event) => {
+    const select = document.getElementById("project-select");
+    const res = await apiServer.get(`/project/${select.value}/tasklists`);
+    setProjectTaskLists(res.data);
   };
 
   useEffect(() => {
@@ -39,19 +61,29 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
     projectId,
     assigneeId,
     due_date,
+    tasklistId,
     completed,
     description,
   }) => {
-    console.log(name, "name");
+    const res = await apiServer.post(`/tasklist/${tasklistId}/task`, {
+      name,
+      projectId,
+      assigneeId,
+      due_date,
+      completed,
+      description,
+    });
+
+    // console.log(name, "name");
     // var projectId = document.getElementById("project-select");
-
-    console.log(projectId, "projectId");
+    // console.log(projectId, "projectId");
     // var assigneeId = document.getElementById("assignee-select");
-
-    console.log(assigneeId, "assigneeId");
-    console.log(due_date, "due_date");
-    console.log(completed, "completed");
-    console.log(description, "description");
+    // console.log(assigneeId, "assigneeId");
+    // console.log(due_date, "due_date");
+    // console.log(tasklistId, "tasklistId");
+    // console.log(completed, "completed");
+    // console.log(description, "description");
+    clickClose();
   };
 
   if (loading) {
@@ -68,6 +100,10 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
 
   const renderedUsers = projectUsers.map((user) => {
     return <option value={user.id}>{user.name}</option>;
+  });
+
+  const renderedTasklists = projectTaskLists.map((tasklist) => {
+    return <option value={tasklist.id}>{tasklist.name}</option>;
   });
 
   return (
@@ -88,9 +124,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     ref={register({ required: true })}
                   ></input>
                   {errors.name?.type === "required" && (
-                    <p style={{ color: "red", margin: "1px" }}>
-                      Please enter a task name
-                    </p>
+                    <p className="error-message">Please enter a task name</p>
                   )}
                 </label>
                 <label className="form-label">
@@ -102,12 +136,12 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     onChange={getProjectUsers}
                     ref={register({ required: true })}
                   >
+                    <option value={0}>{"<---Choose Project--->"}</option>
                     {renderedProjects}
                   </select>
+                  <p className="error-message">{projectError}</p>
                   {errors.projectId?.type === "required" && (
-                    <p style={{ color: "red", margin: "1px" }}>
-                      Please choose a project
-                    </p>
+                    <p className="error-message">Please choose a project</p>
                   )}
                 </label>
               </div>
@@ -122,10 +156,9 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                   >
                     {renderedUsers}
                   </select>
+                  <p className="error-message">{assigneeError}</p>
                   {errors.assigneeId?.type === "required" && (
-                    <p style={{ color: "red", margin: "1px" }}>
-                      Please choose an assignee
-                    </p>
+                    <p className="error-message">Please choose an assignee</p>
                   )}
                 </label>
                 <label className="form-label">
@@ -137,78 +170,46 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     ref={register({ required: true })}
                   ></input>
                   {errors.due_date?.type === "required" && (
-                    <p style={{ color: "red", margin: "1px" }}>
-                      Please choose a due_date
-                    </p>
+                    <p className="error-message">Please choose a due_date</p>
                   )}
                 </label>
               </div>
-              <div className="form-top-right" style={{ alignSelf: "normal" }}>
-                <label className="form-label">
+              <div className="form-top-right">
+                <label className="form-label" style={{ paddingBottom: "10px" }}>
+                  Tasklist
+                  <select
+                    id="tasklist-select"
+                    name="tasklistId"
+                    className="form-input"
+                    ref={register({
+                      required: true,
+                    })}
+                  >
+                    {/* <option value={0}>Choose a project first</option> */}
+                    {renderedTasklists}
+                  </select>
+                  {/* <p className="error-message">{taskListError}</p> */}
+                  {errors.tasklistId?.type === "required" && (
+                    <p className="error-message">
+                      Please choose a tasklist. You may need to make a tasklist
+                      first before adding a task.
+                    </p>
+                  )}
+                </label>
+                <label
+                  className="form-label"
+                  style={{ padding: "10px 5px 10px 0px" }}
+                >
                   Mark Complete
                   <input
+                    style={{ margin: "10px 0" }}
                     type="checkbox"
                     name="completed"
                     ref={register}
                   ></input>
                 </label>
               </div>
-              {/* <div className="task-info">
-                <div
-                  className="task-info-left"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div className="edit-task-user-avatar-container"></div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      paddingLeft: "10px",
-                    }}
-                  >
-                    <div style={{ fontWeight: "500" }}>Assignee</div>
-                    {/* <select style={{ marginTop: "10px" }} name="assignee">
-                    <option value={user.name}>{user.name}</option>
-                    </select> */}
-              {/* </div>
-                </div>
-                <div className="task-info-mid">
-                  <input type="checkbox" name="completed"></input>
-                  <label htmlFor="completed" style={{ fontWeight: "500" }}>
-                    Mark Complete
-                  </label>
-                </div>
-                <div
-                  className="task-info-right"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <div style={{ display: "flex" }}>
-                    <div style={{ fontWeight: "500", marginRight: "5px" }}>
-                      Created:{" "}
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", marginTop: "5px" }}>
-                    <div style={{ fontWeight: "500", marginRight: "5px" }}>
-                      Last Updated:{" "}
-                    </div>
-                  </div>
-                  <div style={{ marginTop: "5px", display: "flex" }}>
-                    <div style={{ fontWeight: "500", marginRight: "5px" }}>
-                      Due:
-                    </div>
-                    <input
-                      style={{ border: "1px solid black" }}
-                      type="date"
-                      name="due_date"
-                    ></input>
-                  </div>
-                </div>
-              </div> */}{" "}
             </div>
-
             <div>
               <textarea
                 name="description"
