@@ -42,6 +42,9 @@ const TasksPage = () => {
       <TaskForm clickClose={closeModal} open={open}></TaskForm>
     </div>
   );
+  const sortedTasks = taskState.tasks.sort(function (a, b) {
+    return new Date(a.due_date) - new Date(b.due_date);
+  });
 
   const recentlyAdded = taskState.tasks.filter((task) => {
     const date = new Date(task.createdAt);
@@ -51,43 +54,45 @@ const TasksPage = () => {
     return createdDate.isBetween(previousDate, todaysDate); //created date is between previous week and today
   });
 
-  const todaysTasks = taskState.tasks.filter((task) => {
+  const todaysTasks = sortedTasks.filter((task) => {
     const date = new Date(task.due_date);
     const dueDate = moment(date).format("M D YYYY");
     const todaysDate = moment(new Date()).format("M D YYYY");
     return dueDate === todaysDate; //due date is today
   });
 
-  const upcomingTasks = taskState.tasks.filter((task) => {
+  const upcomingTasks = sortedTasks.filter((task) => {
     const date = new Date(task.due_date);
     const dueDate = moment(date);
     const todaysDate = moment(new Date());
-    const upcomingDate = moment(new Date()).add(1, "week");
-    return dueDate.isBetween(todaysDate, upcomingDate); //due date is between today and a week
+    const upcomingDate = moment(new Date()).add(1, "month");
+    return dueDate.isBetween(todaysDate, upcomingDate); //due date is between today and a month
   });
 
-  const laterTasks = taskState.tasks.filter((task) => {
+  const laterTasks = sortedTasks.filter((task) => {
     const date = new Date(task.due_date);
     const dueDate = moment(date);
-    const laterDate = moment(new Date()).add(1, "week");
-    return dueDate.isAfter(laterDate); //due date is after 1 week
+    const laterDate = moment(new Date()).add(1, "month");
+    return dueDate.isAfter(laterDate); //due date is after 1 month
   });
 
   return (
     <>
       <TopNavBarTask />
       <div className="tasks-container">
-        <div className="tasks-inner-container">
-          <div className="tasks-container-header">
-            <div>
-              <button className="add-task-button" onClick={openModal}>
-                Add Task
-              </button>
-            </div>
-            <div style={{ fontSize: "14px", alignSelf: "center" }}>
-              Due Date
-            </div>
+        <div className="tasks-container-header">
+          <div>
+            <button className="add-task-button" onClick={openModal}>
+              Add Task
+            </button>
           </div>
+          <div
+            style={{ fontSize: "14px", alignSelf: "center", fontWeight: "500" }}
+          >
+            Due Date
+          </div>
+        </div>
+        <div className="tasks-inner-container">
           <TaskSection title={"Recently Added"} tasks={recentlyAdded} />
           <TaskSection title={"Today"} tasks={todaysTasks} />
           <TaskSection title={"Upcoming"} tasks={upcomingTasks} />
