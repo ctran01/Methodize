@@ -77,7 +77,7 @@ const TeamPage = () => {
               </div>
               <div className="team-content-left-members--list">
                 {membersList}
-                <NewTeamMemberIcon />
+                <NewTeamMemberIcon teamId={teamId} />
               </div>
             </div>
           </div>

@@ -42,13 +42,11 @@ const HomePage = () => {
             <img src={homeImage} alt="home" style={{ width: "400px" }}></img>
             <div>
               <h2 className="home-welcome-message">
-                Welcome, {userState.user.name}!
+                Greetings, {userState.user.name}!
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.{" "}
+                This is your homepage where you can see all the projects are you
+                currently working on as well as any tasks due soon!{" "}
               </p>
             </div>
           </div>

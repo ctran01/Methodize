@@ -191,7 +191,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
                     ref={register({ required: true })}
                   ></input>
                   {errors.due_date?.type === "required" && (
-                    <p className="error-message">Please choose a due_date</p>
+                    <p className="error-message">Please choose a Due Date</p>
                   )}
                 </label>
               </div>

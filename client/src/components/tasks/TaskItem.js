@@ -45,7 +45,7 @@ const TaskItem = ({ task }) => {
           )}
           <p style={{ paddingLeft: "5px" }}>{task.name}</p>
         </div>
-        {date.format("MMM D")}
+        {date.format("MMM D YYYY")}
       </li>
       <Modal open={open} onClose={closeModal}>
         {body}

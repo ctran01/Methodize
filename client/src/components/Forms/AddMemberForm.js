@@ -6,18 +6,21 @@ import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 
-const AddMemberForm = ({ projectId, clickClose, open }) => {
+const AddMemberForm = ({ teamId, clickClose, open }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [users, setUsers] = useState();
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
 
-  const onSubmit = async ({ name }) => {
-    const userId = localStorage.getItem("userId");
+  const onSubmit = async ({ userId }) => {
+    try {
+      await apiServer.post(`/team/${teamId}/user/${userId}`);
+    } catch (err) {
+      setError("User already on team");
+    }
 
-    await apiServer.post(`/project/${projectId}/tasklist`, { name, userId });
-
-    const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    clickClose();
+    // const res = await apiServer.get(`/project/${projectId}/tasklists`);
+    // clickClose();
   };
 
   const getAllUsers = async () => {
@@ -57,14 +60,16 @@ const AddMemberForm = ({ projectId, clickClose, open }) => {
               <div className="form-top-left">
                 <label className="form-label">
                   <select
-                    id="project-select"
-                    name="projectId"
+                    id="user-select"
+                    name="userId"
                     className="form-input"
+                    onChange={() => setError("")}
                     ref={register({ required: true })}
                   >
                     <option value={0}>{"<---Choose user--->"}</option>
                     {renderedUsers}
                   </select>
+                  <div className="error-message">{error}</div>
                   {errors.projectId?.type === "required" && (
                     <p className="error-message">Please choose a user to add</p>
                   )}

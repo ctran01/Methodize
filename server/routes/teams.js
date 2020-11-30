@@ -127,14 +127,20 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const team_id = req.params.teamId;
     const user_id = req.params.userId;
-    const userteam = await UserTeam.create({
-      team_id: team_id,
-      user_id: user_id,
+    const userteam = await UserTeam.findOne({
+      where: {
+        team_id: team_id,
+        user_id: user_id,
+      },
     });
-    if (!userteam) {
-      res.status(404);
-    } else {
-      res.status(201);
+    if (userteam) {
+      res.status(404).send({ error: "user already exists" });
+    } else if (!userteam) {
+      const newUserTeam = await UserTeam.create({
+        team_id: team_id,
+        user_id: user_id,
+      });
+      res.json(newUserTeam).status(201);
     }
   })
 );
