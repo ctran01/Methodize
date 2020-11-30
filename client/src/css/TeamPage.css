@@ -42,7 +42,7 @@
   box-sizing: border-box;
   border-radius: 6px;
 }
-.description {
+.edit-description {
   border-color: transparent;
   overflow-wrap: break-word;
   white-space: pre-wrap;

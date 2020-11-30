@@ -81,14 +81,14 @@ router.post(
   "/:id/tasklist",
   asyncHandler(async (req, res, next) => {
     const project_id = req.params.id;
-    const { name, user_id } = req.body;
+    const { name, userId } = req.body;
 
     const tasklist = await TaskList.create({
       name: name,
-      user_id: user_id,
+      owner_id: userId,
       project_id: project_id,
     });
-    res.status(201);
+    res.json(tasklist).status(201);
   })
 );
 

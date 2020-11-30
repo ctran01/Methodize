@@ -48,6 +48,16 @@ router.get(
   })
 );
 
+router.get(
+  "/users",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const users = await User.findAll({
+      attributes: ["id", "name", "email"],
+    });
+    res.json(users);
+  })
+);
 //Register
 router.post(
   "/register",

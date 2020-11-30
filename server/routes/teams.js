@@ -139,6 +139,25 @@ router.post(
   })
 );
 
+//Edit team description
+router.put(
+  "/:teamId/description",
+  asyncHandler(async (req, res, next) => {
+    const team_id = req.params.teamId;
+    const { description } = req.body;
+    await Team.update(
+      {
+        description: description,
+      },
+      {
+        where: {
+          id: team_id,
+        },
+      }
+    );
+  })
+);
+
 //Create Project for team
 router.post(
   "/:id/project",

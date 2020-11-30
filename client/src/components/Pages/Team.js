@@ -12,22 +12,33 @@ import NewTeamMemberIcon from "../teams/NewTeamMemberIcon";
 const TeamPage = () => {
   const { teamId, teamName } = useParams();
   const [team, setTeam] = useState();
-
+  const [teamDescription, setTeamDescription] = useState();
   const [loading, setLoading] = useState(true);
 
   const getTeam = async () => {
     try {
       const res = await apiServer.get(`/team/${teamId}`);
       setTeam(res.data);
+      setTeamDescription(res.data.description);
       setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleUpdate = (e) => {
+    setTeamDescription(e.target.value);
+  };
+
+  const updateDescription = async (e) => {
+    const description = e.target.value;
+    await apiServer.put(`/team/${teamId}/description`, { description });
+    console.log(e.target.value);
+  };
+
   useEffect(() => {
     getTeam();
-  }, []);
+  }, [teamId, teamName, setTeam]);
 
   if (loading) {
     return <Loader />;
@@ -52,8 +63,11 @@ const TeamPage = () => {
               </div>
               <form className="team-content-left-description-form">
                 <textarea
-                  className="description"
+                  className="edit-description"
                   placeholder="Click to add team description..."
+                  value={teamDescription}
+                  onChange={handleUpdate}
+                  onBlur={updateDescription}
                 ></textarea>
               </form>
             </div>
