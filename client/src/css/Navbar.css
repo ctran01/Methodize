@@ -58,11 +58,16 @@
   flex-direction: column;
   padding-bottom: 10px;
   border-bottom: 1px solid #273240;
-  padding-left: 30px;
+  /* padding-left: 30px; */
+  justify-content: center;
 }
 .favorites-container,
 .teams-items-container li {
   color: white;
+}
+.teams-items-header {
+  display: flex;
+  padding-left: 30px;
 }
 
 .main-menu-items-container button {
@@ -154,8 +159,9 @@
   color: #cbd4db;
 }
 
-.left-nav-bar-main-link {
-  padding: 5px 0;
+.left-nav-bar-main-link,
+.left-nav-bar-team-link {
+  padding: 5px 0 5px 30px;
   color: white;
   text-decoration: none;
 }
@@ -193,4 +199,9 @@
 
 .searchbar {
   align-self: center;
+}
+
+.navlink--active {
+  background-color: #20293a;
+  color: #ffffff;
 }

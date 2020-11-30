@@ -5,6 +5,7 @@ import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 import TopNavBar from "../NavigationBar/TopNavBar";
 import TaskListItem from "../tasks/TaskListItem";
+import TaskListForm from "../Forms/TaskListForm";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
 
@@ -33,9 +34,8 @@ const ProjectPage = () => {
     try {
       const res = await apiServer.get(`/project/${projectId}`);
       await projectdispatch({ type: "get_project", payload: res.data });
-
+      getTasklists();
       // setProject(res.data);
-      console.log(projectState);
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -49,7 +49,6 @@ const ProjectPage = () => {
         type: "get_project_tasklists",
         payload: res.data,
       });
-      console.log(tasklistState);
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +56,6 @@ const ProjectPage = () => {
 
   useEffect(() => {
     getProject();
-    getTasklists();
   }, []);
 
   if (loading) {
@@ -66,7 +64,11 @@ const ProjectPage = () => {
 
   const modalBody = (
     <div className="modal-container">
-      <ProjectForm clickClose={closeModal} open={open}></ProjectForm>
+      <TaskListForm
+        projectId={projectId}
+        clickClose={closeModal}
+        open={open}
+      ></TaskListForm>
     </div>
   );
   // const renderedTaskLists = projectState.userProject.TaskLists.map(
@@ -80,7 +82,9 @@ const ProjectPage = () => {
         <TopNavBar name={projectState.userProject.name} />
         <div className="project-container">
           {renderedTaskLists}
-          <div className="tasklist-new-tasklist--button">+ Add List</div>
+          <div className="tasklist-new-tasklist--button" onClick={openModal}>
+            + Add List
+          </div>
         </div>
       </div>
       <Modal open={open} onClose={closeModal}>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Switch, Route } from "react-router-dom";
+import { Link, NavLink, Switch, Route } from "react-router-dom";
 import "../../css/Navbar.css";
 import { RiMenuFoldLine, RiMenuFill } from "react-icons/ri";
 import apiServer from "../../config/apiServer";
@@ -34,15 +34,22 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
   const closeModal = () => {
     setOpen(false);
   };
-  const renderedList = teamState.teams.map((team, i) => {
+
+  const orderedList = teamState.teams.sort(function (a, b) {
+    return new Date(a.createdAt) - new Date(b.createdAt);
+  });
+
+  const renderedList = orderedList.map((team, i) => {
     return (
-      <Link
+      <NavLink
+        className="left-nav-bar-team-link"
         style={{ textDecoration: "none", color: "white" }}
         to={`/team/${team.id}/${team.name}`}
+        activeClassName="navlink--active"
         key={i}
       >
         <div>{team.name}</div>
-      </Link>
+      </NavLink>
     );
   });
 
@@ -83,12 +90,21 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
               className="main-menu-items-container"
               style={{ marginTop: "10px" }}
             >
-              <Link to="/" className="left-nav-bar-main-link">
+              <NavLink
+                exact
+                to="/"
+                className="left-nav-bar-main-link"
+                activeClassName="navlink--active"
+              >
                 <div>Home</div>
-              </Link>
-              <Link to="/tasks" className="left-nav-bar-main-link">
+              </NavLink>
+              <NavLink
+                to="/tasks"
+                className="left-nav-bar-main-link"
+                activeClassName="navlink--active"
+              >
                 <div>My Tasks</div>
-              </Link>
+              </NavLink>
             </div>
             {/* <div className="favorites-container">
             <p style={{}}>Favorites</p>

@@ -20,7 +20,7 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
 
     //REFER TO THIS WHEN CHECKING FOR RERENDERING
     const res = await apiServer.get(`/project/user/${userId}`);
-    await projectdispatch({ type: "update_user_projects", payload: res.data });
+    await projectdispatch({ type: "get_user_projects", payload: res.data });
     clickClose();
   };
 
