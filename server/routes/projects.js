@@ -2,7 +2,7 @@ const express = require("express");
 const { asyncHandler } = require("./utilities/utils");
 const { requireAuth, getUserToken } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
-const { Project, User, TaskList } = require("../db/models");
+const { Project, User, TaskList, Team } = require("../db/models");
 
 const router = express.Router();
 //Authenticates user before being able to use API
@@ -76,6 +76,17 @@ router.get(
   })
 );
 
+//get team project is on
+router.get(
+  "/:id/team",
+  asyncHandler(async (req, res, next) => {
+    const project_id = req.params.id;
+    const team = await Team.findOne({
+      include: [{ model: Project, where: { id: project_id } }],
+    });
+    res.json(team);
+  })
+);
 //Create tasklist for project
 router.post(
   "/:id/tasklist",
@@ -134,6 +145,8 @@ router.get(
         {
           model: TaskList,
         },
+        // { model: Team },
+        // { model: User, attributes: ["name", "email", "id"] },
       ],
       where: {
         id: project_id,

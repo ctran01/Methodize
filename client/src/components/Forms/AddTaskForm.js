@@ -7,6 +7,7 @@ import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
+import { Context as TaskContext } from "../../context/store/TaskStore";
 
 const TaskForm = ({ handleNewClose, clickClose, open }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
@@ -16,6 +17,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
   const [assigneeError, setAssigneeError] = useState();
   const [projectState, projectdispatch] = useContext(ProjectContext);
   const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
+  const [taskState, taskdispatch] = useContext(TaskContext);
   const [reload, setReload] = useState();
   const [projectUsers, setProjectUsers] = useState([
     {
@@ -79,11 +81,13 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
       description,
     });
 
-    // const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    const res = await apiServer.get(
-      `/project/user/${localStorage.getItem("userId")}`
-    );
-    await projectdispatch({ type: "get_user_projects", payload: res.data });
+    // const res = await apiServer.get(
+    //   `/project/user/${localStorage.getItem("userId")}`
+    // );
+    const userId = localStorage.getItem("userId");
+    const res = await apiServer.get(`/task/user/${userId}`);
+    await taskdispatch({ type: "get_user_tasks", payload: res.data });
+    // await projectdispatch({ type: "get_user_projects", payload: res.data });
 
     // console.log(name, "name");
     // var projectId = document.getElementById("project-select");
@@ -94,7 +98,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
     // console.log(tasklistId, "tasklistId");
     // console.log(completed, "completed");
     // console.log(description, "description");
-    window.location.reload();
+    // window.location.reload();
 
     clickClose();
   };

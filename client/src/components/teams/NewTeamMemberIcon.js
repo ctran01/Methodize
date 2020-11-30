@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import { Modal } from "@material-ui/core";
 import AddMemberForm from "../Forms/AddMemberForm";
 
-const NewTeamMemberIcon = ({ teamId }) => {
+const NewTeamMemberIcon = ({ setTeamUsers, teamId }) => {
   const [open, setOpen] = useState(false);
   const openModal = () => {
     setOpen(true);
@@ -17,6 +17,7 @@ const NewTeamMemberIcon = ({ teamId }) => {
     <div className="modal-container">
       <AddMemberForm
         teamId={teamId}
+        setTeamUsers={setTeamUsers}
         clickClose={closeModal}
         open={open}
       ></AddMemberForm>

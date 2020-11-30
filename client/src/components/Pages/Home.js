@@ -30,7 +30,7 @@ const HomePage = () => {
   });
 
   const projectTiles = projectState.projects.map((project, i) => {
-    return <ProjectTile project={project} key={i} />;
+    return <ProjectTile project={project} key={i} id={project.id} />;
   });
 
   return (

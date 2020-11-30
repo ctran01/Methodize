@@ -2,31 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Switch, Route } from "react-router-dom";
 import "../../css/Navbar.css";
 import { RiMenuFoldLine, RiMenuFill } from "react-icons/ri";
-import apiServer from "../../config/apiServer";
-import Loader from "../Loader";
+
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import { Modal } from "@material-ui/core";
 import TeamForm from "../Forms/TeamForm";
 const LeftNavBar = ({ showSidebar, sidebar }) => {
   // const [teams, setTeams] = useState([]);
-  const [teamState, teamdispatch] = useContext(TeamContext);
-  const [loading, setLoading] = useState(true);
+  const [teamState] = useContext(TeamContext);
   const [open, setOpen] = useState(false);
 
   //NOTE : Only other option that worked was setting state either in here or in App.js and call it for global state. ReducerContext does not work
-  // const getTeams = async () => {
-  //   const id = localStorage.getItem("userId");
-  //   const res = await apiServer.get(`/team/user/${id}`);
-  //   await teamdispatch({ type: "get_user_teams", payload: res.data[0].Teams });
-  //   // setTeams(res.data[0].Teams);
-  //   setLoading(false);
-  // };
 
-  // useEffect(() => {
-  //   getTeams();
-  // }, []);
-
-  // if (loading) return <Loader />;
   const openModal = () => {
     setOpen(true);
   };

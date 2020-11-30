@@ -65,7 +65,7 @@ const AuthRoutes = () => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/tasks" component={TasksPage} />
             <Route
-              path="/project/:projectId/:projectName"
+              path="/team/:teamId/project/:projectId/:projectName"
               component={ProjectPage}
             />
             <Route path="/team/:teamId/:teamName" component={TeamPage} />

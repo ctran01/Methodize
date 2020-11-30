@@ -68,9 +68,9 @@ const TopNavBarHome = () => {
       ></div>
       <div className="top-nav-bar-middle"></div>
       <div className="top-nav-bar-right" style={{}}>
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}>
           <input className="searchbar" placeholder={"Search"}></input>
-        </div>
+        </div> */}
         <div>
           <GrAddCircle onClick={handleNewClick} className="top-nav-bar--icon" />
           <Menu

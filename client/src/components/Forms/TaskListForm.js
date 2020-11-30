@@ -6,17 +6,17 @@ import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
-const TaskListForm = ({ projectId, clickClose, open }) => {
+const TaskListForm = ({ projectId, clickClose, open, setTasklists }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
 
   const onSubmit = async ({ name }) => {
     const userId = localStorage.getItem("userId");
-
     await apiServer.post(`/project/${projectId}/tasklist`, { name, userId });
 
     const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    tasklistdispatch({ type: "update_project_tasklists", payload: res.data });
+    setTasklists(res.data);
+    // tasklistdispatch({ type: "update_project_tasklists", payload: res.data });
     clickClose();
   };
   return (

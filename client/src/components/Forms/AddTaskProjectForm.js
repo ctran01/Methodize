@@ -1,56 +1,34 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
-import { Context as ProjectContext } from "../../context/store/ProjectStore";
-import { Context as TasklistContext } from "../../context/store/TasklistStore";
+
+import { useParams } from "react-router-dom";
 
 const AddTaskProjectForm = ({
   tasklistId,
   projectId,
   clickClose,
   open,
-  setProject,
+  setTasks,
 }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
-  const [projects, setProjects] = useState();
   // const [taskListError, setTaskListError] = useState();
   // const [projectError, setProjectError] = useState();
   const [assigneeError, setAssigneeError] = useState();
-  const [projectState, projectdispatch] = useContext(ProjectContext);
-  const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
 
+  const { teamId } = useParams();
   const [projectUsers, setProjectUsers] = useState();
-  const [projectTaskLists, setProjectTaskLists] = useState([
-    {
-      id: "0",
-      name: "Choose a Project First",
-    },
-  ]);
 
   const [loading, setLoading] = useState(true);
 
-  // const getUserProjects = async () => {
-  //   const userId = localStorage.getItem("userId");
-  //   const res = await apiServer.get(`/project/user/${userId}`);
-  //   setProjects(res.data);
-  //   setLoading(false);
-  // };
-
   const getProjectUsers = async (event) => {
-    const res = await apiServer.get(`/project/${projectId}/users`);
-    setProjectUsers(res.data);
+    const res = await apiServer.get(`/team/${teamId}/users`);
+    setProjectUsers(res.data[0].Users);
     setLoading(false);
-    // getProjectTasklists();
-  };
-
-  const getProjectTasklists = async (event) => {
-    const select = document.getElementById("project-select");
-    const res = await apiServer.get(`/project/${select.value}/tasklists`);
-    setProjectTaskLists(res.data);
   };
 
   useEffect(() => {
@@ -74,15 +52,9 @@ const AddTaskProjectForm = ({
       completed,
       description,
     });
+    const res = await apiServer.get(`/tasklist/${tasklistId}/tasks`);
+    setTasks(res.data);
 
-    const res = await apiServer.get(`/project/${projectId}`);
-    setProject(res.data);
-    // await projectdispatch({ type: "get_project", payload: res.data });
-    // const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    // await tasklistdispatch({
-    //   type: "get_project_tasklists",
-    //   payload: res.data,
-    // });
     // window.location.reload();
 
     clickClose();

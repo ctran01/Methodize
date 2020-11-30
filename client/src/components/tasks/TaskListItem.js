@@ -32,19 +32,20 @@ const TaskListItem = ({ tasklist }) => {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [setTasks]);
 
   if (loading) {
     return <Loader />;
   }
 
   const renderedTasks = tasks.map((task) => {
-    return <TaskItemProject task={task} />;
+    return <TaskItemProject task={task} key={task.id} />;
   });
 
   const modalBody = (
     <div className="modal-container">
       <AddTaskProjectForm
+        setTasks={setTasks}
         tasklistId={tasklist.id}
         projectId={tasklist.project_id}
         clickClose={closeModal}

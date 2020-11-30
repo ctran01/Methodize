@@ -7,6 +7,7 @@ const Reducer = (state, action) => {
       };
     case "update_user_teams":
       return { ...state, teams: action.payload };
+
     default:
       return state;
   }
