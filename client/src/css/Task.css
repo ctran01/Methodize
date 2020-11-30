@@ -17,7 +17,7 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  height: 1100px;
+  height: 100%;
   width: 100%;
   border: 2px solid #e8ecee;
   padding: 10px;

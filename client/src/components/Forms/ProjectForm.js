@@ -21,12 +21,15 @@ const ProjectForm = ({ handleNewClose, clickClose, open, setTeamProjects }) => {
     //REFER TO THIS WHEN CHECKING FOR RERENDERING
     const res = await apiServer.get(`/project/user/${userId}`);
     await projectdispatch({ type: "get_user_projects", payload: res.data });
-    // const projectResponse = await apiServer.get(`/team/${teamId}`);
+    const projectResponse = await apiServer.get(`/team/${teamId}`);
     // NOTE: One way this could work is if we recreate form for just team page add project form button
     // Will not work with top nav bar form
     // setTeamProjects(projectResponse.data.Projects);
-    // await teamdispatch({type:`get_team_projects${teamId}`, payload:teamResponse.data} )
-    // window.location.reload();
+    await teamdispatch({
+      type: `get_team_projects${teamId}`,
+      payload: projectResponse.data,
+    });
+    window.location.reload();
 
     clickClose();
   };
