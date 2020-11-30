@@ -14,12 +14,13 @@ import "../../css/TaskList.css";
 import ProjectForm from "../Forms/ProjectForm";
 
 const ProjectPage = () => {
-  const { projectId, projectName } = useParams();
+  const { projectId, projectName, teamId } = useParams();
   const [projectState, projectdispatch] = useContext(ProjectContext);
   const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
   const [open, setOpen] = useState(false);
 
   const [project, setProject] = useState();
+  const [tasklists, setTasklists] = useState();
   const [loading, setLoading] = useState(true);
 
   const openModal = () => {
@@ -33,9 +34,9 @@ const ProjectPage = () => {
   const getProject = async () => {
     try {
       const res = await apiServer.get(`/project/${projectId}`);
-      await projectdispatch({ type: "get_project", payload: res.data });
-      getTasklists();
-      // setProject(res.data);
+      // await projectdispatch({ type: "get_project", payload: res.data });
+      await getTasklists();
+      setProject(res.data);
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -45,10 +46,11 @@ const ProjectPage = () => {
   const getTasklists = async () => {
     try {
       const res = await apiServer.get(`/project/${projectId}/tasklists`);
-      await tasklistdispatch({
-        type: "get_project_tasklists",
-        payload: res.data,
-      });
+      // await tasklistdispatch({
+      //   type: "get_project_tasklists",
+      //   payload: res.data,
+      // });
+      setTasklists(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -56,15 +58,17 @@ const ProjectPage = () => {
 
   useEffect(() => {
     getProject();
-  }, []);
+  }, [setProject, setTasklists]);
 
   if (loading) {
     return <Loader />;
   }
 
+  //Task list creation
   const modalBody = (
     <div className="modal-container">
       <TaskListForm
+        setTasklists={setTasklists}
         projectId={projectId}
         clickClose={closeModal}
         open={open}
@@ -72,14 +76,16 @@ const ProjectPage = () => {
     </div>
   );
   // const renderedTaskLists = projectState.userProject.TaskLists.map(
-  const renderedTaskLists = tasklistState.tasklists.map((tasklist) => {
-    return <TaskListItem tasklist={tasklist} />;
+  const renderedTaskLists = tasklists.map((tasklist, i) => {
+    return (
+      <TaskListItem teamId={teamId} tasklist={tasklist} key={tasklist.id} />
+    );
   });
 
   return (
     <div>
       <div>
-        <TopNavBar name={projectState.userProject.name} />
+        <TopNavBar name={project.name} />
         <div className="project-container">
           {renderedTaskLists}
           <div className="tasklist-new-tasklist--button" onClick={openModal}>

@@ -6,7 +6,7 @@ import apiServer from "../../config/apiServer";
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import "../../css/Forms.css";
-const ProjectForm = ({ handleNewClose, clickClose, open }) => {
+const ProjectForm = ({ handleNewClose, clickClose, open, setTeamProjects }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [teamState, teamdispatch] = useContext(TeamContext);
   const [projectState, projectdispatch] = useContext(ProjectContext);
@@ -21,6 +21,13 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
     //REFER TO THIS WHEN CHECKING FOR RERENDERING
     const res = await apiServer.get(`/project/user/${userId}`);
     await projectdispatch({ type: "get_user_projects", payload: res.data });
+    // const projectResponse = await apiServer.get(`/team/${teamId}`);
+    // NOTE: One way this could work is if we recreate form for just team page add project form button
+    // Will not work with top nav bar form
+    // setTeamProjects(projectResponse.data.Projects);
+    // await teamdispatch({type:`get_team_projects${teamId}`, payload:teamResponse.data} )
+    // window.location.reload();
+
     clickClose();
   };
 
@@ -77,10 +84,6 @@ const ProjectForm = ({ handleNewClose, clickClose, open }) => {
                   )}
                 </label>
               </div>
-              {/* <div
-                className="form-top-right"
-                style={{ alignSelf: "normal" }}
-              ></div> */}
             </div>
 
             <div style={{ display: "flex", marginLeft: "400px" }}>

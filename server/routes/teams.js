@@ -28,7 +28,7 @@ router.get(
       include: [
         {
           model: User,
-          attributes: ["name"],
+          attributes: ["id", "name", "email"],
         },
       ],
       where: { id: team_id },
@@ -37,6 +37,20 @@ router.get(
     res.json(users);
   })
 );
+
+// router.get(
+//   "/:id/users",
+//   asyncHandler(async (req, res, next) => {
+//     // const project_id = req.params.id;
+//     const team_id = req.params.id;
+
+//     const users = await User.findAll({
+//       include: [{ model: Team, where: { id: team_id } }],
+//       attributes: ["id", "name"],
+//     });
+//     res.json(users);
+//   })
+// );
 
 //get all teams for a user
 router.get(

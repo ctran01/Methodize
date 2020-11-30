@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 
-const AddMemberForm = ({ teamId, clickClose, open }) => {
+const AddMemberForm = ({ teamId, clickClose, open, setTeamUsers }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [users, setUsers] = useState();
   const [error, setError] = useState();
@@ -20,7 +20,10 @@ const AddMemberForm = ({ teamId, clickClose, open }) => {
     }
 
     // const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    // clickClose();
+    const res = await apiServer.get(`/team/${teamId}`);
+    setTeamUsers(res.data.Users);
+
+    clickClose();
   };
 
   const getAllUsers = async () => {
@@ -46,10 +49,7 @@ const AddMemberForm = ({ teamId, clickClose, open }) => {
   return (
     <div>
       <Modal open={open} onClose={clickClose}>
-        <div
-          className="tasklist-modal-container"
-          style={{ minWidth: "auto", width: "200px" }}
-        >
+        <div className="tasklist-modal-container" style={{ minWidth: "auto" }}>
           <form
             className="task-form"
             style={{}}
@@ -79,7 +79,7 @@ const AddMemberForm = ({ teamId, clickClose, open }) => {
               <div className="form-top-right"></div>
             </div>
 
-            <div style={{ display: "flex", marginLeft: "100px" }}>
+            <div style={{ display: "flex", marginLeft: "160px" }}>
               <Button
                 style={{ color: "#0093ff" }}
                 onClick={clickClose}

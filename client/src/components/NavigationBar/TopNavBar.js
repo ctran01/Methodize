@@ -8,7 +8,7 @@ import { Modal, Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
 import TaskForm from "../Forms/AddTaskForm";
 
-const TopNavBar = ({ name }) => {
+const TopNavBar = ({ name, setTeamProjects }) => {
   const { logout } = useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(false);
   const [showNewMenu, setNewMenu] = useState(false);
@@ -55,9 +55,9 @@ const TopNavBar = ({ name }) => {
       </div>
       <div className="top-nav-bar-middle"></div>
       <div className="top-nav-bar-right" style={{}}>
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}>
           <input className="searchbar" placeholder={"Search"}></input>
-        </div>
+        </div> */}
         <div>
           <GrAddCircle onClick={handleNewClick} className="top-nav-bar--icon" />
           <Menu
@@ -78,40 +78,11 @@ const TopNavBar = ({ name }) => {
               handleNewClose={handleNewClose}
               clickClose={clickCloseProject}
               open={openProject}
+              setTeamProjects={setTeamProjects}
             />
           </Menu>
-          {/* {newMenu ? (
-            <div className="drop-down-new-menu">
-              <button
-                className="new-task--button"
-                style={{ padding: "5px 0", borderRadius: "5px 5px 0 0" }}
-              >
-                New Task
-              </button>
-              <button
-                className="new-project--button"
-                style={{ borderRadius: "0 0 5px 5px" }}
-              >
-                New Project
-              </button>
-              <button onClick={handleProjectForm}>Open Form</button>
-            </div>
-          ) : null} */}
         </div>
-        {/* <div onClick={handleMenu} className="top-nav-bar-user-icon">
-          <UserAvatar />
-          {showMenu ? (
-            <div className="drop-down-menu">
-              <button
-                className="logout--button"
-                style={{ borderRadius: "5px" }}
-                onClick={logout}
-              >
-                Logout
-              </button>
-            </div>
-          ) : null}
-        </div> */}
+
         <div onClick={handleProfClick}>
           <UserAvatar id={localStorage.getItem("userId")} />
         </div>
