@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Modal } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import apiServer from "../../config/apiServer";
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import "../../css/Forms.css";
 const TeamForm = ({ handleNewClose, clickClose, open }) => {
-  const { register, handleSubmit, errors, clearErrors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [teamState, teamdispatch] = useContext(TeamContext);
   const userId = localStorage.getItem("userId");
 

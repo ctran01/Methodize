@@ -10,7 +10,6 @@ import TaskForm from "../Forms/AddTaskForm";
 
 const TasksPage = () => {
   const [taskState, taskdispatch] = useContext(TaskContext);
-  const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
@@ -31,6 +30,7 @@ const TasksPage = () => {
 
   useEffect(() => {
     getUserTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

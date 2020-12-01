@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import Routes from "./components/Routes";
 import AuthContext from "./context/AuthContext";
 import UserStore from "./context/store/UserStore";

@@ -31,6 +31,8 @@
 .landing-main {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .landing-message {
   max-width: 800px;
@@ -52,4 +54,43 @@
   border: none;
   font-weight: 500;
   font-size: 18px;
+}
+
+.landing-picture {
+  display: block;
+  margin: 50px auto 75px auto;
+  /* width: 80%; */
+  max-width: 900px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+.landing-main-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing-main-bottom-icons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 600px; */
+  width: 50%;
+  margin: 0 auto 50px auto;
+}
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 33%; */
+}
+
+.icon-container p {
+  line-height: 1.4;
+  text-align: center;
+  color: #606060;
+  font-size: 1.1em;
+}
+/* //color: "rgb(59, 182, 170)" */
+
+.guest-login-button {
+  margin: 50px 0;
 }

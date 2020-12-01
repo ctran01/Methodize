@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "@material-ui/core";
@@ -7,7 +7,7 @@ import apiServer from "../../config/apiServer";
 import Loader from "../Loader";
 
 const AddMemberForm = ({ teamId, clickClose, open, setTeamUsers }) => {
-  const { register, handleSubmit, errors, clearErrors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [users, setUsers] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);

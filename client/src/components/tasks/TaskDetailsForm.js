@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import { Context as TaskContext } from "../../context/store/TaskStore";
 const TaskDetailsForm = ({ task, closeModal, open }) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [taskState, taskdispatch] = useContext(TaskContext);
   const createdDate = moment(
     task.createdAt.substring(0, 10).replace("-", ""),
@@ -70,6 +70,7 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
 
   useEffect(() => {
     getTaskUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

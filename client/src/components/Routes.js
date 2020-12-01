@@ -1,8 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Home from "./Pages/Home";
+import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import LandingPage from "./LandingPage/LandingPage";
 import LandingRoutes from "./LandingPage/LandingRoutes";
 import AuthRoutes from "./AuthRoutes";
 
