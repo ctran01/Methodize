@@ -32,6 +32,7 @@ const TaskListItem = ({ tasklist }) => {
 
   useEffect(() => {
     getTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setTasks]);
 
   if (loading) {

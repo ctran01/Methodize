@@ -42,6 +42,7 @@ const TeamPage = () => {
 
   useEffect(() => {
     getTeam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamId, teamName, setTeam, setTeamProjects, setTeamUsers]);
 
   if (loading) {

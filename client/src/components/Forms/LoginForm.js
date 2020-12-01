@@ -4,7 +4,7 @@ import AuthContext from "../../context/AuthContext";
 import "../../css/LoginPage.css";
 import apiServer from "../../config/apiServer";
 const LoginForm = () => {
-  const { register, handleSubmit, errors, clearErrors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const [errorMessage, setErrorMessage] = useState("");
   const { setAuth, setEmail, setUserId, setUser } = useContext(AuthContext);

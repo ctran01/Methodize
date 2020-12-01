@@ -1,21 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Context as UserContext } from "../../context/store/UserStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import "../../css/Navbar.css";
 import { GrAddCircle } from "react-icons/gr";
 import UserAvatar from "./UserAvatar";
-import { Modal, Menu, MenuItem } from "@material-ui/core";
+import { Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
 import TaskForm from "../Forms/AddTaskForm";
 
 const TopNavBarTask = () => {
-  const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
   const [userState] = useContext(UserContext);
   const { name } = userState.user;
   const [taskState, taskdispatch] = useContext(TaskContext);
   const numTask = taskState.tasks.filter((task) => task.completed === true);
-  const [showMenu, setShowMenu] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEle, setAnchorEle] = useState(null);
@@ -53,15 +52,6 @@ const TopNavBarTask = () => {
     setAnchorEle(null);
   };
 
-  const projectBody = (
-    <div className="modal-container">
-      {/* <h2 id="modal-title">Task Detail</h2>
-      <p id="modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p> */}
-      <ProjectForm closeModal={clickCloseProject} open={openProject} />
-    </div>
-  );
   return (
     <div className="top-nav-bar-container" style={{}}>
       <div

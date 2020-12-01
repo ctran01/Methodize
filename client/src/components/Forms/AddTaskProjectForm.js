@@ -15,10 +15,7 @@ const AddTaskProjectForm = ({
   open,
   setTasks,
 }) => {
-  const { register, handleSubmit, errors, clearErrors } = useForm();
-  // const [taskListError, setTaskListError] = useState();
-  // const [projectError, setProjectError] = useState();
-  const [assigneeError, setAssigneeError] = useState();
+  const { register, handleSubmit, errors } = useForm();
 
   const { teamId } = useParams();
   const [projectUsers, setProjectUsers] = useState();
@@ -33,6 +30,7 @@ const AddTaskProjectForm = ({
 
   useEffect(() => {
     getProjectUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //Probably need dispatch here to update the task page when task is created.
@@ -103,7 +101,6 @@ const AddTaskProjectForm = ({
                   >
                     {renderedUsers}
                   </select>
-                  <p className="error-message">{assigneeError}</p>
                   {errors.assigneeId?.type === "required" && (
                     <p className="error-message">Please choose an assignee</p>
                   )}

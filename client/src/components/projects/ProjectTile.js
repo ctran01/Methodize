@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import apiServer from "../../config/apiServer";
 import "../../css/Project.css";
@@ -15,6 +15,7 @@ const ProjectTile = ({ project, teamId, id }) => {
   };
   useEffect(() => {
     getTeam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

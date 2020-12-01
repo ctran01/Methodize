@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
-import Loader from "../Loader";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
 const TaskListForm = ({ projectId, clickClose, open, setTasklists }) => {
-  const { register, handleSubmit, errors, clearErrors } = useForm();
-  const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async ({ name }) => {
     const userId = localStorage.getItem("userId");

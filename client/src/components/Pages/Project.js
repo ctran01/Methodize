@@ -11,12 +11,9 @@ import { Context as TasklistContext } from "../../context/store/TasklistStore";
 
 import "../../css/Project.css";
 import "../../css/TaskList.css";
-import ProjectForm from "../Forms/ProjectForm";
 
 const ProjectPage = () => {
   const { projectId, projectName, teamId } = useParams();
-  const [projectState, projectdispatch] = useContext(ProjectContext);
-  const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
   const [open, setOpen] = useState(false);
 
   const [project, setProject] = useState();
@@ -58,6 +55,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     getProject();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setProject, setTasklists]);
 
   if (loading) {

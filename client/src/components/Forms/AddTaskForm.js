@@ -1,24 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "../../css/Task.css";
 import Button from "@material-ui/core/Button";
 import { Modal } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import apiServer from "../../config/apiServer";
-import Loader from "../Loader";
 import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 
 const TaskForm = ({ handleNewClose, clickClose, open }) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
-  const [projects, setProjects] = useState();
-  const [taskListError, setTaskListError] = useState();
   const [projectError, setProjectError] = useState();
   const [assigneeError, setAssigneeError] = useState();
   const [projectState, projectdispatch] = useContext(ProjectContext);
-  const [tasklistState, tasklistdispatch] = useContext(TasklistContext);
   const [taskState, taskdispatch] = useContext(TaskContext);
-  const [reload, setReload] = useState();
   const [projectUsers, setProjectUsers] = useState([
     {
       id: "0",
@@ -31,8 +26,6 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
       name: "Choose a Project First",
     },
   ]);
-
-  const [loading, setLoading] = useState(true);
 
   // const getUserProjects = async () => {
   //   const userId = localStorage.getItem("userId");
@@ -87,25 +80,11 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
     const userId = localStorage.getItem("userId");
     const res = await apiServer.get(`/task/user/${userId}`);
     await taskdispatch({ type: "get_user_tasks", payload: res.data });
-    // await projectdispatch({ type: "get_user_projects", payload: res.data });
 
-    // console.log(name, "name");
-    // var projectId = document.getElementById("project-select");
-    // console.log(projectId, "projectId");
-    // var assigneeId = document.getElementById("assignee-select");
-    // console.log(assigneeId, "assigneeId");
-    // console.log(due_date, "due_date");
-    // console.log(tasklistId, "tasklistId");
-    // console.log(completed, "completed");
-    // console.log(description, "description");
     window.location.reload();
 
     clickClose();
   };
-
-  // if (loading) {
-  //   return <Loader />;
-  // }
 
   const renderedProjects = projectState.projects.map((project, i) => {
     return (

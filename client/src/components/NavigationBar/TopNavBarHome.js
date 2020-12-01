@@ -2,14 +2,12 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import "../../css/Navbar.css";
 import { GrAddCircle } from "react-icons/gr";
-import { Context as UserContext } from "../../context/store/UserStore";
 import UserAvatar from "./UserAvatar";
-import Loader from "../Loader";
-import { Modal, Menu, MenuItem } from "@material-ui/core";
+import { Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
 import TaskForm from "../Forms/AddTaskForm";
 const TopNavBarHome = () => {
-  const { setAuth, setEmail, setUserId, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   // const [showMenu, setShowMenu] = useState(false);
   // const [newMenu, setNewMenu] = useState(false);
