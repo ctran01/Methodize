@@ -98,7 +98,7 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
     // console.log(tasklistId, "tasklistId");
     // console.log(completed, "completed");
     // console.log(description, "description");
-    // window.location.reload();
+    window.location.reload();
 
     clickClose();
   };
