@@ -6,6 +6,7 @@ import { RiMenuFoldLine, RiMenuFill } from "react-icons/ri";
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import { Modal } from "@material-ui/core";
 import TeamForm from "../Forms/TeamForm";
+import logo from "../../assets/logo3-white.png";
 const LeftNavBar = ({ showSidebar, sidebar }) => {
   // const [teams, setTeams] = useState([]);
   const [teamState] = useContext(TeamContext);
@@ -58,7 +59,15 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
               }}
             >
               <div className="logo" style={{ color: "white" }}>
-                Logo Here
+                <img
+                  src={logo}
+                  alt="logo"
+                  style={{
+                    width: "180px",
+                    marginBottom: "10px",
+                    marginLeft: "5px",
+                  }}
+                />
               </div>
               <div className="collapse-menu-icon-container">
                 <RiMenuFoldLine
