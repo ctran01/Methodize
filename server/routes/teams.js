@@ -2,7 +2,7 @@ const express = require("express");
 const { asyncHandler } = require("./utilities/utils");
 const { requireAuth } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
-const { Team, UserTeam, User, Project } = require("../db/models");
+const { Team, UserTeam, User, Project, UserProject } = require("../db/models");
 
 const router = express.Router();
 //Authenticates user before being able to use API
@@ -182,19 +182,21 @@ router.put(
 router.post(
   "/:id/project",
   asyncHandler(async (req, res, next) => {
-    //need to add owner for project
     const team_id = req.params.id;
     const { name, userId } = req.body;
     const project = await Project.create({
       name: name,
-      owner_id: userId,
       team_id: team_id,
     });
 
-    if (!project) {
-      res.status(404);
+    if (project) {
+      const userproject = await UserProject.create({
+        user_id: userId,
+        project_id: project.id,
+      });
+      res.json(userproject).status(201);
     } else {
-      res.json(project).status(201);
+      res.status(404);
     }
   })
 );
