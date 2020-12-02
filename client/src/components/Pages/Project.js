@@ -6,8 +6,7 @@ import Loader from "../Loader";
 import TopNavBar from "../NavigationBar/TopNavBar";
 import TaskListItem from "../tasks/TaskListItem";
 import TaskListForm from "../Forms/TaskListForm";
-import { Context as ProjectContext } from "../../context/store/ProjectStore";
-import { Context as TasklistContext } from "../../context/store/TasklistStore";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import "../../css/Project.css";
 import "../../css/TaskList.css";
@@ -20,12 +19,37 @@ const ProjectPage = () => {
   const [tasklists, setTasklists] = useState();
   const [loading, setLoading] = useState(true);
 
+  const [homeIndex, setHomeIndex] = useState("");
+
   const openModal = () => {
     setOpen(true);
   };
 
   const closeModal = () => {
     setOpen(false);
+  };
+  const onDragStart = (start) => {
+    const { source } = start;
+
+    console.log(start);
+  };
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId, type } = result;
+    if (!destination) {
+      return;
+    }
+    console.log("destination: ", destination);
+    console.log("source: ", source);
+    console.log("draggableId: ", draggableId);
+    console.log("type: ", type);
+  };
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
   };
 
   const getProject = async () => {
@@ -76,7 +100,12 @@ const ProjectPage = () => {
   // const renderedTaskLists = projectState.userProject.TaskLists.map(
   const renderedTaskLists = tasklists.map((tasklist, i) => {
     return (
-      <TaskListItem teamId={teamId} tasklist={tasklist} key={tasklist.id} />
+      <TaskListItem
+        index={i}
+        teamId={teamId}
+        tasklist={tasklist}
+        key={tasklist.id}
+      />
     );
   });
 
@@ -84,12 +113,31 @@ const ProjectPage = () => {
     <div>
       <div>
         <TopNavBar name={project.name} />
-        <div className="project-container">
-          {renderedTaskLists}
-          <div className="tasklist-new-tasklist--button" onClick={openModal}>
-            + Add List
-          </div>
-        </div>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+          >
+            {(provided) => (
+              <div
+                className="project-container"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {renderedTaskLists}
+
+                <div
+                  className="tasklist-new-tasklist--button"
+                  onClick={openModal}
+                >
+                  + Add List
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
       <Modal open={open} onClose={closeModal}>
         {modalBody}

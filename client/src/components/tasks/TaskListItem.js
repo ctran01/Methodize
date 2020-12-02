@@ -4,10 +4,11 @@ import apiServer from "../../config/apiServer";
 import "../../css/TaskList.css";
 import Loader from "../Loader";
 import { Modal } from "@material-ui/core";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import AddTaskProjectForm from "../Forms/AddTaskProjectForm";
 
 //Project page task list
-const TaskListItem = ({ tasklist }) => {
+const TaskListItem = ({ index, tasklist }) => {
   const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
@@ -39,8 +40,8 @@ const TaskListItem = ({ tasklist }) => {
     return <Loader />;
   }
 
-  const renderedTasks = tasks.map((task) => {
-    return <TaskItemProject task={task} key={task.id} />;
+  const renderedTasks = tasks.map((task, i) => {
+    return <TaskItemProject task={task} key={task.id} index={i} />;
   });
 
   const modalBody = (
@@ -56,19 +57,45 @@ const TaskListItem = ({ tasklist }) => {
   );
   return (
     <div>
-      <div className="tasklist-container">
-        <div className="tasklist-header">{tasklist.name}</div>
-        <div className="tasklist-add-task--button"></div>
-        <div className="tasklist-task--list">
-          {renderedTasks}
-          <div className="tasklist-new-task--button" onClick={openModal}>
-            + Add task
+      <Draggable
+        type="tasklist"
+        draggableId={tasklist.id.toString()}
+        index={index}
+      >
+        {(provided) => (
+          <div
+            className="tasklist-container"
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+          >
+            <div className="tasklist-header" {...provided.dragHandleProps}>
+              {tasklist.name}
+            </div>
+            <div className="tasklist-add-task--button"></div>
+            <Droppable type="tasklist" droppableId={tasklist.id.toString()}>
+              {(provided, snapshot) => (
+                <div
+                  className="tasklist-task--list"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  isDraggingOver={snapshot.isDraggingOver}
+                >
+                  {renderedTasks}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <div className="tasklist-new-task--button" onClick={openModal}>
+              + Add task
+            </div>
           </div>
-        </div>
+        )}
+      </Draggable>
+      <div>
+        <Modal open={open} onClose={closeModal}>
+          {modalBody}
+        </Modal>
       </div>
-      <Modal open={open} onClose={closeModal}>
-        {modalBody}
-      </Modal>
     </div>
   );
 };
