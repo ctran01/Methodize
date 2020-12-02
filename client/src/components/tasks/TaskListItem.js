@@ -59,7 +59,7 @@ const TaskListItem = ({ index, tasklist }) => {
     <div>
       <Draggable
         type="tasklist"
-        draggableId={tasklist.id.toString()}
+        draggableId={`${tasklist.name}-${tasklist.id.toString()}`}
         index={index}
       >
         {(provided) => (
@@ -72,19 +72,22 @@ const TaskListItem = ({ index, tasklist }) => {
               {tasklist.name}
             </div>
             <div className="tasklist-add-task--button"></div>
-            <Droppable type="tasklist" droppableId={tasklist.id.toString()}>
-              {(provided, snapshot) => (
+            <Droppable
+              type="task"
+              droppableId={`${tasklist.name}-${tasklist.id.toString()}`}
+            >
+              {(provided) => (
                 <div
                   className="tasklist-task--list"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
                 >
                   {renderedTasks}
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
+
             <div className="tasklist-new-task--button" onClick={openModal}>
               + Add task
             </div>

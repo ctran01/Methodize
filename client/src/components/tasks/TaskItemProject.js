@@ -21,13 +21,12 @@ const TaskItemProject = ({ task, index }) => {
   );
   return (
     <div>
-      <Draggable draggableId={task.id.toString()} type="task" index={index}>
+      <Draggable draggableId={`${task.name}-${task.id.toString()}`} type="task">
         {(provided, snapshot) => (
           <div
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            isDragging={snapshot.isDragging}
             className="task-project-item"
             onClick={openModal}
           >
@@ -35,9 +34,11 @@ const TaskItemProject = ({ task, index }) => {
           </div>
         )}
       </Draggable>
-      <Modal open={open} onClose={closeModal}>
-        {modalBody}
-      </Modal>
+      <div>
+        <Modal open={open} onClose={closeModal}>
+          {modalBody}
+        </Modal>
+      </div>
     </div>
   );
 };
