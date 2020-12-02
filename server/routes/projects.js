@@ -2,7 +2,7 @@ const express = require("express");
 const { asyncHandler } = require("./utilities/utils");
 const { requireAuth, getUserToken } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
-const { Project, User, TaskList, Team } = require("../db/models");
+const { Project, User, TaskList, Team, UserProject } = require("../db/models");
 
 const router = express.Router();
 //Authenticates user before being able to use API
@@ -57,7 +57,18 @@ router.get(
         { model: Project },
       ],
     });
-    res.json(projects);
+
+    let combinedProjects = projects.map((team) => {
+      return team.Projects;
+    });
+    let arrays = [];
+    for (i = 0; i < combinedProjects.length; i++) {
+      for (j = 0; j < combinedProjects[i].length; j++) {
+        arrays.push(combinedProjects[i][j]);
+      }
+    }
+
+    res.json(arrays);
     //  select * from Projects where user_id = id from projects join team on projects.team_id = team.id join user_team
   })
 );

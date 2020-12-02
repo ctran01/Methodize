@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../css/Navbar.css";
 import { RiMenuFoldLine, RiMenuFill } from "react-icons/ri";
-
+import { ImLinkedin, ImGithub } from "react-icons/im";
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import { Modal } from "@material-ui/core";
 import TeamForm from "../Forms/TeamForm";
@@ -50,14 +50,7 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
       <div className="left-nav-bar-container">
         <div className={sidebar ? "nav-menu active" : "nav-menu collapsed"}>
           <div className="left-nav-menu-container">
-            <div
-              className="left-nav-menu-top"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: "15px",
-              }}
-            >
+            <div className="left-nav-menu-top">
               <div className="logo" style={{ color: "white" }}>
                 <img
                   src={logo}
@@ -118,6 +111,21 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
                 </p>
               </div>
               {teamState.teams ? renderedList : <div>Loading...</div>}
+            </div>
+            <div className="social-links">
+              <div>
+                <a href="https://github.com/ctran01/Methodize" target="__blank">
+                  <ImGithub className="social-icon" />
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://www.linkedin.com/in/chris-tran-"
+                  target="__blank"
+                >
+                  <ImLinkedin className="social-icon" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

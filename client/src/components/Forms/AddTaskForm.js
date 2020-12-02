@@ -41,8 +41,8 @@ const TaskForm = ({ handleNewClose, clickClose, open }) => {
     clearErrors(projectSelect.name);
     clearErrors(assigneeSelect.name);
     clearErrors(tasklistSelect.name);
-    const res = await apiServer.get(`/project/${projectSelect.value}/users`);
-    setProjectUsers(res.data);
+    const res = await apiServer.get(`/project/${projectSelect.value}/team`);
+    setProjectUsers(res.data.Users);
     getProjectTasklists();
   };
 
