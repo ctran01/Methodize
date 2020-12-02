@@ -120,14 +120,14 @@ module.exports = {
       [
         {
           name: "Database Project",
-          owner_id: 1,
+
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Mobile Application",
-          owner_id: 1,
+
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -135,14 +135,14 @@ module.exports = {
 
         {
           name: "Web Application",
-          owner_id: 1,
+
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "UI/UX Project",
-          owner_id: 1,
+
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -150,14 +150,14 @@ module.exports = {
 
         {
           name: "SEO Campaign",
-          owner_id: 1,
+
           team_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Online Marketing",
-          owner_id: 1,
+
           team_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -165,14 +165,14 @@ module.exports = {
 
         {
           name: "Catalina Wine Mixer",
-          owner_id: 1,
+
           team_id: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "International Sales",
-          owner_id: 1,
+
           team_id: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -180,6 +180,116 @@ module.exports = {
       ],
       { returning: true }
     );
+
+    const userProject = await queryInterface.bulkInsert(
+      "UserProjects",
+      [
+        {
+          user_id: 1,
+          project_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 7,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 1,
+          project_id: 8,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 2,
+          project_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 3,
+          project_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 3,
+          project_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 3,
+          project_id: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 3,
+          project_id: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 4,
+          project_id: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 4,
+          project_id: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 5,
+          project_id: 7,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          user_id: 5,
+          project_id: 8,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: true }
+    );
+
     const tasklists = await queryInterface.bulkInsert(
       "TaskLists",
       [
@@ -351,6 +461,7 @@ module.exports = {
     await queryInterface.bulkDelete("Teams", null, {});
     await queryInterface.bulkDelete("UserTeams", null, {});
     await queryInterface.bulkDelete("Projects", null, {});
+    await queryInterface.bulkDelete("UserProjects", null, {});
     await queryInterface.bulkDelete("TaskLists", null, {});
     await queryInterface.bulkDelete("Tasks", null, {});
     await queryInterface.bulkDelete("Comments", null, {});

@@ -9,12 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Project, {
-        foreignKey: "owner_id",
-        onDelete: "CASCADE",
-        hooks: true,
-      });
-
       User.hasMany(models.TaskList, {
         foreignKey: "owner_id",
         onDelete: "CASCADE",
@@ -39,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: "team_id",
       });
 
+      User.belongsToMany(models.Project, {
+        foreignKey: "user_id",
+        through: "UserProject",
+        otherKey: "project_id",
+      });
       // User.hasMany(models.UserTeam, {
       //   foreignKey: "user_id",
       // });

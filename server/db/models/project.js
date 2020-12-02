@@ -16,11 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "project_id",
       });
 
-      Project.belongsTo(models.User, {
-        foreignKey: "owner_id",
-      });
       Project.belongsTo(models.Team, {
         foreignKey: "team_id",
+      });
+
+      Project.belongsToMany(models.User, {
+        foreignKey: "project_id",
+        through: "UserProjects",
+        otherKey: "user_id",
       });
     }
   }
@@ -28,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      owner_id: {
-        type: DataTypes.INTEGER,
         allowNull: false,
       },
       team_id: {
