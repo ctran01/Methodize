@@ -21,7 +21,6 @@ const TaskItemProject = ({ task }) => {
   return (
     <div>
       <div className="task-project-item" onClick={openModal}>
-        {" "}
         {task.name}
       </div>
       <Modal open={open} onClose={closeModal}>

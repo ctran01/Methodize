@@ -44,7 +44,10 @@ const AuthRoutes = () => {
   const getUserProjects = async () => {
     const id = localStorage.getItem("userId");
     const res = await apiServer.get(`/project/user/${id}`);
-    await projectdispatch({ type: "get_user_projects", payload: res.data });
+    await projectdispatch({
+      type: "get_user_projects",
+      payload: res.data,
+    });
   };
 
   useEffect(() => {
