@@ -8,8 +8,8 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import AddTaskProjectForm from "../Forms/AddTaskProjectForm";
 
 //Project page task list
-const TaskListItem = ({ index, tasklist }) => {
-  const [tasks, setTasks] = useState();
+const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
+  // const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
@@ -59,7 +59,7 @@ const TaskListItem = ({ index, tasklist }) => {
     <div>
       <Draggable
         type="tasklist"
-        draggableId={`Column-${tasklist.id.toString()}`}
+        draggableId={`Column-${tasklist.column_index.toString()}`}
         index={index}
         key={`Column-${tasklist.id.toString()}`}
       >

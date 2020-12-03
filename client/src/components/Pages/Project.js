@@ -18,8 +18,8 @@ const ProjectPage = () => {
   const [project, setProject] = useState();
   const [tasklists, setTasklists] = useState();
   const [loading, setLoading] = useState(true);
-  const [dtasklists, updateDTasklists] = useState();
   const [homeIndex, setHomeIndex] = useState("");
+  const [tasks, setTasks] = useState("");
 
   const openModal = () => {
     setOpen(true);
@@ -33,8 +33,11 @@ const ProjectPage = () => {
 
     console.log(start);
   };
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
+    console.log(result, "result");
     const { destination, source, draggableId, type } = result;
+    console.log(tasklists, "initial");
+
     if (!destination) {
       return;
     }
@@ -45,12 +48,31 @@ const ProjectPage = () => {
       return;
     }
 
-    const redorderedLists = reorder(tasklists, source.index, destination.index);
-    setTasklists(redorderedLists);
-    console.log("destination: ", destination);
-    console.log("source: ", source);
-    console.log("draggableId: ", draggableId);
-    console.log("type: ", type);
+    if (type === "column") {
+      const redorderedLists = reorder(
+        tasklists,
+        source.index,
+        destination.index
+      );
+      setTasklists(redorderedLists);
+      console.log(redorderedLists, "reordedLists");
+      redorderedLists.map((list, index) => {
+        return updateTasklist(index, list.id, list.column_index);
+      });
+
+      console.log(redorderedLists, "reordered");
+      console.log("destination: ", destination);
+      console.log("source: ", source);
+      console.log("draggableId: ", draggableId);
+      console.log("type: ", type);
+    }
+
+    if (type === "task") {
+      console.log("destination: ", destination);
+      console.log("source: ", source);
+      console.log("draggableId: ", draggableId);
+      console.log("type: ", type);
+    }
   };
 
   const reorder = (list, startIndex, endIndex) => {
@@ -59,6 +81,12 @@ const ProjectPage = () => {
     result.splice(endIndex, 0, removed);
 
     return result;
+  };
+
+  const updateTasklist = async (newIndex, tasklistId, columnIndex) => {
+    // console.log(tasklistId, "tasklistid");
+    // console.log(newIndex, "newIndex");
+    await apiServer.put(`/tasklist/${tasklistId}/columnindex/`, { newIndex });
   };
 
   const getProject = async () => {
@@ -121,7 +149,6 @@ const ProjectPage = () => {
     );
   });
 
-  console.log(tasklists);
   return (
     <div>
       <div>
@@ -142,6 +169,8 @@ const ProjectPage = () => {
                 {tasklists.map((tasklist, i) => {
                   return (
                     <TaskListItem
+                      tasks={tasks}
+                      setTasks={setTasks}
                       index={i}
                       teamId={teamId}
                       tasklist={tasklist}
