@@ -8,8 +8,8 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import AddTaskProjectForm from "../Forms/AddTaskProjectForm";
 
 //Project page task list
-const TaskListItem = ({ index, tasklist }) => {
-  const [tasks, setTasks] = useState();
+const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
+  // const [tasks, setTasks] = useState();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
@@ -59,32 +59,35 @@ const TaskListItem = ({ index, tasklist }) => {
     <div>
       <Draggable
         type="tasklist"
-        draggableId={tasklist.id.toString()}
+        draggableId={`Column-${tasklist.column_index.toString()}`}
         index={index}
+        key={`Column-${tasklist.id.toString()}`}
       >
         {(provided) => (
           <div
             className="tasklist-container"
             {...provided.draggableProps}
             ref={provided.innerRef}
+            {...provided.dragHandleProps}
           >
-            <div className="tasklist-header" {...provided.dragHandleProps}>
-              {tasklist.name}
-            </div>
+            <div className="tasklist-header">{tasklist.name}</div>
             <div className="tasklist-add-task--button"></div>
-            <Droppable type="tasklist" droppableId={tasklist.id.toString()}>
-              {(provided, snapshot) => (
+            <Droppable
+              type="task"
+              droppableId={`${tasklist.name}-${tasklist.id.toString()}`}
+            >
+              {(provided) => (
                 <div
                   className="tasklist-task--list"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
                 >
                   {renderedTasks}
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
+
             <div className="tasklist-new-task--button" onClick={openModal}>
               + Add task
             </div>
