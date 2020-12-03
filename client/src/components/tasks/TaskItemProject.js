@@ -21,7 +21,11 @@ const TaskItemProject = ({ task, index }) => {
   );
   return (
     <div>
-      <Draggable draggableId={`${task.name}-${task.id.toString()}`} type="task">
+      <Draggable
+        draggableId={`${task.name}-${task.id.toString()}`}
+        type="task"
+        index={index}
+      >
         {(provided, snapshot) => (
           <div
             {...provided.draggableProps}

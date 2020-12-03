@@ -59,18 +59,18 @@ const TaskListItem = ({ index, tasklist }) => {
     <div>
       <Draggable
         type="tasklist"
-        draggableId={`${tasklist.name}-${tasklist.id.toString()}`}
+        draggableId={`Column-${tasklist.id.toString()}`}
         index={index}
+        key={`Column-${tasklist.id.toString()}`}
       >
         {(provided) => (
           <div
             className="tasklist-container"
             {...provided.draggableProps}
             ref={provided.innerRef}
+            {...provided.dragHandleProps}
           >
-            <div className="tasklist-header" {...provided.dragHandleProps}>
-              {tasklist.name}
-            </div>
+            <div className="tasklist-header">{tasklist.name}</div>
             <div className="tasklist-add-task--button"></div>
             <Droppable
               type="task"
