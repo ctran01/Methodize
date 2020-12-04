@@ -19,7 +19,7 @@ const ProjectPage = () => {
   const [tasklists, setTasklists] = useState();
   const [loading, setLoading] = useState(true);
   const [homeIndex, setHomeIndex] = useState("");
-  const [tasks, setTasks] = useState("");
+  // const [tasks, setTasks] = useState("");
 
   const openModal = () => {
     setOpen(true);
@@ -169,8 +169,6 @@ const ProjectPage = () => {
                 {tasklists.map((tasklist, i) => {
                   return (
                     <TaskListItem
-                      tasks={tasks}
-                      setTasks={setTasks}
                       index={i}
                       teamId={teamId}
                       tasklist={tasklist}
