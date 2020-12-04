@@ -41,7 +41,14 @@ const TaskListItem = ({ index, tasklist }) => {
   }
 
   const renderedTasks = tasks.map((task, i) => {
-    return <TaskItemProject task={task} key={task.id} index={i} />;
+    return (
+      <TaskItemProject
+        setTasks={setTasks}
+        task={task}
+        key={task.id}
+        index={i}
+      />
+    );
   });
 
   const modalBody = (
