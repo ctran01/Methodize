@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from "@material-ui/core";
 import { Draggable } from "react-beautiful-dnd";
-import TaskDetailsProjectForm from "../tasks/TaskDetailsProjectForm";
+import TaskDetailsForm from "../tasks/TaskDetailsForm";
 import "../../css/Modal.css";
 
 //Project page task item for the task list
@@ -17,7 +17,7 @@ const TaskItemProject = ({ task, index, setTasks }) => {
   };
   const modalBody = (
     <div className="modal-container">
-      <TaskDetailsProjectForm
+      <TaskDetailsForm
         setTasks={setTasks}
         task={task}
         closeModal={closeModal}

@@ -29,7 +29,11 @@ const ProjectForm = ({ handleNewClose, clickClose, open, setTeamProjects }) => {
       type: `get_team_projects${teamId}`,
       payload: projectResponse.data,
     });
-    window.location.reload();
+    if (setTeamProjects) {
+      const teamResponse = await apiServer.get(`/team/${teamId}`);
+      setTeamProjects(teamResponse.data.Projects);
+    }
+    // window.location.reload();
 
     clickClose();
   };

@@ -7,7 +7,7 @@ import apiServer from "../../config/apiServer";
 import Button from "@material-ui/core/Button";
 
 import { Context as TaskContext } from "../../context/store/TaskStore";
-const TaskDetailsForm = ({ task, closeModal, open }) => {
+const TaskDetailsForm = ({ task, closeModal, open, setTasks }) => {
   const { register, handleSubmit } = useForm();
   const [taskState, taskdispatch] = useContext(TaskContext);
   const createdDate = moment(
@@ -48,6 +48,12 @@ const TaskDetailsForm = ({ task, closeModal, open }) => {
         `/task/user/${localStorage.getItem("userId")}`
       );
       await taskdispatch({ type: "update_task", payload: res.data });
+      if (setTasks) {
+        const taskres = await apiServer.get(
+          `/tasklist/${task.tasklist_id}/tasks`
+        );
+        setTasks(taskres.data);
+      }
       closeModal();
     } catch (err) {
       console.log(err);
