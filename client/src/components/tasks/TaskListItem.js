@@ -32,13 +32,9 @@ const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
   };
 
   const updateTasks = async () => {
-    if (tasks) {
-      setTasklistTasks(tasks);
-    } else {
-      //returns individual tasklist tasks
-      const res = await apiServer.get(`/tasklist/${tasklist.id}/task`);
-      setTasklistTasks(res.data);
-    }
+    //returns individual tasklist tasks
+    const res = await apiServer.get(`/tasklist/${tasklist.id}/tasks`);
+    setTasklistTasks(res.data);
     setLoading(false);
   };
   useEffect(() => {
