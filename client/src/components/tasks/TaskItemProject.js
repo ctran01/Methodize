@@ -5,9 +5,9 @@ import TaskDetailsForm from "../tasks/TaskDetailsForm";
 import "../../css/Modal.css";
 
 //Project page task item for the task list
-const TaskItemProject = ({ task, index, setTasks }) => {
+const TaskItemProject = ({ task, index, setTasklistTasks }) => {
   const [open, setOpen] = useState(false);
-  console.log(task);
+  // console.log(task);
   const openModal = () => {
     setOpen(true);
   };
@@ -18,7 +18,8 @@ const TaskItemProject = ({ task, index, setTasks }) => {
   const modalBody = (
     <div className="modal-container">
       <TaskDetailsForm
-        setTasks={setTasks}
+        // setTasks={setTasks}
+        setTasklistTasks={setTasklistTasks}
         task={task}
         closeModal={closeModal}
       />
@@ -27,8 +28,9 @@ const TaskItemProject = ({ task, index, setTasks }) => {
   return (
     <div>
       <Draggable
-        draggableId={`${task.name}-${task.id.toString()}`}
+        draggableId={`${task.id.toString()}`}
         type="task"
+        //this index needs to pull from tasksArray
         index={index}
       >
         {(provided, snapshot) => (

@@ -8,20 +8,20 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import AddTaskProjectForm from "../Forms/AddTaskProjectForm";
 
 //Project page task list
-const TaskListItem = ({ index, tasklist }) => {
-  const [tasks, setTasks] = useState();
+const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
+  const [tasklistTasks, setTasklistTasks] = useState();
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
-  const getTasks = async () => {
-    try {
-      const res = await apiServer.get(`/tasklist/${tasklist.id}/tasks`);
-      setTasks(res.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getTasks = async () => {
+  //   try {
+  //     const res = await apiServer.get(`/tasklist/${tasklist.id}/tasks`);
+  //     setTasks(res.data);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const openModal = () => {
     setOpen(true);
@@ -31,19 +31,30 @@ const TaskListItem = ({ index, tasklist }) => {
     setOpen(false);
   };
 
+  const updateTasks = async () => {
+    if (tasks) {
+      setTasklistTasks(tasks);
+    } else {
+      //returns individual tasklist tasks
+      const res = await apiServer.get(`/tasklist/${tasklist.id}/task`);
+      setTasklistTasks(res.data);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    getTasks();
+    updateTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setTasks]);
+  }, [setTasklistTasks]);
 
   if (loading) {
     return <Loader />;
   }
 
-  const renderedTasks = tasks.map((task, i) => {
+  const renderedTasks = tasklistTasks.map((task, i) => {
     return (
       <TaskItemProject
-        setTasks={setTasks}
+        // setTasks={setTasks}
+        setTasklistTasks={setTasklistTasks}
         task={task}
         key={task.id}
         index={i}
@@ -54,7 +65,8 @@ const TaskListItem = ({ index, tasklist }) => {
   const modalBody = (
     <div className="modal-container">
       <AddTaskProjectForm
-        setTasks={setTasks}
+        // setTasks={setTasks}
+        setTasklistTasks={setTasklistTasks}
         tasklistId={tasklist.id}
         projectId={tasklist.project_id}
         clickClose={closeModal}
@@ -62,6 +74,7 @@ const TaskListItem = ({ index, tasklist }) => {
       ></AddTaskProjectForm>
     </div>
   );
+
   return (
     <div>
       <Draggable
@@ -79,10 +92,7 @@ const TaskListItem = ({ index, tasklist }) => {
           >
             <div className="tasklist-header">{tasklist.name}</div>
             <div className="tasklist-add-task--button"></div>
-            <Droppable
-              type="task"
-              droppableId={`${tasklist.name}-${tasklist.id.toString()}`}
-            >
+            <Droppable type="task" droppableId={`${tasklist.id.toString()}`}>
               {(provided) => (
                 <div
                   className="tasklist-task--list"

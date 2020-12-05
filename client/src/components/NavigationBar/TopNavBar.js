@@ -7,7 +7,7 @@ import { Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
 import TaskForm from "../Forms/AddTaskForm";
 
-const TopNavBar = ({ name, setTeamProjects }) => {
+const TopNavBar = ({ name, setTeamProjects, setTasklists }) => {
   const { logout } = useContext(AuthContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,6 +70,7 @@ const TopNavBar = ({ name, setTeamProjects }) => {
               handleNewClose={handleNewClose}
               clickClose={clickCloseTask}
               open={openTask}
+              setTasklists={setTasklists}
             ></TaskForm>
             <MenuItem onClick={clickOpenProject}>Add Project</MenuItem>
             <ProjectForm
