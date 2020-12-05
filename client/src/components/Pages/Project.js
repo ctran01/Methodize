@@ -10,11 +10,12 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import "../../css/Project.css";
 import "../../css/TaskList.css";
+import { GrWindows } from "react-icons/gr";
 
 const ProjectPage = () => {
   const { projectId, projectName, teamId } = useParams();
   const [open, setOpen] = useState(false);
-
+  const [tasks, setTasks] = useState();
   const [project, setProject] = useState();
   const [tasklists, setTasklists] = useState();
   const [taskArray, setTaskArray] = useState();
@@ -48,7 +49,7 @@ const ProjectPage = () => {
     }
 
     if (type === "column") {
-      const redorderedLists = reorder(
+      const redorderedLists = reorderTasklists(
         tasklists,
         source.index,
         destination.index
@@ -61,7 +62,7 @@ const ProjectPage = () => {
     }
 
     if (type === "task") {
-      // const reorderedTasks = reorder(
+      // const reorderedTasks = reorderTasks(
       //   taskArray,
       //   source.index,
       //   destination.index
@@ -90,7 +91,9 @@ const ProjectPage = () => {
       );
 
       // once that comes back, we will  update task_indexes for tasklists then re render
-
+      const res = await apiServer.get(`/project/${projectId}/tasklists`);
+      setTasks(res.data.Tasks);
+      window.location.reload();
       console.log("source: ", source);
       console.log("destination: ", destination);
       console.log("draggableId: ", draggableId);
@@ -107,7 +110,7 @@ const ProjectPage = () => {
     }
   };
 
-  const reorder = (list, startIndex, endIndex) => {
+  const reorderTasklists = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -115,11 +118,9 @@ const ProjectPage = () => {
     return result;
   };
 
-  const reorderTask = (tasklistArray, taskArray, source, destination) => {};
+  const reorderedTasks = (tasklistArray, taskArray, source, destination) => {};
 
   const updateTasklist = async (newIndex, tasklistId, columnIndex) => {
-    // console.log(tasklistId, "tasklistid");
-    // console.log(newIndex, "newIndex");
     await apiServer.put(`/tasklist/${tasklistId}/columnindex/`, { newIndex });
   };
 
@@ -154,6 +155,7 @@ const ProjectPage = () => {
     try {
       const res = await apiServer.get(`/project/${projectId}/tasklists`);
       setTasklists(res.data);
+      setTasks(res.data.Tasks);
       const taskResponse = await apiServer.get(`/project/${projectId}/tasks`);
       setTaskArray(taskResponse.data); //Array of all tasks
     } catch (err) {
@@ -164,7 +166,7 @@ const ProjectPage = () => {
   useEffect(() => {
     getProject();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setProject, setTasklists, setTaskArray]);
+  }, [setProject, setTasklists, setTaskArray, setTasks]);
 
   if (loading) {
     return <Loader />;
@@ -206,9 +208,6 @@ const ProjectPage = () => {
                       teamId={teamId}
                       tasklist={tasklist}
                       key={tasklist.id}
-                      tasks={tasklist.Tasks}
-
-                      // setTasks={setTasks}
                     />
                   );
                 })}
