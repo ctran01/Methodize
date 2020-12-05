@@ -14,6 +14,7 @@ const AddTaskProjectForm = ({
   clickClose,
   open,
   setTasks,
+  setTasklistTasks,
 }) => {
   const { register, handleSubmit, errors } = useForm();
 
@@ -51,9 +52,11 @@ const AddTaskProjectForm = ({
       description,
     });
     const res = await apiServer.get(`/tasklist/${tasklistId}/tasks`);
-    setTasks(res.data);
-
-    // window.location.reload();
+    // setTasks(res.data);
+    // const res = await apiServer.get(`/project/${projectId}/tasklists`);
+    const taskResponse = await apiServer.get(`/project/${projectId}/tasks`);
+    // setTasks(taskResponse.data);
+    setTasklistTasks(res.data);
 
     clickClose();
   };
@@ -128,6 +131,8 @@ const AddTaskProjectForm = ({
                     style={{ margin: "10px 0" }}
                     type="checkbox"
                     name="completed"
+                    //here
+                    defaultChecked={false}
                     ref={register}
                   ></input>
                 </label>
