@@ -2,7 +2,14 @@ const express = require("express");
 const { asyncHandler } = require("./utilities/utils");
 const { requireAuth, getUserToken } = require("./utilities/auth");
 const { check, validationResult } = require("express-validator");
-const { Project, User, TaskList, Team, UserProject } = require("../db/models");
+const {
+  Project,
+  User,
+  TaskList,
+  Team,
+  UserProject,
+  Task,
+} = require("../db/models");
 
 const router = express.Router();
 //Authenticates user before being able to use API
@@ -61,15 +68,23 @@ router.get(
     let combinedProjects = projects.map((team) => {
       return team.Projects;
     });
+    //pulls all projects from teams and combines into an array
     let arrays = [];
     for (i = 0; i < combinedProjects.length; i++) {
       for (j = 0; j < combinedProjects[i].length; j++) {
         arrays.push(combinedProjects[i][j]);
       }
     }
-
+    //Sorts by created date
+    arrays.sort(function (a, b) {
+      var keyA = new Date(a.createdAt),
+        keyB = new Date(b.createdAt);
+      // Compare the 2 dates
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
     res.json(arrays);
-    //  select * from Projects where user_id = id from projects join team on projects.team_id = team.id join user_team
   })
 );
 
@@ -102,6 +117,8 @@ router.get(
       where: {
         project_id: project_id,
       },
+      order: [["column_index", "ASC"]],
+      include: [{ model: Task }],
     });
     if (!tasklist) {
       res.json({ message: "error" });
@@ -118,12 +135,13 @@ router.get(
     const team = await Team.findOne({
       include: [
         { model: Project, where: { id: project_id } },
-        { model: User, attributes: ["name"] },
+        { model: User, attributes: ["name", "id"] },
       ],
     });
     res.json(team);
   })
 );
+
 //Create tasklist for project
 router.post(
   "/:id/tasklist",
@@ -161,21 +179,6 @@ router.get(
     const user_id = req.params.userId;
     const project_name = req.params.projectName;
     const project_id = req.params.id;
-    // const project = await Project.findOne({
-    //   include: [
-    //     {
-    //       model: User,
-    //       where: {
-    //         id: user_id,
-    //       },
-    //       attributes: ["name"],
-    //     },
-    //     { model: TaskList },
-    //   ],
-    //   where: {
-    //     name: project_name,
-    //   },
-    // });
 
     const project = await Project.findOne({
       include: [
@@ -191,6 +194,22 @@ router.get(
     });
 
     res.json(project);
+  })
+);
+
+//get all tasks in a project
+
+router.get(
+  "/:id/tasks",
+  asyncHandler(async (req, res, next) => {
+    const project_id = req.params.id;
+    const tasks = await Task.findAll({
+      where: {
+        project_id: project_id,
+      },
+      order: [["task_index", "ASC"]],
+    });
+    res.json(tasks);
   })
 );
 

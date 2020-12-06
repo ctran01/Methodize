@@ -45,6 +45,9 @@ router.post(
       completed,
       description,
     } = req.body;
+    if (completed === []) {
+      completed = false;
+    }
     const task = await Task.create({
       name: name,
       project_id: projectId,
@@ -72,6 +75,33 @@ router.delete(
       where: { id: tasklist_id },
     });
     res.json(202);
+  })
+);
+
+//Edit Column index
+router.put(
+  "/:id/columnindex",
+  asyncHandler(async (req, res, next) => {
+    const { newIndex } = req.body;
+    const tasklist_id = req.params.id;
+    const column_index = req.params.columnIndex;
+
+    try {
+      const updateIndex = await TaskList.update(
+        {
+          column_index: newIndex,
+        },
+        {
+          where: {
+            id: tasklist_id,
+          },
+        }
+      );
+      console.log(newIndex);
+      res.json(updateIndex);
+    } catch (err) {
+      res.status(401).send({ error: "Something went wrong" });
+    }
   })
 );
 

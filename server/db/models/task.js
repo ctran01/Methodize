@@ -46,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      task_index: {
+        type: DataTypes.INTEGER,
+      },
       description: DataTypes.TEXT,
       due_date: DataTypes.DATE,
       completed: {

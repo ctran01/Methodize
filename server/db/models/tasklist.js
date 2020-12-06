@@ -33,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      column_index: {
+        type: DataTypes.INTEGER,
+      },
       owner_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
