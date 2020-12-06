@@ -91,6 +91,7 @@ const ProjectPage = () => {
       );
 
       // once that comes back, we will  update task_indexes for tasklists then re render
+
       const res = await apiServer.get(`/project/${projectId}/tasklists`);
       setTasks(res.data.Tasks);
       window.location.reload();
@@ -98,6 +99,7 @@ const ProjectPage = () => {
       console.log("destination: ", destination);
       console.log("draggableId: ", draggableId);
       console.log("type: ", type);
+
       // reorderedTasks.map((task, index) => {
       //   return updateTasks(
       //     index,
