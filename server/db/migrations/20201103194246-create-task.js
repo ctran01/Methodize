@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Projects" },
       },
+      task_index: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+      },
       description: {
         type: Sequelize.TEXT,
       },

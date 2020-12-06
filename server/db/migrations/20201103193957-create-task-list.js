@@ -18,6 +18,10 @@ module.exports = {
         references: { model: "Projects" },
         onDelete: "CASCADE",
       },
+      column_index: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+      },
       owner_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

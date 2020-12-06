@@ -93,6 +93,56 @@ router.put(
   })
 );
 
+//updates tasklist
+router.put(
+  `/:id/tasklist`,
+  asyncHandler(async (req, res, next) => {
+    const task_id = req.params.id;
+    const { destinationColumnId } = req.body;
+    try {
+      const updateTasklist = await Task.update(
+        {
+          tasklist_id: destinationColumnId,
+        },
+        {
+          where: {
+            id: task_id,
+          },
+        }
+      );
+      const task = await Task.findOne({ where: { id: task_id } });
+      res.json(task);
+    } catch (err) {
+      res.status(401).send({ error: "Something went wrong" });
+    }
+  })
+);
+
+//updates taskindex
+router.put(
+  `/:id/taskindex`,
+  asyncHandler(async (req, res, next) => {
+    const task_id = req.params.id;
+    const { destinationIndex } = req.body;
+    try {
+      const updateTaskIndex = await Task.update(
+        {
+          task_index: destinationIndex,
+        },
+        {
+          where: {
+            id: task_id,
+          },
+        }
+      );
+      const task = await Task.findOne({ where: { id: task_id } });
+      res.json(task);
+    } catch (err) {
+      res.status(401).send({ error: "Something went wrong" });
+    }
+  })
+);
+
 //Delete Task
 router.delete(
   "/:id",
