@@ -305,6 +305,7 @@ const ProjectPage = () => {
                             <Modal
                               open={openTaskDetailForm}
                               onClose={closeTaskDetailFormModal}
+                              style={{ backgroundColor: "white" }}
                             >
                               <div className="modal-container">
                                 <TaskDetailsForm
@@ -334,10 +335,15 @@ const ProjectPage = () => {
           )}
         </Draggable>
         <div>
-          <Modal open={openTaskProjectForm} onClose={closeTaskProjectFormModal}>
+          <Modal
+            className="modal"
+            style={{ backgroundColor: "white" }}
+            open={openTaskProjectForm}
+            onClose={closeTaskProjectFormModal}
+          >
             <div className="modal-container">
               <AddTaskProjectForm
-                // setTasks={setTasks}
+                setTasklists={setTasklists}
                 setTasklistTasks={setTasklistTasks}
                 tasklistId={tasklist.id}
                 projectId={tasklist.project_id}
