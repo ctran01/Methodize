@@ -13,8 +13,8 @@ const AddTaskProjectForm = ({
   projectId,
   clickClose,
   open,
-  setTasks,
   setTasklistTasks,
+  setTasklists,
 }) => {
   const { register, handleSubmit, errors } = useForm();
 
@@ -52,12 +52,13 @@ const AddTaskProjectForm = ({
       description,
     });
     const res = await apiServer.get(`/tasklist/${tasklistId}/tasks`);
-    // setTasks(res.data);
+
     // const res = await apiServer.get(`/project/${projectId}/tasklists`);
     const taskResponse = await apiServer.get(`/project/${projectId}/tasks`);
     // setTasks(taskResponse.data);
     setTasklistTasks(res.data);
-
+    const resp = await apiServer.get(`/project/${projectId}/tasklists`);
+    setTasklists(resp.data);
     clickClose();
   };
 
