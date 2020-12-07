@@ -93,16 +93,29 @@ router.put(
   })
 );
 
+router.get(
+  `/:id`,
+  asyncHandler(async (req, res, next) => {
+    const task_id = req.params.id;
+    const task = await Task.findOne({
+      where: {
+        id: task_id,
+      },
+    });
+    res.json(task);
+  })
+);
+
 //updates tasklist
 router.put(
   `/:id/tasklist`,
   asyncHandler(async (req, res, next) => {
     const task_id = req.params.id;
-    const { destinationColumnId } = req.body;
+    const { destinationTasklistId } = req.body;
     try {
       const updateTasklist = await Task.update(
         {
-          tasklist_id: destinationColumnId,
+          tasklist_id: destinationTasklistId,
         },
         {
           where: {

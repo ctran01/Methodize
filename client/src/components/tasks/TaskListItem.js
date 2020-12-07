@@ -11,7 +11,7 @@ import AddTaskProjectForm from "../Forms/AddTaskProjectForm";
 const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
   const [tasklistTasks, setTasklistTasks] = useState();
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
+  const [openTaskProjectForm, setOpenTaskProjectForm] = useState(false);
 
   // const getTasks = async () => {
   //   try {
@@ -23,12 +23,12 @@ const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
   //   }
   // };
 
-  const openModal = () => {
-    setOpen(true);
+  const openTaskProjectFormModal = () => {
+    setOpenTaskProjectForm(true);
   };
 
-  const closeModal = () => {
-    setOpen(false);
+  const closeTaskProjectFormModal = () => {
+    setOpenTaskProjectForm(false);
   };
 
   const updateTasks = async () => {
@@ -58,15 +58,15 @@ const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
     );
   });
 
-  const modalBody = (
+  const taskProjectFormModal = (
     <div className="modal-container">
       <AddTaskProjectForm
         // setTasks={setTasks}
         setTasklistTasks={setTasklistTasks}
         tasklistId={tasklist.id}
         projectId={tasklist.project_id}
-        clickClose={closeModal}
-        open={open}
+        clickClose={closeTaskProjectFormModal}
+        open={openTaskProjectForm}
       ></AddTaskProjectForm>
     </div>
   );
@@ -101,15 +101,18 @@ const TaskListItem = ({ index, tasklist, tasks, setTasks }) => {
               )}
             </Droppable>
 
-            <div className="tasklist-new-task--button" onClick={openModal}>
+            <div
+              className="tasklist-new-task--button"
+              onClick={openTaskProjectFormModal}
+            >
               + Add task
             </div>
           </div>
         )}
       </Draggable>
       <div>
-        <Modal open={open} onClose={closeModal}>
-          {modalBody}
+        <Modal open={openTaskProjectForm} onClose={closeTaskProjectFormModal}>
+          {taskProjectFormModal}
         </Modal>
       </div>
     </div>

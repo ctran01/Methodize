@@ -184,7 +184,10 @@ router.get(
       include: [
         {
           model: TaskList,
+          order: [["column_index", "DESC"]],
+          include: [{ model: Task }],
         },
+
         // { model: Team },
         // { model: User, attributes: ["name", "email", "id"] },
       ],
