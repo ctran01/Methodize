@@ -71,7 +71,7 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const tasklist_id = req.params.id;
 
-    const tasklist = await TaskList.delete({
+    const tasklist = await TaskList.destroy({
       where: { id: tasklist_id },
     });
     res.json(202);
@@ -102,6 +102,21 @@ router.put(
     } catch (err) {
       res.status(401).send({ error: "Something went wrong" });
     }
+  })
+);
+
+//update tasklist name
+
+router.put(
+  "/:id/title",
+  asyncHandler(async (req, res, next) => {
+    const tasklist_id = req.params.id;
+    const { columnTitle } = req.body;
+    const tasklist = await TaskList.update(
+      { name: columnTitle },
+      { where: { id: tasklist_id } }
+    );
+    res.json({ message: "updated" });
   })
 );
 

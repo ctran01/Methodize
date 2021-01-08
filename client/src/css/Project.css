@@ -1,7 +1,7 @@
 .project-tile-container {
   border-radius: 30px;
   box-sizing: border-box;
-  height: 220px;
+  height: 170px;
   min-width: 152px;
   padding: 16px 0;
   width: 152px;
@@ -73,6 +73,66 @@
 .project-tile-icon-20 {
   background: lawngreen;
 }
+.project-tile-icon-21 {
+  background: lightblue;
+}
+.project-tile-icon-22 {
+  background: yellowgreen;
+}
+.project-tile-icon-23 {
+  background: red;
+}
+.project-tile-icon-24 {
+  background: salmon;
+}
+.project-tile-icon-25 {
+  background: seagreen;
+}
+.project-tile-icon-26 {
+  background: darkcyan;
+}
+.project-tile-icon-27 {
+  background: slateblue;
+}
+.project-tile-icon-28 {
+  background: skyblue;
+}
+.project-tile-icon-29 {
+  background: lightgoldenrodyellow;
+}
+.project-tile-icon-30 {
+  background: lawngreen;
+}
+.project-tile-icon-31 {
+  background: lightblue;
+}
+.project-tile-icon-32 {
+  background: yellowgreen;
+}
+.project-tile-icon-33 {
+  background: red;
+}
+.project-tile-icon-34 {
+  background: salmon;
+}
+.project-tile-icon-35 {
+  background: seagreen;
+}
+.project-tile-icon-36 {
+  background: darkcyan;
+}
+.project-tile-icon-37 {
+  background: slateblue;
+}
+.project-tile-icon-38 {
+  background: skyblue;
+}
+.project-tile-icon-39 {
+  background: lightgoldenrodyellow;
+}
+.project-tile-icon-40 {
+  background: lawngreen;
+}
 .project-tile-container:hover {
   padding: 0px 0px;
 }
@@ -84,6 +144,7 @@
 
 .project-tile--link {
   text-decoration: none;
+  height: 25%;
 }
 
 .project-tile--link:visited {
@@ -136,9 +197,68 @@
   font-size: 15px;
 }
 
+.project-home-item {
+  /* display: flex;
+  justify-content: space-between; */
+  border-bottom: 1px solid #e8ecee;
+  background-color: white;
+  /* font-size: 13px; */
+  width: 300px;
+  height: 75px;
+  padding: 5px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 6px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.project-home-item:hover {
+  background-color: rgba(133, 140, 155, 0.08);
+}
+
+.project-home-item-name-container {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  text-overflow: ellipsis;
+  margin-left: 25px;
+}
+
+.project-home-item-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.project-home-item-inner-left {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 500px;
+}
+
+.project-page-container {
+  display: flex;
+  padding: 20px 15px 15px 15px;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+.project-page-main-content {
+  display: contents;
+}
+
 .project-container {
   display: flex;
-  padding: 15px;
-  /* height: 100%; */
+  /* padding: 15px; */
+  /* margin: 30px 15px; */
+  height: 100%;
   width: 100%;
+  overflow: scroll;
 }

@@ -75,7 +75,7 @@ const Onboard = (props) => {
               justifyContent: "space-between",
             }}
           >
-            <button
+            {/* <button
               style={{
                 width: "150px",
                 border: "1px solid #0093ff",
@@ -88,7 +88,7 @@ const Onboard = (props) => {
               onClick={onSkip}
             >
               Skip
-            </button>
+            </button> */}
             <button
               style={{
                 width: "150px",

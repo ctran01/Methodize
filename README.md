@@ -1,16 +1,16 @@
 # Methodize
 
-![Home Page](client/src/assets/Methodize.jpg)
+<!-- ![Home Page](src/assets/Product-screenshot.png) -->
 
-<!-- <p align="center"> <img height="350"  alt="home" src="client\src\assets\Methodize.jpg"> </p> -->
+<p align="center"> <img height="400"  alt="home" src="src\assets\Product-screenshot.png"> </p>
 
 ## Overview
 
-Methodize is a clone of Asana, a project management tool. Methodize allows users to keep track of teams, projects, and tasks. Methodize was developed using NodeJS, Express, and React.
+Methodize is a project management tool. Methodize allows users to keep track of teams, projects, and tasks. Methodize was developed using NodeJS, Express, and React.
 
 ## Live Link
 
-[Methodize](https://methodize-app.herokuapp.com)
+[Methodize](https://methodize-demo.herokuapp.com)
 
 ## Technologies
 
@@ -51,5 +51,4 @@ Methodize is a clone of Asana, a project management tool. Methodize allows users
 ## Future Features
 
 - Search functionality
-- Ability to drag tasklists
 - Removal of team members

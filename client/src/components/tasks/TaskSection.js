@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { BiRightArrow } from "react-icons/bi";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 import "../../css/Task.css";
-import TaskItem from "./TaskItem";
+import TaskItemTask from "./TaskItemTask";
 const TaskSection = ({ title, tasks }) => {
   const [open, setOpen] = useState(true);
   const [taskState] = useContext(TaskContext);
@@ -14,7 +14,7 @@ const TaskSection = ({ title, tasks }) => {
     arrow.classList.toggle("open-arrow");
   };
   const taskList = tasks.map((task, i) => {
-    return <TaskItem task={task} key={i} />;
+    return <TaskItemTask task={task} key={i} />;
   });
   return (
     <div className="task-section">

@@ -6,7 +6,11 @@ import { ImLinkedin, ImGithub } from "react-icons/im";
 import { Context as TeamContext } from "../../context/store/TeamStore";
 import { Modal } from "@material-ui/core";
 import TeamForm from "../Forms/TeamForm";
-import logo from "../../assets/logo3-white.png";
+import Home from "../../assets/Home";
+import Tasks from "../../assets/tasks";
+import Project from "../../assets/project";
+import Team from "../../assets/team.svg";
+import Logo from "../../assets/Logo";
 const LeftNavBar = ({ showSidebar, sidebar }) => {
   // const [teams, setTeams] = useState([]);
   const [teamState] = useContext(TeamContext);
@@ -35,7 +39,9 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
         activeClassName="navlink--active"
         key={i}
       >
-        <div>{team.name}</div>
+        <div>
+          <p style={{ margin: "0px", paddingLeft: "30px" }}>{team.name}</p>
+        </div>
       </NavLink>
     );
   });
@@ -51,16 +57,15 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
         <div className={sidebar ? "nav-menu active" : "nav-menu collapsed"}>
           <div className="left-nav-menu-container">
             <div className="left-nav-menu-top">
-              <div className="logo" style={{ color: "white" }}>
-                <img
-                  src={logo}
-                  alt="logo"
-                  style={{
-                    width: "180px",
-                    marginBottom: "10px",
-                    marginLeft: "5px",
-                  }}
-                />
+              <div
+                className="logo"
+                style={{
+                  color: "white",
+                  marginLeft: "10px",
+                  cursor: "default",
+                }}
+              >
+                <Logo style={{}} />
               </div>
               <div className="collapse-menu-icon-container">
                 <RiMenuFoldLine
@@ -84,27 +89,52 @@ const LeftNavBar = ({ showSidebar, sidebar }) => {
                 className="left-nav-bar-main-link"
                 activeClassName="navlink--active"
               >
-                <div>Home</div>
+                <div className="left-nav-bar-link">
+                  <Home />
+                  <div>
+                    <p className="left-nav-bar-link-title">Home</p>
+                  </div>
+                </div>
               </NavLink>
               <NavLink
                 to="/tasks"
                 className="left-nav-bar-main-link"
                 activeClassName="navlink--active"
               >
-                <div>My Tasks</div>
+                <div className="left-nav-bar-link">
+                  <Tasks />
+                  <div>
+                    <p
+                      className="left-nav-bar-link-title"
+                      style={{ marginLeft: "4px" }}
+                    >
+                      My Tasks
+                    </p>
+                  </div>
+                </div>
               </NavLink>
-            </div>
-            {/* <div className="favorites-container">
-            <p style={{}}>Favorites</p>
 
-            <li>Favorite 1</li>
-            <li>Favorite 2</li>
-          </div> */}
+              {/* <NavLink
+                to="/projects"
+                className="left-nav-bar-main-link"
+                activeClassName="navlink--active"
+              >
+                <div className="left-nav-bar-link">
+                  <Project />
+                  <div>
+                    <p className="left-nav-bar-link-title">Projects</p>
+                  </div>
+                </div>
+              </NavLink> */}
+            </div>
             <div className="teams-items-container">
               <div className="teams-items-header" style={{ display: "flex" }}>
-                <p style={{}}>Teams</p>
+                <img src={Team} alt="team-icon" />
+                <div>
+                  <p className="left-nav-bar-link-title">Teams</p>
+                </div>
                 <p
-                  style={{ marginLeft: "140px", cursor: "pointer" }}
+                  style={{ marginLeft: "114px", cursor: "pointer" }}
                   onClick={openModal}
                 >
                   +

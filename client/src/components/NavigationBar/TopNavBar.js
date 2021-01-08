@@ -6,14 +6,19 @@ import UserAvatar from "./UserAvatar";
 import { Menu, MenuItem } from "@material-ui/core";
 import ProjectForm from "../Forms/ProjectForm";
 import TaskForm from "../Forms/AddTaskForm";
+import Search from "../../assets/search";
+import messageIcon from "../../assets/message.png";
+import Alert from "../../assets/alert";
+import { Context as UserContext } from "../../context/store/UserStore";
 
-const TopNavBar = ({ name, setTeamProjects, setTasklists }) => {
+const TopNavBar = ({ name, setTeamProjects, setTasklists, sidebar }) => {
   const { logout } = useContext(AuthContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEle, setAnchorEle] = useState(null);
   const [openProject, setOpenProject] = useState(false);
   const [openTask, setOpenTask] = useState(false);
+  const [userState, userdispatch] = useContext(UserContext);
 
   const clickOpenTask = () => {
     setOpenTask(true);
@@ -47,6 +52,11 @@ const TopNavBar = ({ name, setTeamProjects, setTasklists }) => {
   };
 
   return (
+    // <div
+    //   className={
+    //     sidebar ? "top-nav-bar-container__short" : "top-nav-bar-container"
+    //   }
+    // >
     <div className="top-nav-bar-container">
       <div className="top-nav-bar-left">
         <h2>{name}</h2>
@@ -56,7 +66,7 @@ const TopNavBar = ({ name, setTeamProjects, setTasklists }) => {
         {/* <div style={{ display: "flex" }}>
           <input className="searchbar" placeholder={"Search"}></input>
         </div> */}
-        <div>
+        {/* <div>
           <GrAddCircle onClick={handleNewClick} className="top-nav-bar--icon" />
           <Menu
             style={{ marginTop: "40px" }}
@@ -80,10 +90,39 @@ const TopNavBar = ({ name, setTeamProjects, setTasklists }) => {
               setTeamProjects={setTeamProjects}
             />
           </Menu>
+        </div> */}
+        <div
+          className="top-nav-icons"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <div>
+            <Alert />
+          </div>
+          <div>
+            <Search />
+          </div>
+
+          <div>
+            <img className="logo" style={{}} src={messageIcon} alt="logo" />
+          </div>
         </div>
 
-        <div onClick={handleProfClick}>
-          <UserAvatar id={localStorage.getItem("userId")} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ padding: "0" }}>
+            <UserAvatar id={localStorage.getItem("userId")} />
+          </div>
+          <div>{userState.user.name}</div>
+          <div
+            onClick={handleProfClick}
+            style={{ padding: "0", cursor: "pointer" }}
+          >
+            <i className="arrow"></i>
+          </div>
         </div>
 
         <Menu

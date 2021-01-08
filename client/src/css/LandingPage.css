@@ -9,25 +9,49 @@
   align-items: center;
 
   justify-content: space-between;
-  margin: 0 30px;
+  margin: 10px 15px 0px;
 }
-
-.landing-nav--button {
+.landing-nav-sessions {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 50px;
+}
+.landing-nav-register--button {
   margin: 0 7px;
+  background-color: #0093ff;
+  color: white;
+  padding: 3px 30px;
+  outline: none;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 1.17em;
+}
+.landing-nav-register--button:hover {
+  border: 2px solid #0093ff;
+  margin: 0 7px;
+  background: none;
+}
+.landing-nav-login--button {
+  margin: 0 7px;
+  color: white;
+  padding: 3px 43px;
   background: none;
   outline: none;
   text-decoration: none;
   border: 2px solid transparent;
   cursor: pointer;
   border-radius: 4px;
-  font-weight: 600;
-  font-size: 100%;
+  font-weight: 500;
+  font-size: 1.17em;
 }
-.landing-nav--button:hover {
+.landing-nav-login--button:hover {
   border: 2px solid #0093ff;
+  background-color: #0093ff;
   margin: 0 7px;
 }
-
 .landing-main {
   display: flex;
   justify-content: center;
@@ -35,12 +59,13 @@
   align-items: center;
 }
 .landing-message {
-  max-width: 800px;
+  /* max-width: 800px; */
   width: 60%;
 }
 .landing-message-button--div {
   display: flex;
-  justify-content: center;
+  margin-top: 25px;
+  /* justify-content: center; */
 }
 
 .landing-message--button {
@@ -52,8 +77,8 @@
   color: white;
   outline: none;
   border: none;
-  font-weight: 500;
-  font-size: 18px;
+
+  font-size: 1.17em;
 }
 
 .landing-picture {

@@ -120,14 +120,12 @@ module.exports = {
       [
         {
           name: "Database Project",
-
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Mobile Application",
-
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -135,14 +133,12 @@ module.exports = {
 
         {
           name: "Web Application",
-
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "UI/UX Project",
-
           team_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -150,14 +146,12 @@ module.exports = {
 
         {
           name: "SEO Campaign",
-
           team_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Online Marketing",
-
           team_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -165,14 +159,12 @@ module.exports = {
 
         {
           name: "Catalina Wine Mixer",
-
           team_id: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "International Sales",
-
           team_id: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -401,6 +393,52 @@ module.exports = {
           assignee_id: 1,
           description: "create models",
           due_date: "2021-08-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Update new product feature",
+          tasklist_id: 1,
+          project_id: 1,
+          assignee_id: 3,
+          description: "Update client's request",
+          due_date: "2021-08-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Test Functionality",
+          tasklist_id: 2,
+          project_id: 1,
+          assignee_id: 1,
+          description: "Test functionality of feature",
+          due_date: "2021-08-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Product Feature XY",
+          tasklist_id: 3,
+          project_id: 1,
+          assignee_id: 1,
+          description: "Test functionality of feature",
+          due_date: "2021-08-13",
+          completed: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        {
+          name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          tasklist_id: 3,
+          project_id: 1,
+          assignee_id: 1,
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          due_date: "2021-08-13",
           completed: true,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -438,6 +476,28 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Discuss business requirements with client",
+          tasklist_id: 11,
+          project_id: 7,
+          assignee_id: 1,
+          description: "Business requirements",
+          due_date: "2021-12-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Meet with stakeholders",
+          tasklist_id: 11,
+          project_id: 7,
+          assignee_id: 1,
+          description: "Stakeholder meeting at location Y",
+          due_date: "2021-12-13",
+          completed: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { returning: true }
     );
@@ -448,6 +508,13 @@ module.exports = {
           text: "I'll work on this soon",
           task_id: 1,
           user_id: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          text: "I've heard that before",
+          task_id: 1,
+          user_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

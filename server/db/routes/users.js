@@ -163,30 +163,31 @@ router.post(
     }
     const { email, password } = req.body;
 
-    // if (!email || !password) {
-    //   return res.status(422).send({ error: "Must provide email and password" });
-    // }
+    if (!email || !password) {
+      return res.status(422).send({ error: "Must provide email and password" });
+    }
     const user = await User.findOne({
       where: {
         email,
       },
     });
+
     if (!user || !user.validatePassword(password)) {
       const err = new Error("Login Failed");
       err.status = 401;
       err.title = "Login Failed";
       err.errors = ["The provided credentials were invalid"];
-      res.json(err);
+      res.status(401).json(err);
       return;
+    } else {
+      const token = getUserToken(user);
+
+      res.json({
+        id: user.id,
+        token,
+        email: user.email,
+      });
     }
-
-    const token = getUserToken(user);
-
-    res.status(200).json({
-      id: user.id,
-      token,
-      email: user.email,
-    });
   })
 );
 

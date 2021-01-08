@@ -120,10 +120,14 @@ const TaskDetailsForm = ({
               }}
             >
               <div style={{ fontWeight: "500" }}>Assignee</div>
-              {/* <select style={{ marginTop: "10px" }} name="assignee">
+              <select
+                style={{ marginTop: "10px", border: "none" }}
+                name="assignee"
+                defaultValue={user.name}
+              >
                 <option value={user.name}>{user.name}</option>
-              </select> */}
-              <div>{user.name}</div>
+              </select>
+              {/* <div>{user.name}</div> */}
             </div>
           </div>
           <div className="edit-task-info-mid">

@@ -15,15 +15,15 @@ const AddMemberForm = ({ teamId, clickClose, open, setTeamUsers }) => {
   const onSubmit = async ({ userId }) => {
     try {
       await apiServer.post(`/team/${teamId}/user/${userId}`);
+      const res = await apiServer.get(`/team/${teamId}`);
+      setTeamUsers(res.data.Users);
+
+      clickClose();
     } catch (err) {
       setError("User already on team");
     }
 
     // const res = await apiServer.get(`/project/${projectId}/tasklists`);
-    const res = await apiServer.get(`/team/${teamId}`);
-    setTeamUsers(res.data.Users);
-
-    clickClose();
   };
 
   const getAllUsers = async () => {

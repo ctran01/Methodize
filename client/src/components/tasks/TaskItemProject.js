@@ -5,6 +5,7 @@ import TaskDetailsForm from "../tasks/TaskDetailsForm";
 import "../../css/Modal.css";
 
 //Project page task item for the task list
+
 const TaskItemProject = ({ task, index, setTasklistTasks }) => {
   const [openTaskDetailForm, setOpenTaskDetailForm] = useState(false);
   // console.log(task);

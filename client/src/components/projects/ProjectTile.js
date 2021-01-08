@@ -13,9 +13,13 @@ const ProjectTile = ({ project, teamId, id }) => {
     setTeam(res.data);
     setLoading(false);
   };
+
   useEffect(() => {
-    getTeam();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    (async () => {
+      const res = await apiServer.get(`/project/${project.id}/team`);
+      setTeam(res.data);
+      setLoading(false);
+    })();
   }, []);
 
   if (loading) {
