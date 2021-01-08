@@ -4,6 +4,8 @@ const Reducer = (state, action) => {
       return { ...state, tasklists: action.payload };
     case "update_project_tasklists":
       return { ...state, tasklists: action.payload };
+    case "get_selected_tasklist":
+      return { ...state, selectedTasklist: action.payload };
     default:
       return state;
   }

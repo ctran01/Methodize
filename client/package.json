@@ -7,10 +7,11 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
+    "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.11.0",
     "react-icons": "^3.11.0",
@@ -19,8 +20,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node --max_old_space_size=6144 node_modules/.bin/react-scripts start",
+    "build": "node --max_old_space_size=6144 node_modules/.bin/react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

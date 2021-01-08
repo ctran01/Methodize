@@ -118,7 +118,12 @@ router.get(
         project_id: project_id,
       },
       order: [["column_index", "ASC"]],
-      include: [{ model: Task }],
+      include: [
+        {
+          model: Task,
+          include: [{ model: User, attributes: ["id", "name", "email"] }],
+        },
+      ],
     });
     if (!tasklist) {
       res.json({ message: "error" });
@@ -141,7 +146,6 @@ router.get(
     res.json(team);
   })
 );
-
 //Create tasklist for project
 router.post(
   "/:id/tasklist",
@@ -179,15 +183,27 @@ router.get(
     const user_id = req.params.userId;
     const project_name = req.params.projectName;
     const project_id = req.params.id;
+    // const project = await Project.findOne({
+    //   include: [
+    //     {
+    //       model: User,
+    //       where: {
+    //         id: user_id,
+    //       },
+    //       attributes: ["name"],
+    //     },
+    //     { model: TaskList },
+    //   ],
+    //   where: {
+    //     name: project_name,
+    //   },
+    // });
 
     const project = await Project.findOne({
       include: [
         {
           model: TaskList,
-          order: [["column_index", "DESC"]],
-          include: [{ model: Task }],
         },
-
         // { model: Team },
         // { model: User, attributes: ["name", "email", "id"] },
       ],
@@ -197,22 +213,6 @@ router.get(
     });
 
     res.json(project);
-  })
-);
-
-//get all tasks in a project
-
-router.get(
-  "/:id/tasks",
-  asyncHandler(async (req, res, next) => {
-    const project_id = req.params.id;
-    const tasks = await Task.findAll({
-      where: {
-        project_id: project_id,
-      },
-      order: [["task_index", "ASC"]],
-    });
-    res.json(tasks);
   })
 );
 

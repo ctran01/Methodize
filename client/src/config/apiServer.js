@@ -2,8 +2,8 @@ import axios from "axios";
 import { backendUrl } from "./index";
 
 const instance = axios.create({
-  baseURL: backendUrl,
-  // baseURL: "https://methodic-backend.herokuapp.com/",
+  // baseURL: backendUrl,
+  baseURL: "https://methodic-backend.herokuapp.com/",
 });
 
 instance.interceptors.request.use(

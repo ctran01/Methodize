@@ -100,6 +100,9 @@ router.get(
       ],
       where: { id: team_id },
     });
+    if (!team) {
+      res.send({ error: "No team exists" });
+    }
     res.json(team);
   })
 );
@@ -182,6 +185,7 @@ router.put(
 router.post(
   "/:id/project",
   asyncHandler(async (req, res, next) => {
+    //need to add owner for project
     const team_id = req.params.id;
     const { name, userId } = req.body;
     const project = await Project.create({
@@ -207,7 +211,7 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const team_id = req.params.teamId;
     const project_id = req.params.projectId;
-    const team = await Team.delete({
+    const team = await Team.destroy({
       where: { id: team_id },
     });
     res.status(202);

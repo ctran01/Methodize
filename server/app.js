@@ -9,6 +9,7 @@ const projectRouter = require("./routes/projects");
 const teamRouter = require("./routes/teams");
 const tasklistRouter = require("./routes/tasklists");
 const commentRouter = require("./routes/comments");
+const userteamRouter = require("./routes/userteams");
 const app = express();
 
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.use("/project", projectRouter);
 app.use("/team", teamRouter);
 app.use("/tasklist", tasklistRouter);
 app.use("/comment", commentRouter);
+app.use("/userteam", userteamRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>You're Connected </h1>");

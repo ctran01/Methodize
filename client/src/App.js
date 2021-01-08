@@ -7,7 +7,7 @@ import TaskStore from "./context/store/TaskStore";
 import ProjectStore from "./context/store/ProjectStore";
 import TasklistStore from "./context/store/TasklistStore";
 import "./css/Home.css";
-import "./css/Task.css";
+
 const App = () => {
   const [auth, setAuth] = useState(localStorage.getItem("token") || "");
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
@@ -46,10 +46,7 @@ const App = () => {
           <TeamStore>
             <TasklistStore>
               <TaskStore>
-                {/* {state.auth ? <Routes /> : <LandingRoutes/> } */}
-                {/* <Route exact path="/" component={LandingPage}></Route> */}
                 <Routes />
-                {/* {state.auth ? <Route path="/" component={Home} /> : <Routes />} */}
               </TaskStore>
             </TasklistStore>
           </TeamStore>

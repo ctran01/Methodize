@@ -8,10 +8,20 @@ import { Context as ProjectContext } from "../../context/store/ProjectStore";
 import { Context as TasklistContext } from "../../context/store/TasklistStore";
 import { Context as TaskContext } from "../../context/store/TaskStore";
 
-const TaskForm = ({ handleNewClose, clickClose, open, setTasklists }) => {
+//Form to add task from anywhere
+const TaskForm = ({
+  handleNewClose,
+  clickClose,
+  open,
+  setTasklists,
+  showSideTaskForm,
+}) => {
   const { register, handleSubmit, errors, clearErrors } = useForm();
   const [projectError, setProjectError] = useState();
   const [assigneeError, setAssigneeError] = useState();
+  const [taskName, setTaskName] = useState();
+  const [dueDate, setDueDate] = useState();
+
   const [projectState, projectdispatch] = useContext(ProjectContext);
   const [taskState, taskdispatch] = useContext(TaskContext);
   const [projectUsers, setProjectUsers] = useState([
@@ -34,6 +44,12 @@ const TaskForm = ({ handleNewClose, clickClose, open, setTasklists }) => {
   //   setLoading(false);
   // };
 
+  const handleNameChange = (e) => {
+    setTaskName(e.target.value);
+  };
+  const handleDateChange = (e) => {
+    setDueDate(e.target.value);
+  };
   const getProjectUsers = async (event) => {
     var projectSelect = document.getElementById("project-select");
     var assigneeSelect = document.getElementById("assignee-select");
@@ -74,12 +90,6 @@ const TaskForm = ({ handleNewClose, clickClose, open, setTasklists }) => {
       description,
     });
 
-    // console.log(name);
-    // console.log(projectId);
-    // console.log(assigneeId);
-    // console.log(due_date);
-    // console.log(completed);
-    // console.log(description);
     // const res = await apiServer.get(
     //   `/project/user/${localStorage.getItem("userId")}`
     // );
@@ -96,7 +106,7 @@ const TaskForm = ({ handleNewClose, clickClose, open, setTasklists }) => {
       setTasklists(taskResponse.data);
     }
 
-    clickClose();
+    showSideTaskForm();
   };
 
   const renderedProjects = projectState.projects.map((project, i) => {
@@ -124,140 +134,168 @@ const TaskForm = ({ handleNewClose, clickClose, open, setTasklists }) => {
   });
 
   return (
-    <div>
-      <Modal open={open} onClose={clickClose}>
-        <div className="modal-container">
-          <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
-            <h2 className="form-header">Add a Task</h2>
-            <div className="form-top-container">
-              <div className="form-top-left">
-                <label className="form-label">
-                  Task Name
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder={"Task Name"}
-                    className="form-input"
-                    ref={register({ required: true })}
-                  ></input>
-                  {errors.name?.type === "required" && (
-                    <p className="error-message">Please enter a task name</p>
-                  )}
-                </label>
-                <label className="form-label">
-                  Project
-                  <select
-                    id="project-select"
-                    name="projectId"
-                    className="form-input"
-                    onChange={getProjectUsers}
-                    ref={register({ required: true })}
-                  >
-                    <option value={0}>{"<---Choose Project--->"}</option>
-                    {renderedProjects}
-                  </select>
-                  <p className="error-message">{projectError}</p>
-                  {errors.projectId?.type === "required" && (
-                    <p className="error-message">Please choose a project</p>
-                  )}
-                </label>
-              </div>
-              <div className="form-top-middle">
-                <label className="form-label">
-                  Assignee
-                  <select
-                    id="assignee-select"
-                    name="assigneeId"
-                    className="form-input"
-                    ref={register({ required: true })}
-                  >
-                    {renderedUsers}
-                  </select>
-                  <p className="error-message">{assigneeError}</p>
-                  {errors.assigneeId?.type === "required" && (
-                    <p className="error-message">Please choose an assignee</p>
-                  )}
-                </label>
-                <label className="form-label">
-                  Due date
-                  <input
-                    className="form-input"
-                    type="date"
-                    name="due_date"
-                    ref={register({ required: true })}
-                  ></input>
-                  {errors.due_date?.type === "required" && (
-                    <p className="error-message">Please choose a Due Date</p>
-                  )}
-                </label>
-              </div>
-              <div className="form-top-right">
-                <label className="form-label" style={{ paddingBottom: "10px" }}>
-                  Tasklist
-                  <select
-                    id="tasklist-select"
-                    name="tasklistId"
-                    className="form-input"
-                    ref={register({
-                      required: true,
-                    })}
-                  >
-                    {/* <option value={0}>Choose a project first</option> */}
-                    {renderedTasklists}
-                  </select>
-                  {/* <p className="error-message">{taskListError}</p> */}
-                  {errors.tasklistId?.type === "required" && (
-                    <p className="error-message">
-                      Please choose a tasklist. You may need to make a tasklist
-                      first before adding a task.
-                    </p>
-                  )}
-                </label>
-                <label
-                  className="form-label"
-                  style={{ padding: "10px 5px 10px 0px" }}
-                >
-                  Mark Complete
-                  <input
-                    style={{ margin: "10px 0" }}
-                    type="checkbox"
-                    name="completed"
-                    defaultChecked={false}
-                    ref={register}
-                  ></input>
-                </label>
-              </div>
+    <>
+      {/* <Modal open={open} onClose={clickClose}>
+        <div className="modal-container"> */}
+      <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+        {/* <h2 className="form-header">Add a Task</h2> */}
+        <div className="form-top-container">
+          <div className="form-section">
+            <div className="label-container">
+              <label className="form-label">Task Name</label>
             </div>
-            <div>
-              <textarea
-                name="description"
+            <div className="input-container">
+              <input
+                name="name"
                 type="text"
-                placeholder={"Task Description"}
-                className="edit-task-description textarea"
-                ref={register}
-              ></textarea>
+                placeholder={"Task Name"}
+                className="form-input"
+                ref={register({ required: true })}
+                onChange={handleNameChange}
+              ></input>
+              {errors.name?.type === "required" && (
+                <p className="error-message">Please enter a task name</p>
+              )}
             </div>
 
-            <div style={{ display: "flex", marginLeft: "500px" }}>
-              <Button
-                style={{ color: "#0093ff" }}
-                onClick={clickClose}
-                color="primary"
-              >
-                Cancel
-              </Button>
-              <Button
-                style={{ color: "#0093ff" }}
-                type="submit"
-                color="primary"
-              >
-                Add
-              </Button>
+            <div className="label-container">
+              <label className="form-label">Project</label>
             </div>
-          </form>
+            <div className="input-container">
+              <select
+                id="project-select"
+                name="projectId"
+                className="form-input"
+                onChange={getProjectUsers}
+                ref={register({ required: true })}
+              >
+                <option value={0}>{"<---Choose Project--->"}</option>
+                {renderedProjects}
+              </select>
+              <p className="error-message">{projectError}</p>
+              {errors.projectId?.type === "required" && (
+                <p className="error-message">Please choose a project</p>
+              )}
+            </div>
+          </div>
+          <div className="form-section">
+            <div className="label-container">
+              <label className="form-label">Due date</label>
+            </div>
+            <div className="input-container">
+              <input
+                className="form-input"
+                type="date"
+                name="due_date"
+                ref={register({ required: true })}
+                onChange={handleDateChange}
+              ></input>
+              {errors.due_date?.type === "required" && (
+                <p className="error-message">Please choose a Due Date</p>
+              )}
+            </div>
+            <div className="label-container">
+              <label className="form-label">Assignee</label>
+            </div>
+            <div className="input-container">
+              <select
+                id="assignee-select"
+                name="assigneeId"
+                className="form-input"
+                ref={register({ required: true })}
+              >
+                {renderedUsers}
+              </select>
+              <p className="error-message">{assigneeError}</p>
+              {errors.assigneeId?.type === "required" && (
+                <p className="error-message">Please choose an assignee</p>
+              )}
+            </div>
+          </div>
+          <div className="form-section">
+            <div className="label-container">
+              <label className="form-label">Mark Complete</label>
+            </div>
+            <div className="input-container">
+              <input
+                style={{
+                  margin: "9px 0px 18px 40px",
+                  width: "16px",
+                  height: "16px",
+                }}
+                type="checkbox"
+                name="completed"
+                defaultChecked={false}
+                ref={register}
+              ></input>
+            </div>
+
+            <div className="label-container">
+              <label className="form-label">Column</label>
+            </div>
+            <div className="input-container">
+              <select
+                id="tasklist-select"
+                name="tasklistId"
+                className="form-input"
+                ref={register({
+                  required: true,
+                })}
+              >
+                {/* <option value={0}>Choose a project first</option> */}
+                {projectTaskLists.length === 0 ? (
+                  <option>
+                    You need to make a column in your project first.
+                  </option>
+                ) : (
+                  renderedTasklists
+                )}
+                {/* {renderedTasklists} */}
+              </select>
+              {/* <p className="error-message">{taskListError}</p> */}
+              {errors.tasklistId?.type === "required" && (
+                <p className="error-message">
+                  Please choose a column. You may need to make a column in your
+                  project first before adding a task.
+                </p>
+              )}
+            </div>
+          </div>
         </div>
-      </Modal>
-    </div>
+        <div className="form-description-container">
+          <textarea
+            name="description"
+            type="text"
+            placeholder={"Task Description"}
+            className="edit-task-description textarea"
+            ref={register}
+          ></textarea>
+        </div>
+
+        <div className="form-button-container">
+          <button
+            className="cancel-button"
+            onClick={showSideTaskForm}
+            color="primary"
+          >
+            Cancel
+          </button>
+          <button
+            className={
+              taskName && dueDate
+                ? "submit-button enabled"
+                : "submit-button disabled"
+            }
+            disabled={taskName && dueDate ? false : true}
+            type="submit"
+          >
+            Create Task
+          </button>
+        </div>
+      </form>
+    </>
+    //   </Modal>
+    // </div>
   );
 };
 

@@ -1,24 +1,47 @@
 .tasklist-container {
   display: flex;
   flex-direction: column;
-  width: 270px;
+  width: 300px;
+  /* width: 270px; */
   margin: 0px 10px;
+  padding: 0px 10px;
   align-items: center;
-  background-color: #ebecf0;
+  /* background-color: #ebecf0; */
+  background-color: white;
   border-radius: 10px;
   height: fit-content;
 }
 
 .tasklist-header {
+  display: flex;
+  margin: 10px 0px;
+  width: inherit;
+}
+.tasklist-title {
+  display: flex;
   font-size: 16px;
   font-weight: 500;
-  margin: 10px 0px;
+  width: inherit;
+  align-content: center;
+  justify-content: center;
 }
-.tasklist-add-task--button {
+.tasklist-title__textarea {
+  resize: none;
+  font-size: 16px;
+  line-height: 16px;
+  height: 18px;
+  outline: none;
+  border: 1px solid lightgray;
+}
+
+.tasklist-more-menu {
+  display: flex;
+  cursor: pointer;
 }
 .tasklist-task--list {
-  width: 260px;
-  /* height: 501px; */
+  width: 290px;
+  min-height: 25px;
+  /* width: 260px; */
   display: flex;
   flex-direction: column;
 }
@@ -45,13 +68,13 @@
 
 .tasklist-new-tasklist--button {
   display: flex;
-  width: 270px;
+  width: 50px;
   margin: 0px 10px;
-  background-color: #ebecf0;
+  background-color: white;
   border-radius: 10px;
   justify-content: center;
-  align-items: center;
-  height: 30px;
+  align-items: flex-start;
+  height: 100%;
   cursor: pointer;
 }
 

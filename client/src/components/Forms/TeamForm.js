@@ -25,7 +25,7 @@ const TeamForm = ({ handleNewClose, clickClose, open }) => {
     <div>
       <Modal open={open} onClose={clickClose}>
         <div className="modal-container">
-          <form className="task-form" onSubmit={handleSubmit(onSubmit)}>
+          <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
             <h2 className="form-header">Create a Team</h2>
             <div className="form-top-container">
               <div className="form-top-left">
