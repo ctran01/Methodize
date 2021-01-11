@@ -10,7 +10,7 @@ Methodize is a project management tool. Methodize allows users to keep track of 
 
 ## Live Link
 
-[Methodize](https://methodize-demo.herokuapp.com)
+[Methodize](https://methodize-app.herokuapp.com)
 
 ## Technologies
 
