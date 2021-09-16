@@ -22,12 +22,12 @@ app.use(morgan("dev"));
 app.use(cors({ origin: true }));
 
 app.use(userRouter);
-app.use("/task", taskRouter);
-app.use("/project", projectRouter);
-app.use("/team", teamRouter);
-app.use("/tasklist", tasklistRouter);
-app.use("/comment", commentRouter);
-app.use("/userteam", userteamRouter);
+app.use("./db/routes/task", taskRouter);
+app.use("./db/routes/project", projectRouter);
+app.use("./db/routes/team", teamRouter);
+app.use("./db/routes/tasklist", tasklistRouter);
+app.use("./db/routes/comment", commentRouter);
+app.use("./db/routes/userteam", userteamRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>You're Connected </h1>");
